@@ -1,0 +1,8 @@
+# The scp/sftp URL we use
+SLOTTSFJELLET_URL=sftp://USER@HOST
+
+# The subdirectory on the server we upload to
+SLOTTSFJELLET_SUBDIR=www
+
+# The password we use; delete or leave empty if you would rather be prompted for password
+LFTP_PASSWORD=

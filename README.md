@@ -1,10 +1,48 @@
+<!-- markdownlint-disable -->
 # Om hvordan endre disse sidene
 
-## Eleventy install
+## Om eleventy (bruk og opplasting)
+
+Vi bruker eleventy for å slippe repetere biter med meny etc.  Den lager en
+statisk site, men har templating for å gjøre det lett for oss å utvikle uten å
+repetere mye overalt. Her er hvordan gjøre ting med siten for å
+installere/bygge/laste opp; template-system og struktur er dokumentert nedenfor.
+
+## Installere Eleventy
 
 ```shell
 npm install @11ty/eleventy
 ```
+
+## Bygge siten med Eleventy
+
+```shell
+$ npx @11ty/eleventy
+```
+
+Den skriver hele siten til  `_site`, akkurat som det skal lastes opp.  Bruk
+`bin/deploy.sh` til å laste opp, den tar backups og sjekker at alt er i orden
+før den laster opp.
+
+### Start Eleventy webserver for utvikling
+
+```shell
+$ npx @11ty/eleventy
+```
+
+Siten blir tilgjengelig på http://localhost:8080/
+
+## Publisher siten
+
+Kjør
+
+```shell
+$ bin/deploy.sh
+```
+
+Denne vil sjekke at alt er oppdater, bygd riktig og du er på riktig git-branch,
+ta en datert backup av den live siten lokalt (til _backup/) og laste den opp til
+`slottsfjellet-backups` på hosting, og deretter laste opp.
 
 ## Biter som kopieres rundt
 
