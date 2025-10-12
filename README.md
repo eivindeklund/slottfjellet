@@ -1,15 +1,9 @@
 # Om hvordan endre disse sidene
 
-## Jekyll-install
+## Eleventy install
 
 ```shell
-$ gem install jekyll
-```
-
-På Mac vil dette prøve installere som root; for å unngå dette må du installere ruby fra Homebrew først:
-
-```shell
-$ brew install ruby
+npm install @11ty/eleventy
 ```
 
 ## Biter som kopieres rundt
