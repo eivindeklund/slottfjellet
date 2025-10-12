@@ -96,3 +96,8 @@ Bakgrunn:
 > CSS-selectorer.
 
 
+## TODO
+
+Vi burde migrere organiseringen av filer til en bra struktur for web-siter, f.eks.
+
+https://www.njfamirm.ir/en/blog/eleventy-folder-structure-guide/
