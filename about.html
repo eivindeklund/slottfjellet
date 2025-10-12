@@ -26,17 +26,7 @@
   </head>
   <body class="about-page">
     <div class="container">
-      <!-- Header -->
-      <div class="header-wrapper">
-        <div class="logo-box gray-box flex-center">
-          <a href="index.html"><img src="logo_small.png" alt="Logo" /></a>
-        </div>
-        <div class="title-box gray-box flex-center">
-          <h1>Slottsfjellet Spillforening</h1>
-        </div>
-      </div>
-
-      {% # Navigasjon. %} {% include 'nav.html' %}
+      {% include "header.html" %} {% include 'nav.html' %}
 
       <!-- Main Content -->
       <div class="main-content">
@@ -104,26 +94,7 @@
         </div>
       </div>
 
-      <!-- Partners -->
-      <div class="partners-wrapper">
-        <div class="partners">
-          <div class="partner-box gray-box flex-center">
-            <a href="https://www.tabletopbattle.no/"
-              ><img src="tabletopbattle.png" alt="Tabletop Battle"
-            /></a>
-          </div>
-          <div class="partner-box gray-box flex-center">
-            <a href="https://www.outland.no/butikker/tonsberg"
-              ><img src="outland.png" alt="Outland"
-            /></a>
-          </div>
-          <div class="partner-box gray-box flex-center">
-            <a href="https://www.togbutikken.no"
-              ><img src="togbutikken.png" alt="Togbutikken"
-            /></a>
-          </div>
-        </div>
-      </div>
+      {% include "footer.html" %}
     </div>
   </body>
 </html>
