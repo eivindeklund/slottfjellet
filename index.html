@@ -26,18 +26,18 @@
   </head>
   <body class="index-page">
     <div class="container">
-      {% include "header.html" %} {% include 'nav.html' %}
+      {% render "header.html" %} {% include 'nav.html' %}
 
       <!-- Main Content -->
       <div class="main-content">
-        {% include "infobox_om_oss.html" %}
+        {% render "infobox_om_oss.html" %}
 
         <!-- Latest News -->
         <div class="news-box">
           <div class="content-header gray-box">
             <h3>Siste nytt</h3>
           </div>
-          {% include "content_body_tt_hosten_2025.html" %}
+          {% render "content_body_tt_hosten_2025.html" %}
           <div class="content-body gray-box">
             <h3>Tirsdagssamlinger</h3>
             <p>
@@ -57,11 +57,11 @@
           <div class="content-header gray-box">
             <h3>Samlinger</h3>
           </div>
-          {% include "content_body_samlingsdatoer.html" %}
+          {% render "content_body_samlingsdatoer.html" %}
         </div>
       </div>
 
-      {% include "footer.html" %}
+      {% render "footer.html" %}
     </div>
   </body>
 </html>

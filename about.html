@@ -26,11 +26,11 @@
   </head>
   <body class="about-page">
     <div class="container">
-      {% include "header.html" %} {% include 'nav.html' %}
+      {% render "header.html" %} {% include 'nav.html' %}
 
       <!-- Main Content -->
       <div class="main-content">
-        {% include "infobox_om_oss.html" %}
+        {% render "infobox_om_oss.html" %}
 
         <!-- Board and Contact Info -->
         <div class="news-box" style="grid-column: 2 / 4">
@@ -94,7 +94,7 @@
         </div>
       </div>
 
-      {% include "footer.html" %}
+      {% render "footer.html" %}
     </div>
   </body>
 </html>
