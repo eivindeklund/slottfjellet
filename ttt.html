@@ -1,38 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tønsberg Tabletop - Slottsfjellet Spillforening</title>
-    <link rel="stylesheet" href="style2.css" />
-    <link
-      rel="icon"
-      type="image/png"
-      href="/favicon/favicon-96x96.png"
-      sizes="96x96"
-    />
-    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/favicon/apple-touch-icon.png"
-    />
-    <meta
-      name="apple-mobile-web-app-title"
-      content="Slottsfjellet Spillforening"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-    <style>
-      table {
-        border-collapse: separate; /* must be 'separate' for border-spacing to work */
-        border-spacing: 20px 2px;
-      }
-    </style>
-  </head>
+  {% render "head.html", title: "Tønsberg Tabletop - Slottsfjellet
+  Spillforening" %}
   <body class="ttt-page">
     <div class="container">
-      {% render "header.html" %} {% include 'nav.html' %}
+      {% render "header.html" %} {% render "nav.html" %}
 
       <!-- Main Content -->
       <div class="main-content">
