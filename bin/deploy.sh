@@ -7,7 +7,7 @@
 # The .env file must contain the following variables:
 #
 # SLOTTSFJELLET_URL - The sftp URL of the server, e.g. sftp://user@host
-# SLOTTSFJELLET_SUBDIR - The subdirectory on the server to deploy to, e.g. www
+# SLOTTSFJELLET_WWW_SUBDIR - The subdirectory on the server to deploy to, e.g. www
 # LFTP_PASSWORD - The password for the sftp user; if not set, you will be prompted for the password
 #
 # The script will:
@@ -40,8 +40,8 @@ if [ -z "$SLOTTSFJELLET_URL" ]; then
   exit 1
 fi
 
-if [ -z "$SLOTTSFJELLET_SUBDIR" ]; then
-  echo "Error: SLOTTSFJELLET_SUBDIR is not set in .env file"
+if [ -z "$SLOTTSFJELLET_WWW_SUBDIR" ]; then
+  echo "Error: SLOTTSFJELLET_WWW_SUBDIR is not set in .env file"
   exit 1
 fi
 
@@ -89,11 +89,12 @@ TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
 
 # Mirror the live site to a backup directory locally, in _backups/slottsfjellet-YYYYMMDD-HHMMSS
 mkdir -p _backups
-lftp -c "set ssl:verify-certificate no; open $LFTP_EXTRA_OPTS $SLOTTSFJELLET_URL; mirror $SLOTTSFJELLET_SUBDIR _backups/slottsfjellet-$TIMESTAMP"
+lftp -c "set ssl:verify-certificate no; open $LFTP_EXTRA_OPTS $SLOTTSFJELLET_URL; mirror --exclude='^Wordpress/.*' $SLOTTSFJELLET_WWW_SUBDIR _backups/slottsfjellet-$TIMESTAMP"
 if [ $? -ne 0 ]; then
   echo "Error: Failed to create local backup"
   exit 1
 fi
+
 
 # Mirror the local backup to a backup directory on the server, in ~/slottsfjellet-backups/slottsfjellet-YYYYMMDD-HHMMSS
 # I've been unable to get a remote mirror to work, so we do it by way of the local copy.
@@ -104,7 +105,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Mirror the local _site directory to the server
-lftp -c "set ssl:verify-certificate no; open $LFTP_EXTRA_OPTS $SLOTTSFJELLET_URL; mirror -R _site/ $SLOTTSFJELLET_SUBDIR"
+lftp -c "set ssl:verify-certificate no; open $LFTP_EXTRA_OPTS $SLOTTSFJELLET_URL; mirror -R _site/ $SLOTTSFJELLET_WWW_SUBDIR"
 if [ $? -ne 0 ]; then
   echo "Error: Failed to deploy site"
   exit 1
@@ -114,4 +115,4 @@ fi
 echo "Deployment successful!"
 echo "Local backup created at backups/slottsfjellet-$TIMESTAMP"
 echo "Remote backup created at ~/slottsfjellet-backups/slottsfjellet-$TIMESTAMP"
-echo "Site deployed to $SLOTTSFJELLET_URL/$SLOTTSFJELLET_SUBDIR"
+echo "Site deployed to $SLOTTSFJELLET_URL/$SLOTTSFJELLET_WWW_SUBDIR"
