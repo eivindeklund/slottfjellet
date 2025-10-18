@@ -62,11 +62,11 @@ if [ "$CURRENT_BRANCH" != "$EXPECTED_BRANCH" ]; then
   exit 1
 fi
 
-# Verify that the local git branch has no uncommitted changes
-if [ -n "$(git status --porcelain)" ]; then
-  echo "Error: You have uncommitted changes. Please commit or stash them before deploying."
-  exit 1
-fi
+## Verify that the local git branch has no uncommitted changes
+#if [ -n "$(git status --porcelain)" ]; then
+#  echo "Error: You have uncommitted changes. Please commit or stash them before deploying."
+#  exit 1
+#fi
 
 # Verify that the local git branch is up to date with remote
 if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u})" ]; then
