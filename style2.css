@@ -228,6 +228,27 @@ del {
     .info-box ul, .schedule-box ul {
         font-size: 0.9rem;
     }
+
+    /* On small screens, render content in the desired reading order:
+       1) news-box, 2) schedule-box, 3) info-box (Om oss) */
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    /* Explicit ordering for the three main columns when stacked */
+    .news-box {
+        order: 1;
+    }
+
+    .schedule-box {
+        order: 2;
+    }
+
+    .info-box {
+        order: 3;
+    }
 }
 
 /* Misc small display styles for the date handling */
