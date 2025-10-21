@@ -10,6 +10,7 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addPassthroughCopy("favicon.ico");
 	eleventyConfig.addPassthroughCopy("site.webmanifest");
 	eleventyConfig.addPassthroughCopy("favicon/*");
+	eleventyConfig.addPassthroughCopy("js/*.js");
 	// Pass through during --serve, the default is "copy"
 	eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
 };

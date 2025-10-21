@@ -264,4 +264,54 @@ del {
   display: revert;
 }
 
+/* Countdown full-screen styles */
+body.countdown-page {
+    margin: 0;
+    background: black;
+    color: white;
+    height: 100vh;
+}
+
+.countdown-root {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.countdown-inner {
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.countdown-inner h1 {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    margin: 0 0 20px 0;
+}
+
+.countdown-timer {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(3rem, 10vw, 10rem);
+    line-height: 1;
+    margin: 0 auto;
+}
+
+.countdown-sub { 
+    margin-top: 12px;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: #ddd;
+}
+
+/* color states */
+.countdown-timer.state-black { color: black; background: white; padding: 0.2em 0.6em; border-radius: 6px; }
+.countdown-timer.state-green { color: #0b6623; background: #dff5e0; padding: 0.2em 0.6em; border-radius: 6px; }
+.countdown-timer.state-amber { color: #6d3b00; background: #fff4d9; padding: 0.2em 0.6em; border-radius: 6px; }
+.countdown-timer.state-red { color: #960000; background: #ffd8d8; padding: 0.2em 0.6em; border-radius: 6px; }
+
+/* Make timer text readable on very small screens */
+@media (max-width: 420px) {
+    .countdown-timer { font-size: 6rem; }
+}
+
 

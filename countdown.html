@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Tønsberg Tabletop — Countdown</title>
+    <link rel="stylesheet" href="/style2.css" />
+  </head>
+  <body class="countdown-page">
+    <main class="countdown-root">
+      <div class="countdown-inner">
+        <h1 id="countdown-title" aria-live="polite">Laster...</h1>
+        <div
+          id="countdown-timer"
+          class="countdown-timer"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          --:--
+        </div>
+        <div id="countdown-sub" class="countdown-sub" aria-hidden="false"></div>
+      </div>
+    </main>
+
+    <!-- Render the site's timeplan include inside a hidden container so the
+      schedule table doesn't show visually on this page. The JS will read
+      the data-* attributes on the TD cells. -->
+    <div id="countdown-schedule" aria-hidden="true" style="display: none">
+      {% render "content_body_tt_timeplan.html" %}
+    </div>
+
+    <!-- The schedule is rendered above by the include; we intentionally DO NOT
+         provide a fallback list here. Editors must update
+         `_includes/content_body_tt_timeplan.html` to change the schedule. -->
+
+    <script src="/js/countdown.js" defer></script>
+  </body>
+</html>
