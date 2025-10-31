@@ -23,8 +23,17 @@
   <link rel="manifest" href="/site.webmanifest" />
   <style>
     /* Base fade transition for time-controlled elements */
-    [data-show-after],
-    [data-hide-after] {
+    /* Prevent initial flash: keep time-controlled elements hidden until
+       JS runs and sets the correct visibility. This avoids a visible
+       show-then-fade on first paint. */
+    html:not(.time-controlled-ready) [data-show-after],
+    html:not(.time-controlled-ready) [data-hide-after] {
+      opacity: 0;
+      pointer-events: none;
+      transition: none !important;
+    }
+    .time-controlled-ready[data-show-after],
+    .time-controlled-ready[data-hide-after] {
       opacity: 1;
       transition: opacity 0.6s ease;
     }
@@ -59,6 +68,10 @@
         }
       }
 
+      // Track whether this is the first run. On the first run we set visibility
+      // instantly (no fade) to avoid a flash or visible fade-out on page load.
+      let initialRun = true;
+
       function updateTimeVisibility() {
         const now = Date.now();
 
@@ -76,23 +89,54 @@
             const isHidden = el.dataset.hidden === "true";
 
             if (shouldShow && isHidden) {
-              // Fade in
+              // Fade in (or show instantly during initial run)
               el.style.display = "";
-              requestAnimationFrame(() => {
+              if (initialRun) {
                 el.dataset.hidden = "false";
-              });
+              } else {
+                requestAnimationFrame(() => {
+                  el.dataset.hidden = "false";
+                });
+              }
             } else if (!shouldShow && !isHidden) {
-              // Fade out but delay layout removal
+              // Hide. On initial run remove immediately to avoid a noticeable
+              // fade-out during page load; afterwards keep the fade and delay
+              // layout removal to match the transition.
               el.dataset.hidden = "true";
-              setTimeout(() => {
-                if (el.dataset.hidden === "true") el.style.display = "none";
-              }, 600); // match transition
+              if (initialRun) {
+                el.style.display = "none";
+              } else {
+                setTimeout(() => {
+                  if (el.dataset.hidden === "true") el.style.display = "none";
+                }, 600); // match transition
+              }
             }
           });
+
+        // After the first run, mark ready so subsequent changes animate.
+        if (initialRun) {
+          initialRun = false;
+          // Add a class to the document element on the next animation frame so
+          // the browser doesn't paint the page with the pre-JS styles and
+          // trigger an unwanted visible fade. requestAnimationFrame runs
+          // before the next paint, which prevents the flash.
+          requestAnimationFrame(() => {
+            document.documentElement.classList.add("time-controlled-ready");
+          });
+        }
       }
 
-      updateTimeVisibility();
-      setInterval(updateTimeVisibility, 1000);
+      // Run the first visibility calculation after the DOM is parsed so we can
+      // immediately set the correct visibility before the page is painted.
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
+          updateTimeVisibility();
+          setInterval(updateTimeVisibility, 1000);
+        });
+      } else {
+        updateTimeVisibility();
+        setInterval(updateTimeVisibility, 1000);
+      }
     })();
   </script>
 </head>
