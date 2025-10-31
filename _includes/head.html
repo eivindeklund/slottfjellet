@@ -22,6 +22,10 @@
   />
   <link rel="manifest" href="/site.webmanifest" />
   <style>
+    /** FADE TRANSTIONS DO NOT WORK.  There is a lot of code to try to make them
+     * work correctly, but currently the do nothing.  It is not worth my time to
+     * fix that, at least not right now. --Eivind */
+
     /* Base fade transition for time-controlled elements */
     /* Prevent initial flash: keep time-controlled elements hidden until
        JS runs and sets the correct visibility. This avoids a visible
@@ -32,8 +36,25 @@
       pointer-events: none;
       transition: none !important;
     }
-    .time-controlled-ready[data-show-after],
-    .time-controlled-ready[data-hide-after] {
+    /* Suppress transitions during the brief moment we flip the document to
+       ready so the initial visibility changes happen instantly. */
+    html.time-controlled-suppress-transitions [data-show-after],
+    html.time-controlled-suppress-transitions [data-hide-after] {
+      transition: none !important;
+    }
+
+    /* When the document is marked ready, enable the normal visible state
+       and transitions for time-controlled elements. The selector targets
+       elements under the html element that has the ready class. */
+    html.time-controlled-ready [data-show-after],
+    html.time-controlled-ready [data-hide-after],
+    [data-show-after],
+    [data-hide-after] {
+      opacity: 1;
+      transition: opacity 0.6s ease;
+    }
+    [data-show-after],
+    [data-hide-after] {
       opacity: 1;
       transition: opacity 0.6s ease;
     }
@@ -47,7 +68,35 @@
     (function () {
       // Parse time strings in a specific timezone (fallback: UTC)
       function parseInZone(timeString, zone) {
+        // Robustly parse an ISO-like local date/time (without an explicit
+        // timezone) into an absolute epoch (ms since UTC) corresponding to
+        // that wall time in the given IANA timezone.
+        // If the string already contains a timezone (Z or +/-), fall back to
+        // Date.parse which understands offsets.
         try {
+          if (/Z|[+-]\d{2}:?\d{2}$/.test(timeString)) {
+            return Date.parse(timeString);
+          }
+
+          // Parse numeric components from e.g. 2025-10-31T14:51 or
+          // 2025-10-31 14:51:30
+          const m = timeString.match(
+            /^(\d{4})-(\d{2})-(\d{2})(?:[T\s](\d{2}):(\d{2})(?::(\d{2}))?)?$/
+          );
+          if (!m) return Date.parse(timeString);
+
+          const year = Number(m[1]);
+          const month = Number(m[2]);
+          const day = Number(m[3]);
+          const hour = Number(m[4] || 0);
+          const minute = Number(m[5] || 0);
+          const second = Number(m[6] || 0);
+
+          // Construct a UTC epoch that has the same numeric fields as the
+          // wall time (i.e. interpret the fields as if they were UTC).
+          const asIfUtc = Date.UTC(year, month - 1, day, hour, minute, second);
+
+          // Ask Intl what the timezone would format that UTC instant to.
           const dtf = new Intl.DateTimeFormat("en-US", {
             timeZone: zone,
             year: "numeric",
@@ -58,13 +107,32 @@
             second: "2-digit",
             hour12: false,
           });
-          const parts = dtf.formatToParts(new Date(timeString));
+          const parts = dtf.formatToParts(new Date(asIfUtc));
           const map = Object.fromEntries(parts.map((p) => [p.type, p.value]));
-          return Date.parse(
-            `${map.year}-${map.month}-${map.day}T${map.hour}:${map.minute}:${map.second}Z`
+
+          // Build an epoch from the zone-formatted components as if those
+          // components were UTC. The difference between that epoch and the
+          // asIfUtc epoch equals the timezone offset at that instant.
+          const zoneMillis = Date.UTC(
+            Number(map.year),
+            Number(map.month) - 1,
+            Number(map.day),
+            Number(map.hour),
+            Number(map.minute),
+            Number(map.second)
           );
-        } catch {
-          return Date.parse(timeString); // fallback to normal parse
+
+          const offset = zoneMillis - asIfUtc;
+          // The real epoch for the given wall time in `zone` is adjusted by
+          // subtracting that offset.
+          return asIfUtc - offset;
+        } catch (err) {
+          // Fallback to browser parsing for anything we can't handle.
+          alert(
+            "Error parsing time string, falling back to Date.parse but that is not OK. Error: " +
+              err.message
+          );
+          return Date.parse(timeString);
         }
       }
 
@@ -116,12 +184,21 @@
         // After the first run, mark ready so subsequent changes animate.
         if (initialRun) {
           initialRun = false;
-          // Add a class to the document element on the next animation frame so
-          // the browser doesn't paint the page with the pre-JS styles and
-          // trigger an unwanted visible fade. requestAnimationFrame runs
-          // before the next paint, which prevents the flash.
+          // Add ready + suppress-transitions on the next frame, then remove the
+          // suppress flag on the following frame. This double-rAF ensures the
+          // initial show/hide changes we just applied take effect instantly
+          // (no transition), while subsequent visibility changes will
+          // transition normally.
           requestAnimationFrame(() => {
-            document.documentElement.classList.add("time-controlled-ready");
+            document.documentElement.classList.add(
+              "time-controlled-ready",
+              "time-controlled-suppress-transitions"
+            );
+            requestAnimationFrame(() => {
+              document.documentElement.classList.remove(
+                "time-controlled-suppress-transitions"
+              );
+            });
           });
         }
       }
