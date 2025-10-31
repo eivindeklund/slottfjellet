@@ -22,55 +22,22 @@
   />
   <link rel="manifest" href="/site.webmanifest" />
   <style>
-    /** FADE TRANSTIONS DO NOT WORK.  There is a lot of code to try to make them
-     * work correctly, but currently the do nothing.  It is not worth my time to
-     * fix that, at least not right now. --Eivind */
-
-    /* Base fade transition for time-controlled elements */
-    /* Prevent initial flash: keep time-controlled elements hidden until
-       JS runs and sets the correct visibility. This avoids a visible
-       show-then-fade on first paint. */
-    html:not(.time-controlled-ready) [data-show-after],
-    html:not(.time-controlled-ready) [data-hide-after] {
-      opacity: 0;
-      pointer-events: none;
-      transition: none !important;
-    }
-    /* Suppress transitions during the brief moment we flip the document to
-       ready so the initial visibility changes happen instantly. */
-    html.time-controlled-suppress-transitions [data-show-after],
-    html.time-controlled-suppress-transitions [data-hide-after] {
-      transition: none !important;
-    }
-
-    /* When the document is marked ready, enable the normal visible state
-       and transitions for time-controlled elements. The selector targets
-       elements under the html element that has the ready class. */
-    html.time-controlled-ready [data-show-after],
-    html.time-controlled-ready [data-hide-after],
+    /* Keep styling simple: client JS will control display for
+         [data-show-after] and [data-hide-after]. No CSS transitions here so
+         visibility changes are instantaneous and deterministic. */
     [data-show-after],
     [data-hide-after] {
-      opacity: 1;
-      transition: opacity 0.6s ease;
-    }
-    [data-show-after],
-    [data-hide-after] {
-      opacity: 1;
-      transition: opacity 0.6s ease;
-    }
-    [data-hidden="true"] {
-      opacity: 0;
-      pointer-events: none;
+      /* leave visible by default; JS will set display:none when needed */
+      display: block;
     }
   </style>
-
   <script>
     (function () {
-      // Parse time strings in a specific timezone (fallback: UTC)
       function parseInZone(timeString, zone) {
         // Robustly parse an ISO-like local date/time (without an explicit
         // timezone) into an absolute epoch (ms since UTC) corresponding to
         // that wall time in the given IANA timezone.
+
         // If the string already contains a timezone (Z or +/-), fall back to
         // Date.parse which understands offsets.
         try {
@@ -78,8 +45,6 @@
             return Date.parse(timeString);
           }
 
-          // Parse numeric components from e.g. 2025-10-31T14:51 or
-          // 2025-10-31 14:51:30
           const m = timeString.match(
             /^(\d{4})-(\d{2})-(\d{2})(?:[T\s](\d{2}):(\d{2})(?::(\d{2}))?)?$/
           );
@@ -92,11 +57,7 @@
           const minute = Number(m[5] || 0);
           const second = Number(m[6] || 0);
 
-          // Construct a UTC epoch that has the same numeric fields as the
-          // wall time (i.e. interpret the fields as if they were UTC).
           const asIfUtc = Date.UTC(year, month - 1, day, hour, minute, second);
-
-          // Ask Intl what the timezone would format that UTC instant to.
           const dtf = new Intl.DateTimeFormat("en-US", {
             timeZone: zone,
             year: "numeric",
@@ -110,9 +71,6 @@
           const parts = dtf.formatToParts(new Date(asIfUtc));
           const map = Object.fromEntries(parts.map((p) => [p.type, p.value]));
 
-          // Build an epoch from the zone-formatted components as if those
-          // components were UTC. The difference between that epoch and the
-          // asIfUtc epoch equals the timezone offset at that instant.
           const zoneMillis = Date.UTC(
             Number(map.year),
             Number(map.month) - 1,
@@ -123,8 +81,6 @@
           );
 
           const offset = zoneMillis - asIfUtc;
-          // The real epoch for the given wall time in `zone` is adjusted by
-          // subtracting that offset.
           return asIfUtc - offset;
         } catch (err) {
           // Fallback to browser parsing for anything we can't handle.
@@ -136,13 +92,8 @@
         }
       }
 
-      // Track whether this is the first run. On the first run we set visibility
-      // instantly (no fade) to avoid a flash or visible fade-out on page load.
-      let initialRun = true;
-
       function updateTimeVisibility() {
         const now = Date.now();
-
         document
           .querySelectorAll("[data-show-after], [data-hide-after]")
           .forEach((el) => {
@@ -154,57 +105,19 @@
               ? parseInZone(el.dataset.hideAfter, zone)
               : Infinity;
             const shouldShow = now >= showAfter && now < hideAfter;
-            const isHidden = el.dataset.hidden === "true";
-
-            if (shouldShow && isHidden) {
-              // Fade in (or show instantly during initial run)
-              el.style.display = "";
-              if (initialRun) {
-                el.dataset.hidden = "false";
-              } else {
-                requestAnimationFrame(() => {
-                  el.dataset.hidden = "false";
-                });
-              }
-            } else if (!shouldShow && !isHidden) {
-              // Hide. On initial run remove immediately to avoid a noticeable
-              // fade-out during page load; afterwards keep the fade and delay
-              // layout removal to match the transition.
-              el.dataset.hidden = "true";
-              if (initialRun) {
-                el.style.display = "none";
-              } else {
-                setTimeout(() => {
-                  if (el.dataset.hidden === "true") el.style.display = "none";
-                }, 600); // match transition
-              }
+            if (el.dataset.debug) {
+              console.log("time-visibility", {
+                now: new Date(now).toISOString(),
+                zone,
+                showAfter,
+                hideAfter,
+                shouldShow,
+              });
             }
+            el.style.display = shouldShow ? "" : "none";
           });
-
-        // After the first run, mark ready so subsequent changes animate.
-        if (initialRun) {
-          initialRun = false;
-          // Add ready + suppress-transitions on the next frame, then remove the
-          // suppress flag on the following frame. This double-rAF ensures the
-          // initial show/hide changes we just applied take effect instantly
-          // (no transition), while subsequent visibility changes will
-          // transition normally.
-          requestAnimationFrame(() => {
-            document.documentElement.classList.add(
-              "time-controlled-ready",
-              "time-controlled-suppress-transitions"
-            );
-            requestAnimationFrame(() => {
-              document.documentElement.classList.remove(
-                "time-controlled-suppress-transitions"
-              );
-            });
-          });
-        }
       }
 
-      // Run the first visibility calculation after the DOM is parsed so we can
-      // immediately set the correct visibility before the page is painted.
       if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", () => {
           updateTimeVisibility();
