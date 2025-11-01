@@ -21,16 +21,6 @@
     content="Slottsfjellet Spillforening"
   />
   <link rel="manifest" href="/site.webmanifest" />
-  <style>
-    /* Keep styling simple: client JS will control display for
-         [data-show-after] and [data-hide-after]. No CSS transitions here so
-         visibility changes are instantaneous and deterministic. */
-    [data-show-after],
-    [data-hide-after] {
-      /* leave visible by default; JS will set display:none when needed */
-      display: block;
-    }
-  </style>
   <script>
     (function () {
       function parseInZone(timeString, zone) {
