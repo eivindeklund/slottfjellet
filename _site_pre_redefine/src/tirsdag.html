@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tirsdagssamlinger - Slottsfjellet
+  Spillforening</title>
+  <link rel="stylesheet" href="style2.css" />
+  <link
+    rel="icon"
+    type="image/png"
+    href="/favicon/favicon-96x96.png"
+    sizes="96x96"
+  />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/favicon/apple-touch-icon.png"
+  />
+  <meta
+    name="apple-mobile-web-app-title"
+    content="Slottsfjellet Spillforening"
+  />
+  <link rel="manifest" href="/site.webmanifest" />
+  <style>
+    /* Keep styling simple: client JS will control display for
+         [data-show-after] and [data-hide-after]. No CSS transitions here so
+         visibility changes are instantaneous and deterministic. */
+    [data-show-after],
+    [data-hide-after] {
+      /* leave visible by default; JS will set display:none when needed */
+      display: block;
+    }
+  </style>
+  <script>
+    (function () {
+      function parseInZone(timeString, zone) {
+        // Robustly parse an ISO-like local date/time (without an explicit
+        // timezone) into an absolute epoch (ms since UTC) corresponding to
+        // that wall time in the given IANA timezone.
+
+        // If the string already contains a timezone (Z or +/-), fall back to
+        // Date.parse which understands offsets.
+        try {
+          if (/Z|[+-]\d{2}:?\d{2}$/.test(timeString)) {
+            return Date.parse(timeString);
+          }
+
+          const m = timeString.match(
+            /^(\d{4})-(\d{2})-(\d{2})(?:[T\s](\d{2}):(\d{2})(?::(\d{2}))?)?$/
+          );
+          if (!m) return Date.parse(timeString);
+
+          const year = Number(m[1]);
+          const month = Number(m[2]);
+          const day = Number(m[3]);
+          const hour = Number(m[4] || 0);
+          const minute = Number(m[5] || 0);
+          const second = Number(m[6] || 0);
+
+          const asIfUtc = Date.UTC(year, month - 1, day, hour, minute, second);
+          const dtf = new Intl.DateTimeFormat("en-US", {
+            timeZone: zone,
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false,
+          });
+          const parts = dtf.formatToParts(new Date(asIfUtc));
+          const map = Object.fromEntries(parts.map((p) => [p.type, p.value]));
+
+          const zoneMillis = Date.UTC(
+            Number(map.year),
+            Number(map.month) - 1,
+            Number(map.day),
+            Number(map.hour),
+            Number(map.minute),
+            Number(map.second)
+          );
+
+          const offset = zoneMillis - asIfUtc;
+          return asIfUtc - offset;
+        } catch (err) {
+          // Fallback to browser parsing for anything we can't handle.
+          alert(
+            "Error parsing time string, falling back to Date.parse but that is not OK. Error: " +
+              err.message
+          );
+          return Date.parse(timeString);
+        }
+      }
+
+      function updateTimeVisibility() {
+        const now = Date.now();
+        document
+          .querySelectorAll("[data-show-after], [data-hide-after]")
+          .forEach((el) => {
+            const zone = el.dataset.timezone || "UTC";
+            const showAfter = el.dataset.showAfter
+              ? parseInZone(el.dataset.showAfter, zone)
+              : -Infinity;
+            const hideAfter = el.dataset.hideAfter
+              ? parseInZone(el.dataset.hideAfter, zone)
+              : Infinity;
+            const shouldShow = now >= showAfter && now < hideAfter;
+            if (el.dataset.debug) {
+              console.log("time-visibility", {
+                now: new Date(now).toISOString(),
+                zone,
+                showAfter,
+                hideAfter,
+                shouldShow,
+              });
+            }
+            el.style.display = shouldShow ? "" : "none";
+          });
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
+          updateTimeVisibility();
+          setInterval(updateTimeVisibility, 1000);
+        });
+      } else {
+        updateTimeVisibility();
+        setInterval(updateTimeVisibility, 1000);
+      }
+    })();
+  </script>
+</head>
+
+  <body class="tirsdag-page">
+    <div class="container">
+      <div class="header-wrapper">
+  <div class="logo-box gray-box flex-center">
+    <a href="index.html"><img src="logo_small.png" alt="Logo" /></a>
+  </div>
+  <div class="title-box gray-box flex-center">
+    <h1>Slottsfjellet Spillforening</h1>
+  </div>
+</div>
+ <div class="nav">
+  <div class="nav-item gray-box index-link"><a href=".">Forside</a></div>
+  <div class="nav-item gray-box rpg-link">
+    <a href="rpg.html">Rollespill</a>
+  </div>
+  <div class="nav-item gray-box ttt-link">
+    <a href="ttt.html">Tønsberg Tabletop</a>
+  </div>
+  <div class="nav-item gray-box tirsdag-link">
+    <a href="tirsdag.html">Tirsdagssamlinger</a>
+  </div>
+  <div class="nav-item gray-box about-link">
+    <a href="about.html">Om foreningen</a>
+  </div>
+  <div class="nav-item gray-box">
+    <a target="_blank" rel="noopener" href="https://discord.gg/N3MX5SHGZ8"
+      >Discord</a
+    >
+  </div>
+  <div class="nav-item gray-box">
+    <a
+      target="_blank"
+      rel="noopener"
+      href="https://slottsfjellet.portal.styreweb.com/arrangement/ArrangementSession?ID=Innmelding"
+      >Bli medlem</a
+    >
+  </div>
+</div>
+
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Schedule -->
+        <div class="schedule-box">
+          <div class="content-header gray-box">
+            <h3>Datoer</h3>
+          </div>
+          <div class="content-body gray-box">
+  <ul>
+    <li data-hide-after="2025-10-21T22:00" data-timezone="Europe/Oslo">
+      <span class="only-in-index">Tirsdag: </span
+      ><span class="datetime">21. okt kl 17:30</span>
+    </li>
+    <li data-hide-after="2025-11-04T22:00" data-timezone="Europe/Oslo">
+      <span class="only-in-index">Tirsdag: </span
+      ><span class="datetime">4. nov kl 17:30</span>
+    </li>
+    <li data-hide-after="2025-11-18T22:00" data-timezone="Europe/Oslo">
+      <span class="only-in-index">Tirsdag: </span
+      ><span class="datetime">18. nov kl 17:30</span>
+    </li>
+    <li data-hide-after="2025-12-02T22:00" data-timezone="Europe/Oslo">
+      <span class="only-in-index">Tirsdag: </span
+      ><span class="datetime">2. des kl 17:30</span>
+    </li>
+  </ul>
+</div>
+
+        </div>
+
+        <!-- General Info -->
+        <div class="news-box" style="grid-column: 2 / 4">
+          <div class="content-header gray-box">
+            <h3>Generell info</h3>
+          </div>
+          <div class="content-body gray-box">
+            <p>
+              Annenhver tirsdag møtes vi kl 17:30 på
+              <a
+                href="https://www.google.com/maps/place/Solhaug+KFUK%2FKFUM/@59.2705554,10.4753508,780m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4646b0dcc76a68b9:0xba6fae6f15299884!8m2!3d59.2705527!4d10.4779311!16s%2Fg%2F11fzbjvckk?entry=ttu&g_ep=EgoyMDI1MDkxMC4wIKXMDSoASAFQAw%3D%3D"
+                >Solhaug</a
+              >
+              for å spille spill og hygge oss.
+            </p>
+
+            <p><b>Det koster ingenting å delta.</b></p>
+
+            <p>
+              Vi er en god liten gjeng nå å det er som regel noen som spiller
+              eller holder på med følgende:
+            </p>
+            <ul>
+              <li>
+                <a
+                  href="https://www.ospreypublishing.com/us/frostgrave-second-edition-9781472834683/"
+                  >Frostgrave</a
+                >
+                - Fantasy miniatyrspill som er lett å lære og vi har modeller å
+                låne ut
+              </li>
+              <li>
+                <a
+                  href="https://www.warhammer.com/en-GB/other-games-kill-team-LP"
+                  >Warhammer Kill Team</a
+                >
+                - En variant av Warhammer 40k der du bruker 5-20 modeller
+              </li>
+              <li>Folk som maler miniatyrer</li>
+              <li>
+                Magic the Gathering - det går som regel i Commander. Vi er
+                villige til å lære bort og har kortstokker du kan låne
+              </li>
+            </ul>
+
+            <p>Kom gjerne innom og si hei, vi er en vennlig gjeng.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="partners-wrapper">
+  <div class="partners">
+    <div class="partner-box gray-box flex-center">
+      <a href="https://www.tabletopbattle.no/"
+        ><img src="tabletopbattle.png" alt="Tabletop Battle"
+      /></a>
+    </div>
+    <div class="partner-box gray-box flex-center">
+      <a href="https://www.outland.no/butikker/tonsberg"
+        ><img src="outland.png" alt="Outland"
+      /></a>
+    </div>
+    <div class="partner-box gray-box flex-center">
+      <a href="https://www.togbutikken.no"
+        ><img src="togbutikken.png" alt="Togbutikken"
+      /></a>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </body>
+</html>

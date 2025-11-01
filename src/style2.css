@@ -1,0 +1,317 @@
+* {
+    box-sizing: border-box;
+}
+
+/* Make all the pages render the same, instead of those with enough content to
+ * scroll rendering a bit to the left of those with less content.  Without this,
+ we get a jump left/rigth when navigating between pages. */
+html {
+    /* overflow-y: scroll is an alternative that shows the scrollbar always */
+    /* overflow-y: scroll; */
+    scrollbar-gutter: stable;
+
+}
+
+
+body {
+    font-family: 'Courier New', monospace;
+    background: black;
+    margin: 0;
+    padding: 10px;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Common styles for gray boxes */
+.gray-box {
+    background: #dcdcdc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Common flex centering */
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Header */
+.header-wrapper {
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.logo-box {
+    padding: 58px;
+    height: 155px;
+}
+
+.logo-box img {
+    max-width: 150px;
+    max-height: 150px;
+    height: auto;
+    display: block;
+}
+
+.title-box {
+    padding: 1px 20px;
+    flex: 1;
+    min-width: 250px;
+    height: 155px;
+}
+
+.title-box h1 {
+    margin: 0;
+    font-size: clamp(1.2rem, 5vw, 2rem);
+}
+
+/* Navigation */
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2px;
+    text-align: center;
+    background: transparent;
+    padding: 0;
+}
+
+.nav-item {
+    flex: 1 1 auto;
+    min-width: 120px;
+}
+
+.nav a {
+    display: block;
+    padding: 5px 15px;
+}
+
+/* Make the currently active page bold and not clickable in the nav */
+/* ENDRE HER NÅR DU LEGGER TIL EN SIDE */
+/* Du må også endre i index.html (for navigasjonslink) og kopiere rundt, og sette body class="<sidenavn>-page" i sidens HTML */
+body.index-page .nav .index-link a,
+body.about-page .nav .about-link a,
+body.rpg-page .nav .rpg-link a,
+body.ttt-page .nav .ttt-link a,
+body.tirsdag-page .nav .tirsdag-link a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  pointer-events: none; /* makes it not clickable */
+  cursor: default;      /* avoids showing link cursor */
+}
+
+/* Main content grid */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+    margin: 20px 0;
+}
+
+@media (min-width: 768px) {
+    .main-content {
+        grid-template-columns: 300px 1fr 250px;
+    }
+}
+
+.info-box, .news-box, .schedule-box {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.content-header {
+    margin: 0;
+}
+
+.content-header h3,
+.news-box h1,
+.news-box h2 {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.content-header h3 {
+    margin: 0;
+}
+
+.content-body {
+    flex: 1;
+}
+
+.info-box ul, .schedule-box ul {
+    padding-left: 20px;
+}
+
+.news-box h1 {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+}
+
+.news-box h2 {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+}
+
+/* Partners section */
+.partners-wrapper {
+    background: transparent;
+    padding: 0;
+}
+
+.partners {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2px;
+    align-items: stretch;
+}
+
+.partner-box {
+    padding: 20px;
+    flex: 1 1 calc(33.333% - 10px);
+    min-width: 200px;
+}
+
+@media (max-width: 767px) {
+    .partner-box {
+        flex: 1 1 100%;
+    }
+}
+
+.partners a {
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+.partners img {
+    max-width: 251px;
+    max-height: 344px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Links */
+a {
+    color: blue;
+    text-decoration: underline;
+}
+
+/* Strikethrough for past dates */
+del {
+    opacity: 0.6;
+}
+
+/* Mobile optimizations */
+@media (max-width: 767px) {
+    body {
+        padding: 5px;
+    }
+
+    .nav a {
+        min-width: 100px;
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+
+    .info-box ul, .schedule-box ul {
+        font-size: 0.9rem;
+    }
+
+    /* On small screens, render content in the desired reading order:
+       1) news-box, 2) schedule-box, 3) info-box (Om oss) */
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    /* Explicit ordering for the three main columns when stacked */
+    .news-box {
+        order: 1;
+    }
+
+    .schedule-box {
+        order: 2;
+    }
+
+    .info-box {
+        order: 3;
+    }
+}
+
+/* Misc small display styles for the date handling */
+.datetime {
+    white-space: nowrap;
+}
+
+.only-in-index {
+  display: none;
+}
+
+.index-page .only-in-index {
+  display: revert;
+}
+
+/* Countdown full-screen styles */
+body.countdown-page {
+    margin: 0;
+    background: black;
+    color: white;
+    height: 100vh;
+}
+
+.countdown-root {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.countdown-inner {
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.countdown-inner h1 {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    margin: 0 0 20px 0;
+}
+
+.countdown-timer {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(3rem, 10vw, 10rem);
+    line-height: 1;
+    margin: 0 auto;
+}
+
+.countdown-sub { 
+    margin-top: 12px;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: #ddd;
+}
+
+/* color states */
+.countdown-timer.state-black { color: black; background: white; padding: 0.2em 0.6em; border-radius: 6px; }
+.countdown-timer.state-green { color: #0b6623; background: #dff5e0; padding: 0.2em 0.6em; border-radius: 6px; }
+.countdown-timer.state-amber { color: #6d3b00; background: #fff4d9; padding: 0.2em 0.6em; border-radius: 6px; }
+.countdown-timer.state-red { color: #960000; background: #ffd8d8; padding: 0.2em 0.6em; border-radius: 6px; }
+
+/* Make timer text readable on very small screens */
+@media (max-width: 420px) {
+    .countdown-timer { font-size: 6rem; }
+}
+
+
