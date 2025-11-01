@@ -101,3 +101,25 @@ Bakgrunn:
 Vi burde migrere organiseringen av filer til en bra struktur for web-siter, f.eks.
 
 https://www.njfamirm.ir/en/blog/eleventy-folder-structure-guide/
+
+## Debugging av tidssensitive elementer
+
+Skriptet i `src/_includes/head.html` har støtte for å overstyre «now» når du
+trenger å feilsøke visning som avhenger av tid. Den forventer en ISO-lignende
+lokal dato/tid og tolker den i tidssonen Europe/Oslo (som du ønsket).
+
+Bruk én av disse (precedence i denne rekkefølgen):
+
+- HTML-attributt på `<html>`:
+	`<html data-debug-time="2025-11-01T15:00:00">`
+- På `<body>`:
+	`<body data-debug-time="2025-11-01T15:00:00">`
+- Meta-tag:
+	`<meta name="debug_time" content="2025-11-01T15:00:00">`
+- URL-query:
+	`/page.html?debug_time=2025-11-01T15:00:00`
+
+Format: `YYYY-MM-DD` eller `YYYY-MM-DDTHH:mm` (sekunder er valgfrie). Hvis
+strengen inneholder en tidssone (Z eller +/-hh:mm) brukes den i stedet.
+Elementer som har `data-debug` vil logge synlighetsinformasjon (`time-visibility`)
+til konsollen slik at det er lett å se hvilken «now» som ble brukt.
