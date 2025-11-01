@@ -15,6 +15,7 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addPassthroughCopy("src/favicon.ico");
 	eleventyConfig.addPassthroughCopy("src/site.webmanifest");
 	// Directories
+	eleventyConfig.addPassthroughCopy("src/css");
 	eleventyConfig.addPassthroughCopy("src/favicon");
 	eleventyConfig.addPassthroughCopy("src/js");
 	// TODO: .htaccess is probably not necessary (it just sets js files to
