@@ -7,7 +7,15 @@ tråkke hverandre på tærne.  Det er derfor viktig at ikke noen bare går inn o
 endrer på siten uten å bruke alt dette; endringene deres vil bli overskrevet av
 de som bruker dette.
 
-## Quick Start
+## Om eleventy (bruk og opplasting)
+
+Vi bruker eleventy for å slippe repetere biter med meny etc.  Den lager en
+statisk site, men har templating for å gjøre det lett for oss å utvikle uten å
+repetere mye overalt. Her er hvordan gjøre ting med siten for å
+installere/bygge/laste opp; template-system og struktur er dokumentert nedenfor.
+
+
+## Utviklings-kommandoene
 
 **Første gangs oppsett**
 
@@ -54,6 +62,9 @@ hvis endringer ikke dukker opp, press Ctrl-Shift-R (på Linux/Windows) eller
 > Hvis du skal ha flere kopier av siten oppe samtidig (fra forskjellige
 > workspaces) må du bruke forskjellig port til hver av dem.
 
+Se nedenfor for hvor de forskjellige filene du kan endre er (oftest `src/*.html`
+og `src/_include/*.html`).
+
 Når du er ferdig med å gjøre endring trenger du lagre dem i git lokalt, sende
 dem til github, og kjøre et script for å legge dem ut.  Jeg foretrekker å bruke
 den integrerte git-støtten i [VS Code](https://code.visualstudio.com/download)
@@ -65,7 +76,7 @@ en greie du kan klikke på på venstre side som ser ca sånn ut:
 Deretter skriver du beskrivelse og trykker "⬆Commit & Push".  Dette kan også
 gjøres fra kommandolinje men er litt fumlete; kommandoene du leter etter er som
 regel `git add`, `git commit` og `git push`, med `git mv` og `git rm` for
-flytting og fjerning (med `git commit` etterpå.)
+flytting og fjerning.
 
 Når du er ferdig med å endre og commit'e og pushe, kan du legge ut websiden.
 
@@ -75,14 +86,18 @@ Da må du først bygge den:
 $ npx @11ty/eleventy
 ```
 
+Dette skriver hele siten til  `_site`, akkurat som det skal lastes opp (som
+`bin/deploy.sh` gjør.)
+
 Deretter kan du sende den til å bli aktiv:
 
 ```sh
 $ ./bin/deploy.sh
 ```
 
-Deploy vil sjekke at du har riktig oppsett og har gjort det du trenger med git,
-ta backup, og legge ut den nye websiten.
+Deploy vil sjekke at alt er bygd riktig og at alt er riktig med git,
+ta en datert backup av den live siten lokalt (til `_backup/`), laste backupen
+opp til `slottsfjellet-backups` på hosting, og til slutt laste opp selve siten.
 
 Deploy har en del kommandolinje-switcher som kan brukes til å droppe sjekker eller
 kjøre gjennom alt "som test" etc.  For å se hva som er av switcher kjør
@@ -90,49 +105,6 @@ kjøre gjennom alt "som test" etc.  For å se hva som er av switcher kjør
 ```sh
 $ ./bin/deploy.sh --help
 ```
-
-## Om eleventy (bruk og opplasting)
-
-Vi bruker eleventy for å slippe repetere biter med meny etc.  Den lager en
-statisk site, men har templating for å gjøre det lett for oss å utvikle uten å
-repetere mye overalt. Her er hvordan gjøre ting med siten for å
-installere/bygge/laste opp; template-system og struktur er dokumentert nedenfor.
-
-## Installere Eleventy
-
-```shell
-npm install @11ty/eleventy
-```
-
-## Bygge siten med Eleventy
-
-```shell
-$ npx @11ty/eleventy
-```
-
-Den skriver hele siten til  `_site`, akkurat som det skal lastes opp.  Bruk
-`bin/deploy.sh` til å laste opp, den tar backups og sjekker at alt er i orden
-før den laster opp.
-
-### Start Eleventy webserver for utvikling
-
-```shell
-$ npx @11ty/eleventy --serve
-```
-
-Siten blir tilgjengelig på http://localhost:8080/
-
-## Publiser siten til å bli aktiv på web.
-
-Kjør
-
-```shell
-$ bin/deploy.sh
-```
-
-Denne vil sjekke at alt er oppdatert, bygd riktig og du er på riktig git-branch,
-ta en datert backup av den live siten lokalt (til `_backup/`), laste den opp til
-`slottsfjellet-backups` på hosting, og til slutt laste opp selve siten.
 
 ## Filstruktur og includes
 
@@ -142,24 +114,24 @@ infrastruktur.
 Fil eller dir | Innhold
 ---|---
 `bin/` | For små-programmer/scripts som hjelper oss vedlikeholde.
-`bin/deploy.sh` | For å kopiere hele siten til FTP.  Kjør 
-`.env` |
+`bin/deploy.sh` | For å kopiere hele siten til FTP.  Kjør `./bin/deploy.sh --help` for å se mer muligheter.
+`.env` | Sett variabler som trengs for å kunne laste opp.  Du må få disse fra noen som har tilgang.
 `.eleventyignore` | For å [sette opp filer som ikke skal kopieres/prosesseres](https://www.11ty.dev/docs/ignores/).  Per idag brukes den bare så vi kan legge README.md filer rundt hvor som helst uten at de gjøres om til `README.html`
-`.gitignore` |
-`dotenv.example` |
-`eleventy.config.js` | 
+`.gitignore` | Liste av filer som ikke skal med i versjonskontroll (`git`).
+`dotenv.example` | Eksempel for `.env` med kommentarer.
+`eleventy.config.js` | Oppsett for kopiering av filer etc.
 `README.md` | Denne filen.  Dokumentasjon på struktur, hvordan oppdatere, etc.
 `src/` | Input-data for å bygge websiten.  **Alt som skal kopieres herfra må settes opp i `eleventy.config.js`!**
-`src/*.html` |
+`src/*.html` | Der websidene våre kommer fra :-)
 `src/_data/` | Greier for eleventy.  Det eneste jeg vet om bruk av er `permalink.js` men jeg antar det finnes mer en kna legge her.
 `src/_data/permalink.js` | Eleventy config for hvordan sette opp filnavn.  Per default kopierer eleventy foo.html til foo/index.html så foo.html kan kommes til som slottsfjellet.org/foo, men vi har allerede slottsfjellet.org/foo.html i bruk, så vi må gjøre noe mer oppsett før vi kan skifte format.
 `src/_extra_for_root` | Filer som skal kopieres til `/`, utenom `*.html`.  Separert ut for å ha minst mulig rot når en endrer HTML-filene.  `src/_includes` | Filer som inkluderes i de andre filene for å bygge websiten.
 `src/_includes/content_body_*.html` | div's med grå bokser som settes inn i forskjellige andre sider.
-`src/_includes/footer.html` | 
 `src/_includes/head.html` | Innhold til `<head>` i sidene våre.  Tar parameter `title` via `{% render "head.html", title: "En Tittel Her" }` der `En Tittel Her` vanligvis er `Slottsfjellet Spillforening`.
 `src/_includes/header.html` | Topp-header på siden, med logo og "Slottsfjellet Spillforening"
-`src/_includes/infobox_om_oss.html` | Om oss-box, med HTML-struktur som er litt annerledes enn i `content_body_*.html`.  Burde gjøres om til å ha samme strukture.  TODO
+`src/_includes/footer.html` | Det som kommer på slutten av siden.  For øyeblikket reklamen med Tabletopbattle, Outland, og Togbutikken.
 `src/_includes/nav.html` | Nav-bar.  Kommer så langt alltid sammen med `header.html` så burde inkluderes derfra. Se TODO
+`src/_includes/infobox_om_oss.html` | Om oss-box, med HTML-struktur som er litt annerledes enn i `content_body_*.html`.  Burde gjøres om til å ha samme strukture.  TODO
 
 Includes brukes som følger:
 
@@ -226,6 +198,11 @@ Format: `YYYY-MM-DD` eller `YYYY-MM-DDTHH:mm` (sekunder er valgfrie). Hvis
 strengen inneholder en tidssone (Z eller +/-hh:mm) brukes den i stedet.
 Elementer som har `data-debug` vil logge synlighetsinformasjon (`time-visibility`)
 til konsollen slik at det er lett å se hvilken «now» som ble brukt.
+
+# TODOs
+
+Mulig vi skal endre `./bin/deploy.sh` til å gjøre bygging også istedenfor å bare
+sjekke build, og å sette permissions så folk ikke kan endre feil sted.
 
 ## Referanser
 
