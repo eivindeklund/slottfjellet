@@ -84,51 +84,32 @@
 
       function updateTimeVisibility() {
         // Determine 'now'. Normally we use the real current time, but for
-        // debugging we allow an override via (in order of precedence):
-        // - data-debug-time on <html> (document.documentElement.dataset.debugTime)
-        // - data-debug-time on <body> (document.body.dataset.debugTime)
-        // - <meta name="debug_time" content="...">
-        // - URL query parameter `?debug_time=...`
+        // debugging we allow an override via the URL query parameter
+        // `?debug_time=...`
+        //
         // The provided datetime is parsed using parseInZone with the
-        // Europe/Oslo timezone as requested.
+        // Europe/Oslo timezone as default.
         let now = Date.now();
-        try {
-          const meta = document.querySelector('meta[name="debug_time"]');
-          const q =
-            typeof URLSearchParams !== "undefined"
-              ? new URLSearchParams(location.search).get("debug_time")
-              : null;
-          const debugStr =
-            document.documentElement &&
-            document.documentElement.dataset &&
-            document.documentElement.dataset.debugTime
-              ? document.documentElement.dataset.debugTime
-              : document.body &&
-                document.body.dataset &&
-                document.body.dataset.debugTime
-              ? document.body.dataset.debugTime
-              : meta && meta.getAttribute("content")
-              ? meta.getAttribute("content")
-              : q;
+        const debugStr =
+          typeof URLSearchParams !== "undefined"
+            ? new URLSearchParams(location.search).get("debug_time")
+            : null;
 
-          if (debugStr) {
-            const parsed = parseInZone(debugStr, "Europe/Oslo");
-            if (!Number.isNaN(parsed)) {
-              now = parsed;
-            } else {
-              console.warn(
-                "debug_time present but could not be parsed:",
-                debugStr
-              );
-            }
+        if (debugStr) {
+          const parsed = parseInZone(debugStr, "Europe/Oslo");
+          if (!Number.isNaN(parsed)) {
+            now = parsed;
+          } else {
+            console.warn(
+              "debug_time present but could not be parsed:",
+              debugStr
+            );
           }
-        } catch (err) {
-          console.warn("error while parsing debug_time override", err);
         }
         document
           .querySelectorAll("[data-show-after], [data-hide-after]")
           .forEach((el) => {
-            const zone = el.dataset.timezone || "UTC";
+            const zone = el.dataset.timezone || "Europe/Oslo";
             const showAfter = el.dataset.showAfter
               ? parseInZone(el.dataset.showAfter, zone)
               : -Infinity;
