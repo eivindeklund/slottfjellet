@@ -48,7 +48,14 @@ while [[ $# -gt 0 ]]; do
       ;;
     --help|-h)
       cat <<EOF
+Copy the website to our webhost (w/checks & backups)
+
 Usage: $(basename "$0") [options]
+
+This is always safe to run.  It will verify that you have the correct setup
+(including verifying that you're both up to date WRT the remote repo, and that
+you've checked in all your local changes), and store a backup of the current
+live site (stored both remotely and locally).
 
 Options:
   --force, -f             Continue on check failures for things that are not fatal (warnings instead of exit)
@@ -175,7 +182,13 @@ fi
 
 # Verify that the local git branch is up to date with remote
 if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u} 2>/dev/null)" ]; then
-  warn_or_exit "Your local branch is not up to date with remote. Please pull the latest changes before deploying." 0
+  warn_or_exit 'Your local branch is not up to date with remote. Please "git pull" the latest changes before deploying.' 0
+fi
+
+# Verify that remote is up to date with the local git branch
+git fetch
+if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+  warn_or_exit 'Your local branch contains changes that have not been pushed to the remote. Please "git push" the latest changes before deploying.' 0
 fi
 
 # Verify that the local eleventy build is up to date by building to a temp directory and comparing
