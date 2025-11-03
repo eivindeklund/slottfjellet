@@ -1,0 +1,7 @@
+{
+  // Set up so it's easy for non-git-savvy users to work with this.
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.postCommitCommand": "push",
+  "git.suggestSmartCommit": true
+}

@@ -1,6 +1,96 @@
 <!-- markdownlint-disable -->
 # Om hvordan endre disse sidene
 
+Merk: Sidene er satt opp for å være lette å jobbe med, inkludert at vi har
+versjonskontroll som gjør at flere av oss kan jobbe med dem samtidig uten å
+tråkke hverandre på tærne.  Det er derfor viktig at ikke noen bare går inn og
+endrer på siten uten å bruke alt dette; endringene deres vil bli overskrevet av
+de som bruker dette.
+
+## Quick Start
+
+**Første gangs oppsett**
+
+1. Installer `npm` og `git` hvis du ikke har dem.
+2. Hvis du ikke gjør utvikling på ting som er lagret på Github allerede:
+    1. Installer [github cli](https://github.com/cli/cli#installation)
+    2. Følg instruksjonene  [om hvordan sette opp github-autentisering via `gh cli`](https://docs.github.com/en/get-started/git-basics/caching-your-github-credentials-in-git#github-cli).  De skal si noe a la 
+       * In the command line, enter `gh auth login`, then follow the prompts.
+       * When prompted for your preferred protocol for Git operations, select HTTPS.
+       * When asked if you would like to authenticate to Git with your GitHub credentials, enter Y
+       * For more information about authenticating with GitHub CLI, see [`gh auth login`](https://cli.github.com/manual/gh_auth_login).
+
+3. Installer [eleventy](http://11ty.dev):
+
+```shell
+npm install @11ty/eleventy
+```
+
+**Oppsett for hvert "workspace" (du kan ha fler på en maskin)**
+
+Lag et workspace med koden:
+
+```sh
+# Sjekk ut koden
+$ git checkout https://github.com/eivindeklund/slottfjellet
+$ cd slottfjellet
+$ cp dotenv.example .env
+# Endre .env til å ha de variablene som er viktige for oss.  Du må få dem fra
+# noen som vet om dem; ihvertfall Daniel og Eivind har dem.
+$ $EDITOR .env
+```
+
+Sett igang server for å kunne teste endringer:
+
+```sh
+$ npx @11ty/eleventy --serve --port=8000
+```
+
+Gå til http://localhost:8080/; når du endrer noe i kildefilene vil det stort
+sett øyeblikkelig dukke opp her.  Det kan noen ganger være noe caching i veien;
+hvis endringer ikke dukker opp, press Ctrl-Shift-R (på Linux/Windows) eller
+⌘-Shift-R (på Mac).
+
+> Hvis du skal ha flere kopier av siten oppe samtidig (fra forskjellige
+> workspaces) må du bruke forskjellig port til hver av dem.
+
+Når du er ferdig med å gjøre endring trenger du lagre dem i git lokalt, sende
+dem til github, og kjøre et script for å legge dem ut.  Jeg foretrekker å bruke
+den integrerte git-støtten i [VS Code](https://code.visualstudio.com/download)
+(gratis, lett å installere på Linux, Mac og Windows).  Hvis du bruker den får du
+en greie du kan klikke på på venstre side som ser ca sånn ut:
+
+![The VSCode git button](docs/vscode-git-button.png)
+
+Deretter skriver du beskrivelse og trykker "⬆Commit & Push".  Dette kan også
+gjøres fra kommandolinje men er litt fumlete; kommandoene du leter etter er som
+regel `git add`, `git commit` og `git push`, med `git mv` og `git rm` for
+flytting og fjerning (med `git commit` etterpå.)
+
+Når du er ferdig med å endre og commit'e og pushe, kan du legge ut websiden.
+
+Da må du først bygge den:
+
+```sh
+$ npx @11ty/eleventy
+```
+
+Deretter kan du sende den til å bli aktiv:
+
+```sh
+$ ./bin/deploy.sh
+```
+
+Deploy vil sjekke at du har riktig oppsett og har gjort det du trenger med git,
+ta backup, og legge ut den nye websiten.
+
+Deploy har en del kommandolinje-switcher som kan brukes til å droppe sjekker eller
+kjøre gjennom alt "som test" etc.  For å se hva som er av switcher kjør
+
+```sh
+$ ./bin/deploy.sh --help
+```
+
 ## Om eleventy (bruk og opplasting)
 
 Vi bruker eleventy for å slippe repetere biter med meny etc.  Den lager en
@@ -27,12 +117,12 @@ før den laster opp.
 ### Start Eleventy webserver for utvikling
 
 ```shell
-$ npx @11ty/eleventy
+$ npx @11ty/eleventy --serve
 ```
 
 Siten blir tilgjengelig på http://localhost:8080/
 
-## Publisher siten
+## Publiser siten til å bli aktiv på web.
 
 Kjør
 
@@ -40,38 +130,48 @@ Kjør
 $ bin/deploy.sh
 ```
 
-Denne vil sjekke at alt er oppdater, bygd riktig og du er på riktig git-branch,
-ta en datert backup av den live siten lokalt (til _backup/) og laste den opp til
-`slottsfjellet-backups` på hosting, og deretter laste opp.
+Denne vil sjekke at alt er oppdatert, bygd riktig og du er på riktig git-branch,
+ta en datert backup av den live siten lokalt (til `_backup/`), laste den opp til
+`slottsfjellet-backups` på hosting, og til slutt laste opp selve siten.
 
-## Biter som kopieres rundt
+## Filstruktur og includes
 
-### Hvordan
+Alt som skal ut på websiden kommer fra `src/` - det som ikke er i `src/` er
+infrastruktur.
 
-Alle biter som kopieres rundt skal være merket med en kommentar som dette:
+Fil eller dir | Innhold
+---|---
+`bin/` | For små-programmer/scripts som hjelper oss vedlikeholde.
+`bin/deploy.sh` | For å kopiere hele siten til FTP.  Kjør 
+`.env` |
+`.eleventyignore` | For å [sette opp filer som ikke skal kopieres/prosesseres](https://www.11ty.dev/docs/ignores/).  Per idag brukes den bare så vi kan legge README.md filer rundt hvor som helst uten at de gjøres om til `README.html`
+`.gitignore` |
+`dotenv.example` |
+`eleventy.config.js` | 
+`README.md` | Denne filen.  Dokumentasjon på struktur, hvordan oppdatere, etc.
+`src/` | Input-data for å bygge websiten.  **Alt som skal kopieres herfra må settes opp i `eleventy.config.js`!**
+`src/*.html` |
+`src/_data/` | Greier for eleventy.  Det eneste jeg vet om bruk av er `permalink.js` men jeg antar det finnes mer en kna legge her.
+`src/_data/permalink.js` | Eleventy config for hvordan sette opp filnavn.  Per default kopierer eleventy foo.html til foo/index.html så foo.html kan kommes til som slottsfjellet.org/foo, men vi har allerede slottsfjellet.org/foo.html i bruk, så vi må gjøre noe mer oppsett før vi kan skifte format.
+`src/_extra_for_root` | Filer som skal kopieres til `/`, utenom `*.html`.  Separert ut for å ha minst mulig rot når en endrer HTML-filene.  `src/_includes` | Filer som inkluderes i de andre filene for å bygge websiten.
+`src/_includes/content_body_*.html` | div's med grå bokser som settes inn i forskjellige andre sider.
+`src/_includes/footer.html` | 
+`src/_includes/head.html` | Innhold til `<head>` i sidene våre.  Tar parameter `title` via `{% render "head.html", title: "En Tittel Her" }` der `En Tittel Her` vanligvis er `Slottsfjellet Spillforening`.
+`src/_includes/header.html` | Topp-header på siden, med logo og "Slottsfjellet Spillforening"
+`src/_includes/infobox_om_oss.html` | Om oss-box, med HTML-struktur som er litt annerledes enn i `content_body_*.html`.  Burde gjøres om til å ha samme strukture.  TODO
+`src/_includes/nav.html` | Nav-bar.  Kommer så langt alltid sammen med `header.html` så burde inkluderes derfra. Se TODO
 
-```html
-<!-- <hva det er>.
- ORIGINAL i <orignalfil>
- KOPI i <annen fil>
- KOPI i <annen fil>
+Includes brukes som følger:
 
- Endre bare i ORIGINAL FIL, og kopier deretter ut til alle andre steder.
- Hvis du legger til en ny kopi, endre ORIGINAL FIL til å liste den nye filen
- som en ekstra KOPI.
-
- Kopier med denne kommentaren.
--->
-```
+1. Putt en fil for inkludering i `src/_includes/et_navn.html`.  Dette kan være
+   en straight fil, eller den kan includere mer ting for inkludering eller
+   ekspandering.  (Teknisk sett er dette en template i liquid-format.)
+2. Putt `{% render "et_navn.html" }` eller `{% render "et_navn.html", en_variabel: "en verdi" }` der du vil inkludere.
+3. Putt `{{ en_variabel }}` der du vil legge inn verdien.
 
 
-Avslutt etter det kopierte med
 
-```html
-<!--- Slutt kopiert seksjon -->
-```
-
-### Nav-meny og hvordan legge til i den
+## Nav-meny og hvordan legge til sider i den
 
 Nav-menyen viser hvilken side som er aktiv via CSS; "linken" til den aktive
 siden blir bold, svart og kan ikke klikkes på.
@@ -80,46 +180,54 @@ Dette fungerer via tre ting tilsammen:
 
 * Hver side har en CSS-klasse `<side>-page` på `body` som sier hvilken side en er i.  For `ttt.html` (Tønsberg TableTop) er det `<body class="ttt-page">`, etc.
 * Hver link i nav'en har en CSS-classe `<side>-link` som sier hvilken side den hører til.  For linken til `ttt.html` er det `<div class="nav-item gray-box ttt-link">`
-* I style2.css er det en CSS-selektor som velger kombinasjonen `.<blah>-page .<blah>-link` og skifter stilen.
+* I `style.css` er det en CSS-selektor som velger kombinasjonen `.<blah>-page .<blah>-link` og skifter stilen.
 
-Alle disse må endres sammen hvis en skal legge til en ny side.  `index.html` og `style2.css` har merking med `ENDRE HER NÅR DU LEGGER TIL EN SIDE.`
+Alle disse må endres sammen hvis en skal legge til en ny side.
 
 Bakgrunn:
 
-> Vi prøver unngå Javascript for å ikke måtte vedlikeholde noe komplisert.
+> Vi prøver unngå for mye Javascript for å ikke måtte vedlikeholde noe komplisert.
 >
 > Per oktober 2025 har ikke ren CSS noe som lar oss gjøre dette med mindre
-> repetisjon enn det ovenfor. :local-link er i draft men ikke implementert noe
+> repetisjon enn det ovenfor. `:local-link` er i draft men ikke implementert noe
 > sted, og det er ingen måte å gjøre prefix match mellom to css-regler (så vi
-> kan ikke matche foo-page og foo-link uten å liste det for hånd.)  Det kan evt
-> endres via et template-system (f.eks. Jekyll) eller hvis det kommer nye
-> CSS-selectorer.
+> kan ikke matche foo-page og foo-link uten å liste det for hånd.)
+>
+> Vi kunne brukt eleventy til å gjøre dette i det HTML blir skrevet om, men det ville
+> gjøre det mye vanskeligere å gå tilbake til manuell endring hvis vi skulle
+> måtte gjøre det.
 
 
-## TODO
+## Tidssensitive elementer
 
-Vi burde migrere organiseringen av filer til en bra struktur for web-siter, f.eks.
+Vi har Javascript-basert støtte for å få elementer til å dukke opp og forsvinne
+ved å tagge dem med `data-show-after` og `data-hide-after`.  Hvis det av en
+eller annen grunn skulle trenges en annen tidssone en `Europe/Oslo`, legg til en
+`data-timezone`.
 
-https://www.njfamirm.ir/en/blog/eleventy-folder-structure-guide/
+Eksempel på bruk:
 
-## Debugging av tidssensitive elementer
+```html
+    <li data-hide-after="2025-12-02T22:00">
+      <span class="only-in-index">Tirsdag på Solhaug (juleavslutning): </span
+      ><span class="datetime">2. des kl 17:30</span>
+    </li>
+```
 
-Skriptet i `src/_includes/head.html` har støtte for å overstyre «now» når du
-trenger å feilsøke visning som avhenger av tid. Den forventer en ISO-lignende
-lokal dato/tid og tolker den i tidssonen Europe/Oslo (som du ønsket).
+### Debugging av tidssensitive elementer
 
-Bruk én av disse (precedence i denne rekkefølgen):
+Skriptet har støtte for å overstyre `now` når du
+trenger å feilsøke visning som avhenger av tid ved å sende `&debug_time=en-iso-lignende-tidsstreng`.
+Den tolker i tidssonen Europe/Oslo.
 
-- HTML-attributt på `<html>`:
-	`<html data-debug-time="2025-11-01T15:00:00">`
-- På `<body>`:
-	`<body data-debug-time="2025-11-01T15:00:00">`
-- Meta-tag:
-	`<meta name="debug_time" content="2025-11-01T15:00:00">`
-- URL-query:
-	`/page.html?debug_time=2025-11-01T15:00:00`
+Eksempel: `http://slottsfjellet.org/tirsdag.html?debug_time=2025-11-01T15:00:00`
 
 Format: `YYYY-MM-DD` eller `YYYY-MM-DDTHH:mm` (sekunder er valgfrie). Hvis
 strengen inneholder en tidssone (Z eller +/-hh:mm) brukes den i stedet.
 Elementer som har `data-debug` vil logge synlighetsinformasjon (`time-visibility`)
 til konsollen slik at det er lett å se hvilken «now» som ble brukt.
+
+## Referanser
+
+For mer avansert eleventy-struktur:
+https://www.njfamirm.ir/en/blog/eleventy-folder-structure-guide/
