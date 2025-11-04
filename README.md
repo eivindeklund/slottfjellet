@@ -17,7 +17,7 @@ installere/bygge/laste opp; template-system og struktur er dokumentert nedenfor.
 
 ## Utviklings-kommandoene
 
-**Første gangs oppsett**
+**Førstegangs oppsett**
 
 1. Installer `npm` og `git` hvis du ikke har dem.
 2. Hvis du ikke gjør utvikling på ting som er lagret på Github allerede:
