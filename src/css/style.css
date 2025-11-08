@@ -314,4 +314,34 @@ body.countdown-page {
     .countdown-timer { font-size: 6rem; }
 }
 
+/* Flags for translation */
+.flags {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 8px;
+  font-size: 1.5rem;
+  z-index: 1000;
+}
+
+.flags .flag {
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.flags .flag:hover {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+}
+
+/* Disabled state for current language */
+.flags .flag.disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+  transform: none;
+  filter: none;
+}
+
 
