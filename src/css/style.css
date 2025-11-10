@@ -344,4 +344,9 @@ body.countdown-page {
   filter: none;
 }
 
+/* Remove the Google Translate banner */
+#gt-nvframe {
+  display: none !important;
+}
+
 
