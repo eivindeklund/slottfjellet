@@ -194,19 +194,56 @@ fi
 # Verify that the local eleventy build is up to date by building to a temp directory and comparing
 TEMP_DIR=$(mktemp -d)
 npx @11ty/eleventy --output=$TEMP_DIR
-if ! diff -r _site/ $TEMP_DIR > /dev/null; then
+if ! diff -r _site/ "$TEMP_DIR" > /dev/null; then
   # This is something we may want to bypass with --force or --dry-run
   if [ "$FORCE" = "1" ] || [ "$DRY_RUN" = "1" ]; then
     prefix "Warning: The local eleventy build is different from a fresh build. Continuing because --force or --dry-run was given. Build command: npx @11ty/eleventy"
   else
-    diff -u -r _site/ $TEMP_DIR
-    prefix "----------"
-    prefix "Error: The local eleventy build is different from a fresh build.  Please build the site before deploying, or investigate the differences.  Build command: npx @11ty/eleventy"
-    rm -rf $TEMP_DIR
-    exit 1
+    # Interactive loop: let the user show diffs, rebuild into the temp dir, or exit.
+    while true; do
+      prefix "The local eleventy build is different from a fresh build. Choose an action:"
+      prefix "  [s]how diffs"
+      prefix "  [b]uild now (removes _site and runs npx @11ty/eleventy --output=_site)"
+      prefix "  [e]xit"
+      printf "Enter choice (s/b/e): "
+      # read user input
+      if ! read -r CHOICE; then
+        prefix "No input (stdin closed). Aborting."
+        rm -rf "$TEMP_DIR"
+        exit 1
+      fi
+      case "$CHOICE" in
+        s|S)
+          # Show unified diff; continue loop afterwards
+          diff -u -r _site/ "$TEMP_DIR" || true
+          prefix "----------"
+          ;;
+        b|B)
+          prefix "Rebuilding into _site"
+          # ensure a clean temp dir for rebuild
+          mv _site backups/_site_backup_$(date +"%Y%m%d-%H%M%S")
+          rm -rf _site
+          npx @11ty/eleventy --output=_site
+          if diff -r _site/ "$TEMP_DIR" > /dev/null; then
+            prefix "Rebuild matches _site. Continuing deploy."
+            break
+          else
+            prefix "Rebuild still differs from _site. You can show diffs, try rebuilding again, or exit."
+          fi
+          ;;
+        e|E)
+          prefix "Aborting deploy due to differing build. Build command: npx @11ty/eleventy"
+          rm -rf "$TEMP_DIR"
+          exit 1
+          ;;
+        *)
+          prefix "Invalid choice. Please enter s, b, or e."
+          ;;
+      esac
+    done
   fi
 fi
-rm -rf $TEMP_DIR
+rm -rf "$TEMP_DIR"
 
 # Create a timestamp for the backup directory
 TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
