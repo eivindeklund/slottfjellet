@@ -348,5 +348,6 @@ body.countdown-page {
 #gt-nvframe {
   display: none !important;
 }
-
-
+body {
+  margin-top: 0 !important;
+}
