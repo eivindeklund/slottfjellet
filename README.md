@@ -51,7 +51,7 @@ $ $EDITOR .env
 Sett igang server for å kunne teste endringer:
 
 ```sh
-$ npx @11ty/eleventy --serve --port=8000
+$ npx @11ty/eleventy --serve --port=8080
 ```
 
 Gå til http://localhost:8080/; når du endrer noe i kildefilene vil det stort
