@@ -382,3 +382,66 @@ body {
   border: 1px solid #888888;
   border-radius: 4px;
 }
+
+/* Styles for the parking map legend in tirsdag.html */
+.parking-legend {
+  margin-top: 10px;
+}
+
+.legend-table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+.legend-row {
+  display: table-row;
+}
+
+.legend-cell {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 6px 8px;
+  border-bottom: 1px solid #eee;
+  font-size: 1rem;
+}
+
+.color-box {
+  width: 20px;
+  height: 20px;
+  display: inline-block; /* Allows text to flow next to it */
+  vertical-align: middle; /* Aligns with text */
+  border: 1px solid #ccc; /* Adds a subtle border */
+}
+
+@media (max-width: 767px) {
+  .legend-table {
+    display: block;
+  }
+  .legend-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 4px;
+    padding-bottom: 4px;
+  }
+  .legend-cell {
+    display: block;
+    width: auto;
+    border: none;
+    padding: 2px 0;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+  /* Add spacing between cells in a row except the first */
+  .legend-row > .legend-cell:not(:first-of-type) {
+    margin-left: 15px;
+  }
+
+  /* Set minimum size for the first cell to align cell #2 if possible */
+  .legend-row > .legend-cell:first-of-type {
+    min-width: 10em;
+  }
+}
