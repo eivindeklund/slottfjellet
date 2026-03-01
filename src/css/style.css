@@ -10,14 +10,43 @@ html {
     /* overflow-y: scroll; */
     scrollbar-gutter: stable;
 
+    /* Tokens, so we can change here instead of having it coded throughout */
+    /* To test: 
+    --header-font-family: "MedievalSharp", serif;
+    --main-font-family: "Inter", serif;
+     */
+    --header-font-family: "Courier New", monospace;
+    --main-font-family: "Courier New", monospace;
+
+    --main-bg-color: black;
+    --card-bg-color: #dcdcdc;
+    --text-color: black;
+
+    --link-color: blue;
+    --link-text-decoration: underline;
+
+    --legend-cell-border-color: #eee;
+    --color-box-border-color: #ccc;
+    --boardgame-list-img-border-color: #888888;
+    --boardgame-list-details-border-color: #aaaaaa;
+
+    --countdown-body-color: white;
+    --countdown-background-color: black;
+    --countdown-sub-color: #ddd;
 }
 
 
 body {
-    font-family: 'Courier New', monospace;
-    background: black;
+    font-family: var(--main-font-family);
+    background: var(--main-bg-color);
+    color: var(--text-color);
     margin: 0;
     padding: 10px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--header-font-family);
+    color: var(--header-color);
 }
 
 .container {
@@ -28,7 +57,7 @@ body {
 
 /* Common styles for gray boxes */
 .gray-box {
-    background: #dcdcdc;
+    background: var(--card-bg-color);
     border-radius: 5px;
     padding: 10px;
 }
@@ -105,7 +134,7 @@ body.rpg-page .nav .rpg-link a,
 body.ttt-page .nav .ttt-link a,
 body.tirsdag-page .nav .tirsdag-link a {
   text-decoration: none;
-  color: black;
+  color: var(--accent-color-1);
   font-weight: bold;
   pointer-events: none; /* makes it not clickable */
   cursor: default;      /* avoids showing link cursor */
@@ -205,8 +234,8 @@ body.tirsdag-page .nav .tirsdag-link a {
 
 /* Links */
 a {
-    color: blue;
-    text-decoration: underline;
+    color: var(--link-color);
+    text-decoration: var(--link-text-decoration);
 }
 
 /* Strikethrough for past dates */
@@ -268,8 +297,8 @@ del {
 /* Countdown full-screen styles */
 body.countdown-page {
     margin: 0;
-    background: black;
-    color: white;
+    background: var(--countdown-background-color);
+    color: var(--countdown-body-color);
     height: 100vh;
 }
 
@@ -301,7 +330,7 @@ body.countdown-page {
 .countdown-sub { 
     margin-top: 12px;
     font-size: clamp(1rem, 2.5vw, 1.5rem);
-    color: #ddd;
+    color: var(--countdown-sub-color);
 }
 
 /* color states */
@@ -355,7 +384,7 @@ body {
 
 /* Format for details/summary used in the boardgames page */
 .boardgame-list details {
-  border: 1px solid #aaaaaa;
+  border: 1px solid var(--boardgame-list-details-border-color);
   border-radius: 4px;
   padding: 0.5em 0.5em 0;
 }
@@ -371,7 +400,7 @@ body {
 }
 
 .boardgame-list details[open] summary {
-  border-bottom: 1px solid #aaaaaa;
+  border-bottom: 1px solid var(--boardgame-list-details-border-color);
   margin-bottom: 0.5em;
 }
 .boardgame-list img {
@@ -379,7 +408,7 @@ body {
   height: auto;
   vertical-align: middle;
   margin-right: 10px;
-  border: 1px solid #888888;
+  border: 1px solid var(--boardgame-list-img-border-color);
   border-radius: 4px;
 }
 
@@ -403,7 +432,7 @@ body {
   display: table-cell;
   vertical-align: middle;
   padding: 6px 8px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--legend-cell-border-color);
   font-size: 1rem;
 }
 
@@ -412,7 +441,7 @@ body {
   height: 20px;
   display: inline-block; /* Allows text to flow next to it */
   vertical-align: middle; /* Aligns with text */
-  border: 1px solid #ccc; /* Adds a subtle border */
+  border: 1px solid var(--color-box-border-color); /* Adds a subtle border */
 }
 
 @media (max-width: 767px) {
@@ -423,7 +452,7 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--legend-cell-border-color;
     margin-bottom: 4px;
     padding-bottom: 4px;
   }
