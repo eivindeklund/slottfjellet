@@ -456,7 +456,7 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    border-bottom: 1px solid var(--legend-cell-border-color;
+    border-bottom: 1px solid var(--legend-cell-border-color);
     margin-bottom: 4px;
     padding-bottom: 4px;
   }
@@ -477,4 +477,196 @@ body {
   .legend-row > .legend-cell:first-of-type {
     min-width: 10em;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO CAROUSEL
+   All motion is CSS transitions/layouts; JS manages state classes only.
+
+   Class states applied by carousel.js:
+     .is-active  – the currently displayed slide / body item / description
+     .is-prev    – a slide exiting to the left
+     .no-anim    – suppresses transitions during setup (removed after 2 rAFs)
+     .is-visible – applied to #carousel-curr-desc when title text is shown
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.carousel {
+    position: relative;
+    outline: none;        /* element is focusable (tabindex=0) but no outline */
+    font-family: var(--main-font-family);
+    margin-bottom: 2px;   /* match the gap used by the main-content grid */
+}
+
+/* ── Title bar ─────────────────────────────────────────────────────────── */
+.carousel-title-bar {
+    background: var(--card-bg-color);
+    padding: 10px 12px 8px;
+    border-radius: 5px 5px 0 0;
+}
+
+.carousel-heading {
+    margin: 0;
+    font-size: clamp(1.1rem, 3.5vw, 1.7rem);
+    color: var(--header-color);
+    font-family: var(--header-font-family);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* The swappable part of the heading ("på biblioteket", "brettspill", …).
+   Starts invisible; .is-visible triggers the fade-in transition.
+   Losing .is-visible triggers the fade-out because the base transition
+   still applies. */
+#carousel-curr-desc {
+    display: inline;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+#carousel-curr-desc.is-visible {
+    opacity: 1;
+}
+
+/* ── Image-wrap: positions viewport + arrow buttons together ────────────── */
+.carousel-image-wrap {
+    /* position: relative here so the absolutely-positioned arrow buttons
+       are placed relative to this element (which gets its height from
+       .carousel-aspect's padding-bottom, naturally). */
+    position: relative;
+}
+
+/* ── 16:9 height-establishing wrapper (padding-bottom trick) ────────────── */
+/* height:0 + padding-bottom:56.25% gives the box an intrinsic 16:9 height.
+   No overflow:hidden here — positioned descendants of .carousel-viewport are
+   NOT containing-block descendants of .carousel-aspect, so clipping here
+   would be unreliable.  Clipping is done on .carousel-viewport instead. */
+.carousel-aspect {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;   /* 9 ÷ 16 × 100% */
+    background: var(--main-bg-color);
+}
+
+/* ── Viewport fills the aspect-ratio box and clips the slides ───────────── */
+/* overflow:hidden here is reliable: .carousel-viewport IS the containing
+   block for .carousel-slide (both are position:absolute), so the spec
+   guarantees that the clip edge applies to all descendant slides. */
+.carousel-viewport {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+/* ── Individual slides ──────────────────────────────────────────────────── */
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Default: off-screen to the right, NO transition (snaps instantly so
+       JS can reposition a slide without triggering animation) */
+    transform: translateX(100%);
+}
+
+.carousel-slide.is-active {
+    transform: translateX(0);
+    transition: transform 0.9s ease-in-out;
+}
+
+.carousel-slide.is-prev {
+    transform: translateX(-100%);
+    transition: transform 0.9s ease-in-out;
+}
+
+/* Suppress all transitions during the initialisation phase */
+.carousel-slide.no-anim,
+.carousel-body-item.no-anim {
+    transition: none !important;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* ── Arrow navigation buttons ───────────────────────────────────────────── */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+
+    /* Visual */
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    width: 2.6rem;
+    height: 3.5rem;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: background 0.2s ease;
+
+    /* Keep buttons inside the image area so they don't bleed into text */
+    margin: 0 4px;
+}
+
+.carousel-btn:hover,
+.carousel-btn:focus-visible {
+    background: rgba(0, 0, 0, 0.75);
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.carousel-btn--prev { left: 0; }
+.carousel-btn--next { right: 0; }
+
+/* ── Body-text area ─────────────────────────────────────────────────────── */
+/* CSS Grid stacking: all items share cell (1, 1) → parent height = tallest
+   item height; no explicit height needed. */
+.carousel-body-area {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--card-bg-color);
+    border-radius: 0 0 5px 5px;
+    padding: 12px;
+    min-height: 5.5em;
+}
+
+.carousel-body-item {
+    grid-row: 1;
+    grid-column: 1;
+    opacity: 0;
+    visibility: hidden;
+    /* Instant fade-out when .is-active is removed */
+    transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+    margin: 0;
+}
+
+.carousel-body-item.is-active {
+    visibility: visible;
+    opacity: 1;
+    /* Delay fade-in until the slide transition completes (0.9s) */
+    transition: opacity 0.4s ease 0.9s, visibility 0s linear 0.9s;
+}
+
+.carousel-body-item p {
+    margin: 0;
+    line-height: 1.55;
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    color: var(--text-color);
 }

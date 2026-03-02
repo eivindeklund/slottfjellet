@@ -1,0 +1,197 @@
+<!--
+  Carousel: image/title/body data is stored in .carousel-slide elements and
+  .carousel-body-item elements below.  To add or remove a slide, add/remove a
+  matching pair of .carousel-slide + .carousel-body-item (same order).
+
+  Images must be placed in /images/carousel/.
+  The description shown in the title "Vi spiller <desc>" comes from
+  data-desc on each .carousel-slide.
+
+  Pure-CSS transitions handle all motion and fading;
+  JavaScript is used only for the timer, arrow-click handling and
+  the "pause on interaction" gate (none of which are doable in CSS alone).
+
+  Browser compatibility: CSS transitions, position:absolute, custom properties
+  and ResizeObserver are all supported in all current browsers (Chrome, Firefox,
+  Safari, Edge).  No polyfill is required.
+-->
+<section
+  class="carousel"
+  id="hero-carousel"
+  aria-label="Aktiviteter i Slottsfjellet Spillforening"
+  aria-roledescription="carousel"
+  tabindex="0"
+>
+  <!-- ── Title bar (sits outside the scrolling viewport) ─────────────────── -->
+  <div class="carousel-title-bar" aria-hidden="true">
+    <h2 class="carousel-heading">
+      Vi&nbsp;spiller&nbsp;<span
+        class="carousel-curr-desc"
+        id="carousel-curr-desc"
+      ></span>
+    </h2>
+  </div>
+
+  <!-- ── Image area: viewport (clips slides) + arrow buttons ────────────── -->
+  <div class="carousel-image-wrap">
+    <!-- .carousel-aspect uses the padding-bottom trick to create a reliable
+         16:9 box whose overflow:hidden clips translated children properly.
+         This is more robust than aspect-ratio + overflow on a flex/grid
+         parent whose only children are position:absolute. -->
+    <div class="carousel-aspect">
+      <div class="carousel-viewport" role="group" aria-label="Bilder">
+        <div
+          class="carousel-slide is-active no-anim"
+          data-index="0"
+          data-desc="på biblioteket"
+          aria-roledescription="slide"
+          aria-label="1 av 6: Vi spiller på biblioteket"
+        >
+          <img
+            src="/images/carousel/image-1-på-bilioteket.png"
+            alt="Spillere samlet rundt bord på Tønsberg Bibliotek"
+          />
+        </div>
+
+        <div
+          class="carousel-slide"
+          data-index="1"
+          data-desc="brettspill"
+          aria-roledescription="slide"
+          aria-label="2 av 6: Vi spiller brettspill"
+        >
+          <img
+            src="/images/carousel/image-2-brettspill.png"
+            alt="Brettspillere i gang med et strategispill"
+          />
+        </div>
+
+        <div
+          class="carousel-slide"
+          data-index="2"
+          data-desc="rollespill"
+          aria-roledescription="slide"
+          aria-label="3 av 6: Vi spiller rollespill"
+        >
+          <img
+            src="/images/carousel/image-3-rollespill.jpg"
+            alt="Rollespillere rundt spillbordet"
+          />
+        </div>
+
+        <div
+          class="carousel-slide"
+          data-index="3"
+          data-desc="Warhammer Old World"
+          aria-roledescription="slide"
+          aria-label="4 av 6: Vi spiller Warhammer Old World"
+        >
+          <img
+            src="/images/carousel/image-4-Warhammer-Old-World.png"
+            alt="Warhammer Old World-figurer på spillbrettet"
+          />
+        </div>
+
+        <div
+          class="carousel-slide"
+          data-index="4"
+          data-desc="Warhammer 40k"
+          aria-roledescription="slide"
+          aria-label="5 av 6: Vi spiller Warhammer 40k"
+        >
+          <img
+            src="/images/carousel/image-5-Warhammer-40k.png"
+            alt="Warhammer 40 000-miniatyrene klar til kamp"
+          />
+        </div>
+
+        <div
+          class="carousel-slide"
+          data-index="5"
+          data-desc="samlekortspill"
+          aria-roledescription="slide"
+          aria-label="6 av 6: Vi spiller samlekortspill"
+        >
+          <img
+            src="/images/carousel/image-6-samlekortspill.png"
+            alt="Spillere som bytter og spiller samlekortspill"
+          />
+        </div>
+      </div>
+      <!-- /.carousel-viewport -->
+    </div>
+    <!-- /.carousel-aspect -->
+
+    <!-- Arrow buttons are siblings of .carousel-aspect, positioned relative
+         to .carousel-image-wrap (which gets its height from .carousel-aspect) -->
+    <button
+      class="carousel-btn carousel-btn--prev"
+      type="button"
+      aria-label="Forrige bilde"
+    >
+      &#8592;
+    </button>
+
+    <button
+      class="carousel-btn carousel-btn--next"
+      type="button"
+      aria-label="Neste bilde"
+    >
+      &#8594;
+    </button>
+  </div>
+  <!-- /.carousel-image-wrap -->
+
+  <!-- ── Body-text area (fades; one item per slide, same order) ──────────── -->
+  <div class="carousel-body-area" aria-live="polite" aria-atomic="true">
+    <div class="carousel-body-item is-active no-anim">
+      <p>
+        Tirsdagssamlingene finner sted på <strong>Tønsberg Bibliotek</strong>,
+        åpne for alle — ingen påmelding nødvendig. Ta med egne spill eller velg
+        blant våre, og møt opp fra kl.&nbsp;17:30.
+      </p>
+    </div>
+
+    <div class="carousel-body-item">
+      <p>
+        Fra raske kortspill til tunge strategibrettspill — vi har noe for alle.
+        Både nybegynnere og erfarne spillere er hjertelig velkomne til å prøve
+        noe nytt eller møte noen å spille det de elsker med.
+      </p>
+    </div>
+
+    <div class="carousel-body-item">
+      <p>
+        Utforsk fantastiske verdener og fortell episke historier rundt bordet.
+        Vi spiller hver tirsdag og vil spesielt gjerne ha med deg som ikke har
+        prøvd før. Så mye at vi gir hver ferske rollespiller et sett med
+        rollespillterninger i som minne fra da de begynte rollespill!
+      </p>
+    </div>
+
+    <div class="carousel-body-item">
+      <p>
+        Sett opp dine hærer og kjemp om kontroll over <em>The Old World</em>.
+        Warhammer Fantasy Battles er tilbake under nytt navn — kom og del
+        entusiasmen for fantastisk miniatyrmaleri og taktiske slag!
+      </p>
+    </div>
+
+    <div class="carousel-body-item">
+      <p>
+        I det 41.&nbsp;årtusen er det bare krig. Mal miniatyrene dine og still
+        til kamp på slagmarken i et av verdens mest ikoniske miniatyrkrigsspill.
+        Alle nivåer er velkomne.
+      </p>
+    </div>
+
+    <div class="carousel-body-item">
+      <p>
+        Magic:&nbsp;The Gathering, Pokémon, Flesh&nbsp;and&nbsp;Blood og mer.
+        Bygg ditt deck, test det mot andre, og bli en del av et aktivt
+        samlekortspillmiljø i Vestfold.
+      </p>
+    </div>
+  </div>
+  <!-- /.carousel-body-area -->
+</section>
