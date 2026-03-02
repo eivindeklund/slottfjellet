@@ -484,17 +484,29 @@ body {
    All motion is CSS transitions/layouts; JS manages state classes only.
 
    Class states applied by carousel.js:
-     .is-active  – the currently displayed slide / body item / description
-     .is-prev    – a slide exiting to the left
-     .no-anim    – suppresses transitions during setup (removed after 2 rAFs)
-     .is-visible – applied to #carousel-curr-desc when title text is shown
+     .is-active      – slide / body item / description currently on screen
+     .is-enter-left  – incoming slide snapped off-screen LEFT (no transition)
+     .is-exit-left   – outgoing slide animating off to the left
+     .is-exit-right  – outgoing slide animating off to the right
+     .no-anim        – suppresses transitions during setup (removed after 2 rAFs)
+     .is-visible     – applied to #carousel-curr-desc when title text is shown
+
+   Configurable via CSS custom properties (set on #hero-carousel or override
+   the defaults on .carousel):
+     --carousel-max-height  max pixel height of the image box  (default 450px)
+     --carousel-max-width   max pixel/% width of the image box (default 100%)
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .carousel {
     position: relative;
-    outline: none;        /* element is focusable (tabindex=0) but no outline */
+    outline: none;
     font-family: var(--main-font-family);
-    margin-bottom: 2px;   /* match the gap used by the main-content grid */
+    margin-bottom: 2px;
+
+    /* ── Configurable sizing knobs ──────────────────────────────────────── */
+    /* Override these on #hero-carousel { --carousel-max-height: 350px; } */
+    --carousel-max-height: 450px;
+    --carousel-max-width: 100%;
 }
 
 /* ── Title bar ─────────────────────────────────────────────────────────── */
@@ -516,12 +528,13 @@ body {
 
 /* The swappable part of the heading ("på biblioteket", "brettspill", …).
    Starts invisible; .is-visible triggers the fade-in transition.
-   Losing .is-visible triggers the fade-out because the base transition
-   still applies. */
+   TUNING: change the duration here AND change DESC_FADE_DURATION in
+   carousel.js to the same value (in ms).  The JS uses it to schedule
+   the text swap so the fade-in finishes exactly when the slide stops. */
 #carousel-curr-desc {
     display: inline;
     opacity: 0;
-    transition: opacity 0.35s ease;
+    transition: opacity 0.35s ease;   /* 0.35s = 350ms = DESC_FADE_DURATION in JS */
 }
 #carousel-curr-desc.is-visible {
     opacity: 1;
@@ -529,29 +542,31 @@ body {
 
 /* ── Image-wrap: positions viewport + arrow buttons together ────────────── */
 .carousel-image-wrap {
-    /* position: relative here so the absolutely-positioned arrow buttons
-       are placed relative to this element (which gets its height from
-       .carousel-aspect's padding-bottom, naturally). */
+    /* arrow buttons are positioned relative to this wrapper */
     position: relative;
+    /* honour --carousel-max-width and centre the narrowed box */
+    max-width: var(--carousel-max-width, 100%);
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* ── 16:9 height-establishing wrapper (padding-bottom trick) ────────────── */
-/* height:0 + padding-bottom:56.25% gives the box an intrinsic 16:9 height.
-   No overflow:hidden here — positioned descendants of .carousel-viewport are
-   NOT containing-block descendants of .carousel-aspect, so clipping here
-   would be unreliable.  Clipping is done on .carousel-viewport instead. */
+/* ── Aspect-ratio / height-capped image box ─────────────────────────────── */
+/* aspect-ratio gives a natural 16:9 height; max-height caps it.
+   When max-height kicks in the box becomes wider than 16:9 — images are
+   letterboxed/pillarboxed by object-fit:contain on the <img>.
+   The whole box (including empty space) slides as one unit so the
+   animation always covers the full width cleanly. */
 .carousel-aspect {
     position: relative;
     width: 100%;
-    height: 0;
-    padding-bottom: 56.25%;   /* 9 ÷ 16 × 100% */
+    aspect-ratio: 16 / 9;
+    max-height: var(--carousel-max-height, 450px);
     background: var(--main-bg-color);
 }
 
-/* ── Viewport fills the aspect-ratio box and clips the slides ───────────── */
-/* overflow:hidden here is reliable: .carousel-viewport IS the containing
-   block for .carousel-slide (both are position:absolute), so the spec
-   guarantees that the clip edge applies to all descendant slides. */
+/* ── Viewport fills the aspect box and clips the slides ─────────────────── */
+/* overflow:hidden is reliable here: .carousel-viewport IS the containing
+   block for .carousel-slide, so the spec guarantees clipping applies. */
 .carousel-viewport {
     position: absolute;
     top: 0;
@@ -562,24 +577,38 @@ body {
 }
 
 /* ── Individual slides ──────────────────────────────────────────────────── */
+
+/* Default: snapped off-screen RIGHT — no transition (instant reposition) */
 .carousel-slide {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    /* Default: off-screen to the right, NO transition (snaps instantly so
-       JS can reposition a slide without triggering animation) */
     transform: translateX(100%);
 }
 
+/* Snap off-screen LEFT — no transition (entry point for backward slides) */
+.carousel-slide.is-enter-left {
+    transform: translateX(-100%);
+}
+
+/* On-screen.  Declared AFTER is-enter-left so its transform wins the
+   cascade when both classes are present during a backward entry. */
 .carousel-slide.is-active {
     transform: translateX(0);
     transition: transform 0.9s ease-in-out;
 }
 
-.carousel-slide.is-prev {
+/* Forward exit: current slide leaves to the left */
+.carousel-slide.is-exit-left {
     transform: translateX(-100%);
+    transition: transform 0.9s ease-in-out;
+}
+
+/* Backward exit: current slide leaves to the right */
+.carousel-slide.is-exit-right {
+    transform: translateX(100%);
     transition: transform 0.9s ease-in-out;
 }
 
@@ -592,7 +621,8 @@ body {
 .carousel-slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    /* contain = scale to fit without cropping; letterbox/pillarbox as needed */
+    object-fit: contain;
     display: block;
     user-select: none;
     -webkit-user-drag: none;
@@ -660,8 +690,10 @@ body {
 .carousel-body-item.is-active {
     visibility: visible;
     opacity: 1;
-    /* Delay fade-in until the slide transition completes (0.9s) */
-    transition: opacity 0.4s ease 0.9s, visibility 0s linear 0.9s;
+    /* Fade-in starts at (TRANS_DURATION - fade-duration) so it FINISHES
+       when the slide stops.  TUNING: delay = TRANS_DURATION(900ms) minus
+       the opacity duration below.  Keep visibility delay = opacity delay. */
+    transition: opacity 0.4s ease 0.5s, visibility 0s linear 0.5s;
 }
 
 .carousel-body-item p {

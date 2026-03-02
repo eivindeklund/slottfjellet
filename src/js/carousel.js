@@ -6,19 +6,28 @@
  * and user-interaction pausing.
  *
  * Timing (can be tuned here):
- *   SLIDE_DURATION  – how long a slide is fully visible before the next one
- *                     starts sliding in  (ms)
- *   TRANS_DURATION  – must match the CSS transition time for the image slide
- *                     and the transition-delay on .is-active body/.is-visible
- *                     desc fade-in
+ *   SLIDE_DURATION     – how long a slide is fully visible before the next
+ *                        one starts sliding in  (ms)
+ *   TRANS_DURATION     – must match the CSS transition on .carousel-slide
+ *                        .is-active  (transform 0.9s)
+ *   DESC_FADE_DURATION – must match the CSS opacity transition duration on
+ *                        #carousel-curr-desc (currently 0.35s = 350 ms).
+ *                        Text swap fires at TRANS_DURATION − DESC_FADE_DURATION
+ *                        so the fade-in is COMPLETE when the slide stops.
+ *                        To finish even earlier, lower DESC_FADE_DURATION and
+ *                        set the matching CSS transition to the same value.
  */
 
 (function () {
         "use strict";
 
         /* ── Timing constants ─────────────────────────────────────────────────── */
-        var SLIDE_DURATION = 5000; // ms a slide is on display before auto-advancing
-        var TRANS_DURATION = 900;  // ms for the image sliding transition (matches CSS)
+        var SLIDE_DURATION = 5000;     // ms a slide is on display before auto-advancing
+        var TRANS_DURATION = 900;      // ms for the image slide transition (matches CSS)
+        /* Tune both this value AND the CSS transition on #carousel-curr-desc together.
+           Text swap fires at (TRANS_DURATION - DESC_FADE_DURATION) so the
+           fade-in finishes exactly when the slide stops. */
+        var DESC_FADE_DURATION = 350;  // ms — must match CSS opacity 0.35s on #carousel-curr-desc
 
         /* ── Cache elements ───────────────────────────────────────────────────── */
         var root = document.getElementById("hero-carousel");
@@ -45,20 +54,39 @@
                 });
         });
 
+        /* ── Slide-class housekeeping ─────────────────────────────────────────── */
+        function clearSlideClasses(slide) {
+                slide.classList.remove(
+                        "is-active",
+                        "is-enter-left",
+                        "is-exit-left",
+                        "is-exit-right"
+                );
+        }
+
         /* ── Core state‑change routine ────────────────────────────────────────── */
-        function goTo(nextIndex) {
+        /* direction: "forward" (default) → new slide enters from the right;
+                      "backward"          → new slide enters from the left  */
+        function goTo(nextIndex, direction) {
                 if (nextIndex === current) return;
+                direction = direction || "forward";
                 var prev = current;
                 current = ((nextIndex % total) + total) % total;
 
-                /* 1. Outgoing slide moves left ──────────────────────────────────────── */
+                /* 1. Outgoing slide exits in the appropriate direction ───────────────── */
                 slides[prev].classList.remove("is-active");
-                slides[prev].classList.add("is-prev");
+                slides[prev].classList.add(
+                        direction === "backward" ? "is-exit-right" : "is-exit-left"
+                );
 
-                /* 2. New slide: snap it to the right (remove any leftover is-prev /
-                      is-active, force reflow so the browser sees translateX(100%),
-                      then add is-active so the CSS transition fires) */
-                slides[current].classList.remove("is-prev", "is-active");
+                /* 2. Incoming slide: clear all state, snap to entry position,
+                      force reflow, then apply is-active so CSS transition fires */
+                clearSlideClasses(slides[current]);
+                if (direction === "backward") {
+                        /* Snap off-screen LEFT so it slides in from the left */
+                        slides[current].classList.add("is-enter-left");
+                }
+                /* else: no class = default translateX(100%), enters from right */
                 /* eslint-disable-next-line no-unused-expressions */
                 slides[current].offsetWidth; // force reflow
                 slides[current].classList.add("is-active");
@@ -68,20 +96,22 @@
                 bodyItems[prev].classList.remove("is-active");
                 bodyItems[current].classList.add("is-active");
 
-                /* 4. Title description: remove is-visible → CSS fades it to opacity 0.
-                      After TRANS_DURATION, swap the text and restore is-visible so CSS
-                      fades it back in.  Cancel any in-progress swap first. */
+                /* 4. Title description: fade out immediately, then start the fade-in
+                      early enough that it FINISHES when the slide stops (TRANS_DURATION).
+                      Cancel any in-progress swap first. */
                 clearTimeout(descChangeTimer);
                 descSpan.classList.remove("is-visible");
 
+                /* Schedule the text swap + fade-in so it completes at TRANS_DURATION */
+                var swapAt = Math.max(0, TRANS_DURATION - DESC_FADE_DURATION);
                 descChangeTimer = setTimeout(function () {
                         descSpan.textContent = slides[current].dataset.desc || "";
-                        /* Force a reflow so the browser registers the text change at opacity 0
-                           before re-adding is-visible which triggers the fade-in transition. */
+                        /* Force a reflow so the browser sees the text at opacity 0
+                           before re-adding is-visible which triggers the fade-in. */
                         /* eslint-disable-next-line no-unused-expressions */
                         descSpan.offsetWidth;
                         descSpan.classList.add("is-visible");
-                }, TRANS_DURATION);
+                }, swapAt);
         }
 
         /* ── Auto‑advance ─────────────────────────────────────────────────────── */
@@ -104,23 +134,30 @@
         btnPrev.addEventListener("click", function (e) {
                 e.stopPropagation();
                 pause();
-                goTo(current - 1);
+                goTo(current - 1, "backward");
         });
 
         btnNext.addEventListener("click", function (e) {
                 e.stopPropagation();
                 pause();
-                goTo(current + 1);
+                goTo(current + 1, "forward");
         });
 
-        /* ── Keyboard navigation (when carousel has focus) ───────────────────── */
-        root.addEventListener("keydown", function (e) {
+        /* ── Keyboard navigation (document-level — no need to focus the carousel) ── */
+        /* Skip when the user is actively typing in a form field or rich-text editor. */
+        document.addEventListener("keydown", function (e) {
+                var tag = document.activeElement ? document.activeElement.tagName : "";
+                var isEditable = document.activeElement &&
+                        document.activeElement.getAttribute("contenteditable") !== null;
+                if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || isEditable) {
+                        return;
+                }
                 if (e.key === "ArrowLeft") {
                         pause();
-                        goTo(current - 1);
+                        goTo(current - 1, "backward");
                 } else if (e.key === "ArrowRight") {
                         pause();
-                        goTo(current + 1);
+                        goTo(current + 1, "forward");
                 }
         });
 
