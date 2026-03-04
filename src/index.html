@@ -7,67 +7,114 @@
   {% render "head.html", title: "Slottsfjellet Spillforening" %}
   <body class="index-page">
     <div class="container">
-      {% render "header.html" %} {% render "nav.html" %}
+      <div class="index-header-wrapper">
+        <!-- Translation buttons -->
+        <div class="flags">
+          <img
+            id="flag-en"
+            class="flag"
+            width="30em"
+            src="/images/flag-en.svg"
+            alt="English"
+          />
+          <img
+            id="flag-no"
+            class="flag"
+            width="30em"
+            src="/images/flag-no.svg"
+            alt="Norwegian"
+          />
+        </div>
+
+        <div class="index-logo-box gray-box">
+          <a href="index.html"
+            ><img src="/images/logo_small.png" alt="Logo"
+          /></a>
+          <br />
+          <p>
+            Vi er en gjeng med spillinteresserte fra Tønsberg og omegn som
+            ønsker å bygge et aktivt miljø for likesinnede. Vi spiller
+            brettspill, miniatyrspill, rollespill, og samlekortspill.
+          </p>
+        </div>
+        <div class="index-carousel-box gray-box flex-center">
+          {% render "carousel.html" %}
+        </div>
+        <div class="gray-box intro-text">
+          <p>
+            Slottsfjellet Spillforening er for de som spiller fysiske spill i
+            Tønsberg og omegn. Vi arrangerer spilling på biblioteket hver
+            tirsdag - gratis og åpent for alle.
+          </p>
+          <div class="call-to-action">
+            <a href="tirsdag.html" class="button-link">Kom og spill!</a>
+            <a href="ttt.html" class="button-link"
+              >Bli med på Warhammer-turnering!</a
+            >
+            <a
+              target="_blank"
+              rel="noopener"
+              class="button-link"
+              href="https://discord.gg/N3MX5SHGZ8"
+              >Snakk med oss på Discord!</a
+            >
+          </div>
+          <div>
+            🇬🇧 We are English-friendly - our games are in English when any
+            participant prefers that, and we'll respond to English on the
+            Discord server.
+          </div>
+        </div>
+      </div>
+
+      <div class="nav">
+        <div class="nav-item gray-box boardgames-link">
+          <a href="boardgames.html">Brettspill</a>
+        </div>
+        <div class="nav-item gray-box miniaturegames-link">
+          <a href="miniaturegames.html">Minatyrspill</a>
+        </div>
+        <div class="nav-item gray-box rpg-link">
+          <a href="rpg.html">Rollespill</a>
+        </div>
+        <div class="nav-item gray-box tradingcardgames-link">
+          <a href="tradingcardgames.html">Samlekortspill</a>
+        </div>
+        <div class="nav-item gray-box about-link">
+          <a href="about.html">Om foreningen</a>
+        </div>
+        <div class="nav-item gray-box">
+          <a
+            target="_blank"
+            rel="noopener"
+            href="http://facebook.com/slottsfjelletspillforening"
+            >Facebook</a
+          >
+        </div>
+        <div class="nav-item gray-box">
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://slottsfjellet.portal.styreweb.com/arrangement/ArrangementSession?ID=Innmelding"
+            >Bli medlem</a
+          >
+        </div>
+      </div>
 
       <!-- Main Content -->
       <div class="main-content">
-        {% render "infobox_om_oss.html" %}
-
         <!-- Latest News -->
         <div class="news-box">
           <div class="content-header gray-box">
             <h3>Aktuelt Nå</h3>
           </div>
-          {% # render "content_body_ttt_baguette.html" %}
-          <div class="content-header gray-box">
-            🇬🇧 Please participate in our events even if you don't speak
-            Norwegian.
-            <b
-              >Our games can be run in English, and we are very happy to do so!
-              Some games are always run in English.</b
-            >
-            You can change the website language by clicking the flags in the top
-            right corner of the page (courtesy of Google Translate).
-          </div>
-          <div class="content-body gray-box">
-            <h2>Tirsdagssamlingene har flyttet til Tønsberg Bibliotek!</h2>
-            <p>
-              Tirsdagssamlinger er åpne for alle;
-              <b>du trenger ikke være medlem</b>
-              for å delta. Ta gjerne med egne spill; ellers har vi alltid noe.
-            </p>
-            <p>
-              Vi har sagt farvel til Solhaug og flyttet tirsdagssamlingene våre
-              til
-              <a href="https://maps.app.goo.gl/yXWHbJDAZkoLQpZ79"
-                >Tønsberg Bibliotek</a
-              >, fra kl 17:30 (men mange kommer senere.) Vi har også samlinger
-              <b>hver tirsdag</b>, dobbelt så ofte!
-            </p>
-
-            <p>
-              Vi har satt sammen
-              <a href="tirsdag.html#parkering-ved-biblioteket"
-                >et kart over parkering nær biblioteket</a
-              >. For 7 kroner kan du stå en hel samling tre minutters gange fra
-              biblioteket. Samme perioden i parkeringshuset ved biblioteket vil
-              koste 260kr.
-            </p>
-          </div>
-
-          {% render "content_body_tt_varen_2026.html" %}
-        </div>
-
-        <!-- Schedule -->
-        <div class="schedule-box">
-          <div class="content-header gray-box">
-            <h3>Samlinger</h3>
-          </div>
-          {% render "content_body_samlingsdatoer.html" %}
+          {% # render "content_body_ttt_baguette.html" %} {% render
+          "content_body_tt_varen_2026.html" %}
         </div>
       </div>
 
       {% render "footer.html" %}
     </div>
+    <script src="/js/carousel.js" defer></script>
   </body>
 </html>

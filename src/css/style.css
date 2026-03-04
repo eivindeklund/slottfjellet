@@ -1,4 +1,4 @@
-* {
+{
     box-sizing: border-box;
 }
 
@@ -61,6 +61,7 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--card-bg-color);
     border-radius: 5px;
     padding: 10px;
+    margin: 2px 0;
 }
 
 /* Common flex centering */
@@ -102,7 +103,43 @@ h1, h2, h3, h4, h5, h6 {
 .title-box h1 {
     margin: 0;
     font-size: clamp(1.2rem, 5vw, 2rem);
+
 }
+
+/* Index logo + carousel + intro layout */
+.index-header-wrapper {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    gap: 2px;
+    margin: 20px 0;
+}
+
+.index-logo-box {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    max-width: 200px;
+}
+
+.index-logo-box img {
+    max-width: 150px;
+    max-height: 150px;
+    height: auto;
+    display: block;
+}
+
+.index-carousel-box {
+    grid-column: 2;
+    grid-row: 1;
+    padding: 1px 20px;
+    min-width: 0;
+}
+
+.index-header-wrapper .intro-text {
+    grid-column: 2;
+    grid-row: 2;
+}
+
 
 /* Navigation */
 .nav {
@@ -127,6 +164,19 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
     padding: 5px 15px;
 }
+
+.call-to-action {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2px;
+    text-align: center;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
 
 /* Make the currently active page bold and not clickable in the nav */
 /* ENDRE HER NÅR DU LEGGER TIL EN SIDE */
@@ -154,8 +204,13 @@ body.tirsdag-page .nav .tirsdag-link a {
 
 @media (min-width: 768px) {
     .main-content {
-        grid-template-columns: 300px 1fr 250px;
+        grid-template-columns: 1fr;
     }
+}
+
+.standalone-box {
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 
 .info-box, .news-box, .schedule-box {
@@ -168,6 +223,7 @@ body.tirsdag-page .nav .tirsdag-link a {
 .content-header {
     margin: 0;
 }
+
 
 .content-header h3,
 .news-box h1,
@@ -478,6 +534,21 @@ body {
     min-width: 10em;
   }
 }
+
+/* Styles for button-like links (e.g. "Bli medlem", "Når treffes vi?") */
+.button-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
+}
+.button-link:hover {
+  background-color: #0056b3;
+}
+
 
 /* ═══════════════════════════════════════════════════════════════════════════
    HERO CAROUSEL
