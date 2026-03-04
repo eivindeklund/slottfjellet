@@ -208,3 +208,13 @@ sjekke build, og å sette permissions så folk ikke kan endre feil sted.
 
 For mer avansert eleventy-struktur:
 https://www.njfamirm.ir/en/blog/eleventy-folder-structure-guide/
+
+# Diverse kommandoer
+
+## png til webp (For Google Forms)
+
+Konverter bilder fra PNG til WebP, passende for tegneseriestil, m/skalering (men vi skal ikke alltid ha skalering, denne var for header til Google Forms):
+
+```
+magick frivillig-form-header.png -resize 1600x400\^ -gravity center -extent 1600x400 -quality 85 -define webp:lossless=false frivillig-form-header.webp
+```
