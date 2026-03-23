@@ -5,4 +5,5 @@ _site
 _backups
 .DS_Store
 *.bak
-*.bak.*
+*.bak[1-9]
+*.bak[1-9][0-9]
