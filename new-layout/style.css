@@ -1,50 +1,56 @@
 :root {
-  /* Colors derived from the logo and Tønsberg stone */
-  --stone-light: #f4f1ea;   /* Background: Parchment/Stone */
-  --stone-dark: #2d2d2d;    /* Text & Borders: Charcoal */
-  --accent-red: #e63946;    /* Primary Action (Logo Red) */
-  --accent-blue: #457b9d;   /* Secondary (Logo Blue) */
-  --accent-green: #2a9d8f;  /* Success/Library (Logo Green) */
-  --accent-yellow: #ffb703; /* Highlights (Logo Yellow) */
-  
+  --stone-light: #f4f1ea;
+  --stone-dark: #2d2d2d;
+  --accent-red: #e63946;
+  --accent-blue: #457b9d;
+  --accent-green: #2a9d8f;
+  --accent-yellow: #ffb703;
   --border-width: 3px;
   --shadow-offset: 6px;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   background-color: var(--stone-light);
   color: var(--stone-dark);
-  font-family: 'Inter', system-ui, sans-serif; /* Clean, modern body text */
+  font-family: "Inter", system-ui, sans-serif;
   line-height: 1.6;
   margin: 0;
-  padding-top: 210px; /* Reserve space for fixed nav (150px content + 2×30px padding) */
+  padding-top: 210px;
 }
 
-h1, h2, h3 {
-  font-family: 'Bebas Neue', sans-serif; /* Use a bold, condensed font for comic impact */
+h1,
+h2,
+h3 {
+  font-family: "Bebas Neue", sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
+  line-height: 1.05;
 }
 
-/* The "Panel" System for your Comic Images */
+img {
+  max-width: 100%;
+}
+
 .comic-panel {
   background: white;
   border: var(--border-width) solid var(--stone-dark);
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--stone-dark);
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--stone-dark);
   transition: transform 0.2s ease;
   overflow: hidden;
   margin-bottom: 20px;
   position: relative;
 }
 
-/* Clickable card overlay — sits behind inner links */
 .card-link-overlay {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
 
-/* Inner links float above the card overlay */
 .comic-panel a:not(.card-link-overlay) {
   position: relative;
   z-index: 1;
@@ -52,27 +58,36 @@ h1, h2, h3 {
 
 .comic-panel:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 8px 8px 0px var(--accent-blue);
+  box-shadow: 8px 8px 0 var(--accent-blue);
 }
 
-.btn-primary {
+.btn-primary,
+.btn-secondary {
   display: inline-block;
   padding: 12px 24px;
-  background-color: var(--accent-red);
-  color: white;
   text-decoration: none;
   font-weight: bold;
   border: var(--border-width) solid var(--stone-dark);
-  box-shadow: 4px 4px 0px var(--stone-dark);
+  box-shadow: 4px 4px 0 var(--stone-dark);
   text-transform: uppercase;
 }
 
-.btn-primary:active {
-  transform: translate(2px, 2px);
-  box-shadow: 0px 0px 0px var(--stone-dark);
+.btn-primary {
+  background-color: var(--accent-red);
+  color: white;
 }
 
-/* Table styling that looks like a game reference card */
+.btn-secondary {
+  background-color: white;
+  color: var(--stone-dark);
+}
+
+.btn-primary:active,
+.btn-secondary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--stone-dark);
+}
+
 .tt-schedule {
   width: 100%;
   border-collapse: collapse;
@@ -82,7 +97,7 @@ h1, h2, h3 {
 }
 
 .tt-schedule th {
-  background-color: var(--accent-red); /* Using Logo Red for tournament headers */
+  background-color: var(--accent-red);
   color: white;
   text-align: left;
   padding: 10px;
@@ -92,15 +107,15 @@ h1, h2, h3 {
 .tt-schedule td {
   padding: 10px;
   border-bottom: 1px solid #ddd;
+  vertical-align: top;
 }
 
 .tt-schedule tr:nth-child(even) {
   background-color: #fcfbf8;
 }
 
-/* A specialized "Note" box for 'Lavterskel' rules */
 .rule-note {
-  background: #fffbe6; /* Light yellow tint like a sticky note */
+  background: #fffbe6;
   border-left: 10px solid var(--accent-yellow);
   padding: 20px;
   margin: 20px 0;
@@ -110,23 +125,21 @@ h1, h2, h3 {
   border-bottom: 2px solid var(--stone-dark);
 }
 
-/* Spesifikke farger for bibliotek-seksjonen */
 .library-theme {
   --current-accent: var(--accent-green);
 }
 
 .highlight-box {
-  background-color: #e9f5f3; /* Lys grønn nyanse */
+  background-color: #e9f5f3;
   border-left: 5px solid var(--accent-green);
   padding: 15px;
   margin: 20px 0;
 }
 
-/* Tabell for parkering - inspirert av "Equipment Lists" i rollespill */
 .parking-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.9em;
+  font-size: 0.95em;
 }
 
 .parking-table th {
@@ -139,6 +152,7 @@ h1, h2, h3 {
 .parking-table td {
   padding: 10px;
   border-bottom: 1px solid #ccc;
+  vertical-align: top;
 }
 
 .status-dot {
@@ -147,29 +161,30 @@ h1, h2, h3 {
   border-radius: 50%;
   display: inline-block;
   margin-right: 8px;
-  border: 1px solid rgba(0,0,0,0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-/* Global Link Reset */
 a {
-  color: #457b9d; /* Din Logo-blå */
+  color: var(--accent-blue);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
 }
 
-/* Spesifikk stil for lenker i brødtekst (p-tagger) */
-p a {
+p a,
+li a,
+summary a {
   border-bottom: 2px solid rgba(69, 123, 157, 0.3);
 }
 
-p a:hover {
+p a:hover,
+li a:hover,
+summary a:hover {
   color: var(--stone-dark);
   background-color: var(--accent-yellow);
   border-bottom-color: var(--stone-dark);
 }
 
-/* Footer-lenker bør være mer subtile */
 footer a {
   color: white;
   opacity: 0.8;
@@ -179,10 +194,9 @@ footer a {
 footer a:hover {
   opacity: 1;
   border-bottom-color: white;
-  background: none; /* Ingen gul markør i footeren */
+  background: none;
 }
 
-/* NAVBAR CONTAINER */
 .main-nav {
   position: fixed;
   top: 0;
@@ -195,6 +209,9 @@ footer a:hover {
   justify-content: space-between;
   align-items: center;
   z-index: 1000;
+  animation: shrink-nav linear both;
+  animation-timeline: scroll(root block);
+  animation-range: 0 150px;
 }
 
 .nav-links {
@@ -203,11 +220,11 @@ footer a:hover {
   margin: 0;
   padding: 0;
   gap: 20px;
+  align-items: center;
 }
 
-/* Navigasjons-lenker som "Tabs" */
 .nav-item a {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: "Bebas Neue", sans-serif;
   font-size: 1.2rem;
   color: var(--stone-dark);
   text-decoration: none;
@@ -216,13 +233,13 @@ footer a:hover {
   transition: all 0.2s;
 }
 
-.nav-item a:hover {
+.nav-item a:hover,
+.nav-item a[aria-current="page"] {
   background-color: var(--accent-yellow);
   border: 2px solid var(--stone-dark);
-  box-shadow: 3px 3px 0px var(--stone-dark);
+  box-shadow: 3px 3px 0 var(--stone-dark);
 }
 
-/* DROPDRown LOGIKK (Enkel CSS-only) */
 .dropdown {
   position: relative;
 }
@@ -231,9 +248,9 @@ footer a:hover {
   display: none;
   position: absolute;
   background-color: white;
-  min-width: 160px;
+  min-width: 180px;
   border: var(--border-width) solid var(--stone-dark);
-  box-shadow: 5px 5px 0px var(--stone-dark);
+  box-shadow: 5px 5px 0 var(--stone-dark);
   top: 100%;
   left: 0;
 }
@@ -246,58 +263,36 @@ footer a:hover {
   display: block;
   padding: 10px;
   font-size: 1rem;
-  border: none !important; /* Fjerner tab-stilen inni menyen */
+  border: none !important;
 }
 
-.dropdown-content a:hover {
+.dropdown-content a:hover,
+.dropdown-content a[aria-current="page"] {
   background-color: var(--stone-light);
   color: var(--accent-blue);
+  box-shadow: none;
 }
 
-/* CARD LINK WRAPPER */
-/* Gjør hele kortet klikkbart uten å ødelegge tekstfargen */
-.card-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
-/* 1. Sørg for at alle listeelementene er sentrert vertikalt */
-.nav-links {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 20px;
-    align-items: center; /* Dette sentrerer alt vertikalt uansett høyde */
-}
-
-/* 2. Spesialtilpasning for knapper i menyen */
 .nav-btn {
-    /* Vi overstyrer paddingen for å matche høyden på de andre nav-valgene */
-    padding: 6px 15px !important; 
-    font-size: 1.1rem !important; /* Litt mindre enn overskriftene for å passe inn */
-    display: inline-flex;
-    align-items: center;
-    line-height: 1; /* Hindrer teksten i å "hoppe" opp eller ned */
-    color: white !important; /* Sørg for at knappen alltid har hvit tekst */
+  padding: 6px 15px !important;
+  font-size: 1.1rem !important;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  color: white !important;
 }
 
-/* 3. Fjern eventuelle marginer fra nav-items som kan dytte på knappen */
 .nav-item {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
- /*** NAVBAR SCROLLING EFFECTS ***/
-
-
-/* 1. Definer animasjonene */
 @keyframes shrink-nav {
   from {
     height: 150px;
     padding-block: 30px;
   }
+
   to {
     height: 60px;
     padding-block: 10px;
@@ -305,33 +300,237 @@ footer a:hover {
 }
 
 @keyframes shrink-logo {
-  from { height: 170px; }
-  to   { height: 60px; }
+  from {
+    height: 170px;
+  }
+
+  to {
+    height: 60px;
+  }
 }
 
-/* 2. Bruk animasjonen på navbaren */
-.main-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
-  background-color: var(--stone-light);
-  border-bottom: var(--border-width) solid var(--stone-dark);
-
-  animation: shrink-nav linear both;
-  animation-timeline: scroll(root block);
-  animation-range: 0px 150px;
-}
-
-/* 3. Krymper logoen synkront med navbaren */
 .logo img {
   height: 130px;
   width: auto;
   animation: shrink-logo linear both;
   animation-timeline: scroll(root block);
-  animation-range: 0px 150px;
+  animation-range: 0 150px;
+}
+
+.page-shell {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px 40px;
+}
+
+.page-hero {
+  padding: 32px;
+}
+
+.page-hero__grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.page-hero__title {
+  margin: 0 0 12px;
+  font-size: clamp(2.6rem, 7vw, 4.8rem);
+}
+
+.page-hero__lead {
+  font-size: 1.1rem;
+  max-width: 60ch;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.page-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.page-grid--sidebar {
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  align-items: start;
+}
+
+.panel-body {
+  padding: 24px;
+}
+
+.panel-body > :first-child {
+  margin-top: 0;
+}
+
+.panel-body > :last-child {
+  margin-bottom: 0;
+}
+
+.kicker {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 4px 10px;
+  background: var(--accent-yellow);
+  border: 2px solid var(--stone-dark);
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.08em;
+}
+
+.muted-note {
+  color: #5c5c5c;
+  font-size: 0.95rem;
+}
+
+.stat-list,
+.link-list,
+.calendar-list,
+.plain-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.stat-list li,
+.link-list li,
+.calendar-list li,
+.plain-list li {
+  padding: 10px 0;
+  border-bottom: 1px dashed #c9c2b6;
+}
+
+.stat-list li:last-child,
+.link-list li:last-child,
+.calendar-list li:last-child,
+.plain-list li:last-child {
+  border-bottom: none;
+}
+
+.feature-list {
+  padding-left: 20px;
+}
+
+.feature-list li + li {
+  margin-top: 10px;
+}
+
+.pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pill-list li {
+  background: #f8f4ec;
+  border: 2px solid var(--stone-dark);
+  box-shadow: 3px 3px 0 var(--stone-dark);
+  padding: 8px 12px;
+  font-weight: 700;
+}
+
+.split-callout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.detail-card {
+  background: #fcfbf8;
+  border: 2px solid var(--stone-dark);
+  padding: 16px;
+}
+
+.detail-card h3,
+.detail-card h4 {
+  margin-top: 0;
+}
+
+.library-entry {
+  margin: 0 0 20px;
+}
+
+.library-entry summary {
+  cursor: pointer;
+  list-style: none;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.7rem;
+  letter-spacing: 0.04em;
+  padding: 20px 24px;
+  background: var(--stone-light);
+  border-bottom: 2px solid var(--stone-dark);
+}
+
+.library-entry[open] summary {
+  background: #fff2d0;
+}
+
+.library-entry summary::-webkit-details-marker {
+  display: none;
+}
+
+.library-meta {
+  margin-top: 14px;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.number-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.number-grid .detail-card {
+  text-align: center;
+}
+
+.embed-frame {
+  width: 100%;
+  height: 320px;
+  border: 0;
+}
+
+.footer {
+  background: var(--stone-dark);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  body {
+    padding-top: 0;
+  }
+
+  .main-nav {
+    position: static;
+    animation: none;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .logo img {
+    height: 90px;
+    animation: none;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .page-hero__grid,
+  .page-grid--sidebar {
+    grid-template-columns: 1fr;
+  }
 }

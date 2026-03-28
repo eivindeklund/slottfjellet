@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="no">
   <head>
     <meta charset="UTF-8" />
-    <title>Slottsfjellet Spillforening | Tønsberg</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Slottsfjellet Spillforening | Hjem</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -14,7 +15,7 @@
       </div>
 
       <ul class="nav-links">
-        <li class="nav-item"><a href="index.html">Hjem</a></li>
+        <li class="nav-item"><a href="index.html" aria-current="page">Hjem</a></li>
         <li class="nav-item"><a href="tirsdag.html">Tirsdager</a></li>
         <li class="nav-item"><a href="ttt.html">Tabletop (TT)</a></li>
 
@@ -37,146 +38,179 @@
       </ul>
     </nav>
 
-    <header
-      style="
-        padding: 20px;
-        text-align: center;
-        background: #fff;
-        border-bottom: 3px solid #2d2d2d;
-      "
-    >
-      <div class="comic-panel" style="max-width: 900px; margin: 0 auto">
-        <img
-          src="image-1-paa-biblioteket.webp"
-          alt="Gaming at the library"
-          style="width: 100%; display: block"
-        />
-      </div>
-      <h1>Slottsfjellet Spillforening</h1>
-      <p>
-        Analogspill i hjertet av Tønsberg. Fra vikingtiden til det 41. årtusen.
-      </p>
-      <p>
-        <a href="tirsdag.html">Hver tirsdag på biblioteket</a>. Gratis og åpent
-        for alle.
-      </p>
-    </header>
-
-    <main style="max-width: 1100px; margin: 40px auto; padding: 0 20px">
-      <h2 style="text-align: center; margin-bottom: 40px">Hva vi spiller</h2>
-
-      <div
-        style="
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 30px;
-        "
-      >
-        <div class="comic-panel">
-          <a
-            href="brettspill.html"
-            class="card-link-overlay"
-            aria-label="Brettspill"
-          ></a>
-          <img
-            src="image-2-brettspill.webp"
-            alt="Brettspill"
-            style="width: 100%"
-          />
-          <div style="padding: 15px">
-            <h3>Brettspill</h3>
-            <p>
-              Alt fra lette spill for nybegynnere til tunge strategispill. Vi
-              har noe for alle, og hjelper gjerne nye spillere i gang.
+    <main class="page-shell">
+      <section class="comic-panel page-hero">
+        <div class="page-hero__grid">
+          <div>
+            <span class="kicker">Analogspill i Tønsberg</span>
+            <h1 class="page-hero__title">Slottsfjellet Spillforening</h1>
+            <p class="page-hero__lead">
+              Vi er en forening for folk som liker fysiske spill: brettspill,
+              miniatyrspill, rollespill og samlekortspill. Hovedbasen vår er
+              tirsdagskveldene på biblioteket, men vi arrangerer også større
+              samlinger som Tønsberg Tabletop.
             </p>
-            <p>
-              Det varierer hvor mange som spiller brettspill på tirsdager, så
-              sjekk på Discord for å se at noen kommer. Det er høy sjanse for
-              det kommer fler hvis du sier fra!
+            <div class="cta-row">
+              <a href="tirsdag.html" class="btn-primary">Kom på tirsdag</a>
+              <a href="ttt.html" class="btn-secondary"
+                >Se Tønsberg Tabletop</a
+              >
+              <a href="om-oss.html" class="btn-secondary">Om klubben</a>
+            </div>
+            <p class="muted-note">
+              Gratis og åpent for alle. Vi er også English-friendly når noen i
+              bordet foretrekker det.
             </p>
           </div>
-        </div>
-        <div class="comic-panel">
-          <a
-            href="rollespill.html"
-            class="card-link-overlay"
-            aria-label="Rollespill"
-          ></a>
-          <img
-            src="image-3-rollespill.webp"
-            alt="Rollespill"
-            style="width: 100%"
-          />
-          <div style="padding: 15px">
-            <h3>Rollespill</h3>
-            <p>
-              Fangehull, drager, fremtid, nåtid, magi, teknologi, lovens lange
-              arm og skurkenes lange fingre, og mye annet.
-            </p>
-            <p>
-              Drop-in, men det er kjekt om du sier fra på Discord så vi kan
-              planlegge hvor mange som kommer.
-            </p>
+          <div class="comic-panel" style="margin: 0">
+            <img
+              src="image-1-paa-biblioteket.webp"
+              alt="Spilling på biblioteket"
+              style="display: block; width: 100%"
+            />
           </div>
         </div>
+      </section>
 
-        <div class="comic-panel">
-          <a
-            href="miniatyrspill.html"
-            class="card-link-overlay"
-            aria-label="Miniatyrspill"
-          ></a>
-          <img
-            src="image-4-Warhammer-Old-World.webp"
-            alt="Warhammer"
-            style="width: 100%"
-          />
-          <div style="padding: 15px">
-            <h3>Miniatyrspill</h3>
+      <section class="page-grid" style="margin-top: 28px">
+        <article class="comic-panel">
+          <div class="panel-body">
+            <h2>Fast møteplass</h2>
             <p>
-              Det er alltid noen som spiller på biblioteket. Du bør si fra på
-              Discord når du kommer, siden spilling trenger par med spillere.
-              Der kan du også få noen til å låne deg en arme hvis du ikke har
-              en.
-            </p>
-            <p>
-              Vår <a href="ttt.html">halvårlige turnering</a> er høydepunktet i
-              sesongen.
+              Hver tirsdag fra kl. 17:30 samles vi i kjelleren på Tønsberg
+              Bibliotek. Du kan komme når du vil, gå når du vil, og det koster
+              ingenting å delta.
             </p>
           </div>
-        </div>
+        </article>
+        <article class="comic-panel">
+          <div class="panel-body">
+            <h2>Lav terskel</h2>
+            <p>
+              Vi hjelper gjerne nye spillere i gang. For miniatyrspill kan det
+              ofte ordnes utlånsarmeer, og for kortspill har vi folk som gjerne
+              lærer bort formatene.
+            </p>
+          </div>
+        </article>
+        <article class="comic-panel">
+          <div class="panel-body">
+            <h2>Mer enn ukekveld</h2>
+            <p>
+              To ganger i året lager vi en større helgesamling for
+              miniatyrspillere. Tønsberg Tabletop kombinerer
+              lavterskel-turneringer med frispill, maling og sosial tid.
+            </p>
+          </div>
+        </article>
+      </section>
 
-        <div class="comic-panel">
-          <a
-            href="kortspill.html"
-            class="card-link-overlay"
-            aria-label="Samlekortspill"
-          ></a>
-          <img
-            src="image-6-samlekortspill.webp"
-            alt="Samlekortspill"
-            style="width: 100%"
-          />
-          <div style="padding: 15px">
-            <h3>Samlekortspill</h3>
-            <p>
-              Middelalderske taktikker møter moderne kortbygging. Bli med på
-              ukentlige bytter og turneringer hvor hvert kort du plasserer kan
-              endre historiens gang. Eller i det minste spillet.
-            </p>
-          </div>
+      <section style="margin-top: 42px">
+        <h2 style="text-align: center; margin-bottom: 24px">Hva vi spiller</h2>
+        <div class="page-grid">
+          <article class="comic-panel">
+            <a
+              href="brettspill.html"
+              class="card-link-overlay"
+              aria-label="Brettspill"
+            ></a>
+            <img
+              src="image-2-brettspill.webp"
+              alt="Brettspill"
+              style="width: 100%; display: block"
+            />
+            <div class="panel-body">
+              <h3>Brettspill</h3>
+              <p>
+                Alt fra raske og lettlærte spill til tyngre strategispill.
+                Klubben har en liten samling som kan tas fram på tirsdager og
+                arrangementer.
+              </p>
+              <p>
+                Sjekk gjerne inn på Discord hvis du vil være sikker på at noen
+                andre planlegger brettspill den kvelden.
+              </p>
+            </div>
+          </article>
+
+          <article class="comic-panel">
+            <a
+              href="rollespill.html"
+              class="card-link-overlay"
+              aria-label="Rollespill"
+            ></a>
+            <img
+              src="image-3-rollespill.webp"
+              alt="Rollespill"
+              style="width: 100%; display: block"
+            />
+            <div class="panel-body">
+              <h3>Rollespill</h3>
+              <p>
+                Vi vil gjerne bygge et sterkere rollespillmiljø, og det finnes
+                allerede folk som er interesserte i både one-shots og kampanjer.
+              </p>
+              <p>
+                Gi beskjed på Discord hvis du vil spille eller lede noe, så blir
+                det mye lettere å samle bord.
+              </p>
+            </div>
+          </article>
+
+          <article class="comic-panel">
+            <a
+              href="miniatyrspill.html"
+              class="card-link-overlay"
+              aria-label="Miniatyrspill"
+            ></a>
+            <img
+              src="image-4-Warhammer-Old-World.webp"
+              alt="Miniatyrspill"
+              style="width: 100%; display: block"
+            />
+            <div class="panel-body">
+              <h3>Miniatyrspill</h3>
+              <p>
+                Dette er et av de mest aktive miljøene våre. På tirsdager dukker
+                det ofte opp mindre formater, maling og hobbyprosjekter, og
+                Tabletop-helgene er sesongens høydepunkt.
+              </p>
+              <p>
+                Si fra på forhånd hvis du trenger motspiller eller vil låne noe å
+                spille med.
+              </p>
+            </div>
+          </article>
+
+          <article class="comic-panel">
+            <a
+              href="kortspill.html"
+              class="card-link-overlay"
+              aria-label="Samlekortspill"
+            ></a>
+            <img
+              src="image-6-samlekortspill.webp"
+              alt="Samlekortspill"
+              style="width: 100%; display: block"
+            />
+            <div class="panel-body">
+              <h3>Samlekortspill</h3>
+              <p>
+                Det går oftest i Magic: The Gathering, særlig Commander. Nye
+                spillere er velkomne, og vi har folk som gjerne forklarer både
+                regler og bordskikk.
+              </p>
+              <p>
+                Har du lyst til å få i gang andre kortspill også, er klubben et
+                godt sted å samle interesserte.
+              </p>
+            </div>
+          </article>
         </div>
-      </div>
+      </section>
     </main>
 
-    <footer
-      style="
-        background: var(--stone-dark);
-        color: white;
-        padding: 40px 20px;
-        text-align: center;
-      "
-    >
+    <footer class="footer">
       <p>
         &copy; 2026 Slottsfjellet Spillforening - Bygget på historie, spilt med
         terninger.
