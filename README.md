@@ -219,7 +219,7 @@ Konverter bilder fra PNG til WebP, passende for tegneseriestil, m/skalering (men
 magick frivillig-form-header.png -resize 1600x400\^ -gravity center -extent 1600x400 -quality 85 -define webp:lossless=false frivillig-form-header.webp
 ```
 
-Konvert en haug med bilder til webp:
+Konverter en haug med bilder til webp:
 
 ```shell
 for i in *.png; do if [ -f "${i%.png}.webp" ]; then echo "Skipping $i"; else magick "$i" -quality 85 "${i%.png}.webp"; fi; done
