@@ -1,169 +1,202 @@
 <!doctype html>
-<html lang="en">
-  {% render "head.html", title: "Tirsdagssamlinger - Slottsfjellet
-  Spillforening" %}
+<html lang="no">
+  {% render "head.html", title: "Tirsdagssamlinger - Slottsfjellet Spillforening" %}
   <body class="tirsdag-page">
-    <div class="container">
-      {% render "header.html" %} {% render "nav.html" %}
+    {% render "header.html" %}
 
-      <!-- Main Content -->
-      <div class="main-content">
-        <!-- Schedule -->
-        <div class="schedule-box">
-          <div class="content-header gray-box">
-            <h3>Datoer</h3>
+    <main class="page-shell">
+      <section class="comic-panel page-hero library-theme">
+        <div class="page-hero__grid">
+          <div>
+            <span class="kicker">Hver uke på biblioteket</span>
+            <h1 class="page-hero__title" style="color: var(--accent-green)">
+              Tirsdagssamlinger
+            </h1>
+            <p class="page-hero__lead">
+              Hver tirsdag fra kl. 17:30 til rundt 22:00 møtes vi i kjelleren på
+              Tønsberg Bibliotek. Det er gratis, uformelt og helt fint å komme
+              både sent og for første gang.
+            </p>
+            <div class="cta-row">
+              <a
+                href="https://maps.app.goo.gl/yXWHbJDAZkoLQpZ79"
+                class="btn-secondary"
+                >Finn biblioteket</a
+              >
+              <a href="https://discord.gg/N3MX5SHGZ8" class="btn-primary"
+                >Spør på Discord</a
+              >
+            </div>
           </div>
-          {% render "content_body_samlingsdatoer.html" %}
+          <div class="comic-panel" style="margin: 0">
+            <img
+              src="/images/carousel/image-1-paa-biblioteket.webp"
+              alt="Spill på biblioteket"
+              style="display: block; width: 100%"
+            />
+          </div>
         </div>
+      </section>
 
-        <!-- General Info -->
-        <div class="news-box" style="grid-column: 2 / 4">
-          <div class="content-header gray-box">
-            <h3>Generell info</h3>
-          </div>
-          <div class="content-body gray-box">
-            <div>
-              <p>
-                Velkommen til tirsdagssamlinger på
-                <b
-                  ><a href="https://maps.app.goo.gl/yXWHbJDAZkoLQpZ79"
-                    >Tønsberg Bibliotek</a
-                  ></b
-                >
-                hver tirsdag fra kl 17:30 til ca kl 22:00 (men du kan komme
-                senere og gå tidligere om du vil).
-              </p>
-              <p>
-                Vi er i et rom i kjelleren på biblioteket. Det skal være lett å
-                se oss.
-              </p>
+      <div class="page-grid page-grid--sidebar" style="margin-top: 28px">
+        <section>
+          <article class="comic-panel">
+            <div class="panel-body">
+              <h2>Hva skjer på en vanlig tirsdag?</h2>
               <p>
                 Vi spiller spill og hygger oss sammen. Ta gjerne med egne spill;
-                ellers har vi alltid noe å låne. Hvis du vil låne en armé til
-                Warhammer, sjekk inn på forhånd på Discord så kan noen ta med
-                til deg.
+                ellers har vi som regel noe å låne bort. For Warhammer og andre
+                miniatyrspill er det lurt å sjekke inn på forhånd hvis du trenger
+                hær eller motspiller.
+              </p>
+              <div class="highlight-box">
+                <strong>Det koster ingenting å delta.</strong><br />
+                Ingen medlemskrav, ingen inngangspenger, bare møt opp og si hei.
+              </div>
+              <h3>Dette dukker ofte opp</h3>
+              <ul class="feature-list">
+                <li>
+                  <strong>Frostgrave og mindre miniatyrspill</strong> for deg som
+                  liker raske kveldsformater.
+                </li>
+                <li>
+                  <strong>Magic: The Gathering</strong>, som regel i
+                  Commander-format.
+                </li>
+                <li>
+                  <strong>Rollespill</strong> når det er nok folk og noen tar på
+                  seg å lede.
+                </li>
+                <li>
+                  <strong>Maling og hobby</strong> for de som vil jobbe på
+                  figurer mellom slagene.
+                </li>
+                <li>
+                  <strong>Brettspill</strong> når noen tar initiativ eller tar
+                  med spill.
+                </li>
+              </ul>
+              <p>
+                Vi er en vennlig gjeng og prøver å gjøre det lett å bli med.
+                Hvis noen ved bordet foretrekker engelsk, spiller vi på engelsk.
               </p>
             </div>
+          </article>
 
-            <p><b>Det koster ingenting å delta.</b></p>
-
-            <p>
-              Vi er en god liten gjeng nå og det er som regel noen som spiller
-              eller holder på med følgende:
-            </p>
-            <ul>
-              <li>
-                <a
-                  href="https://www.ospreypublishing.com/us/frostgrave-second-edition-9781472834683/"
-                  >Frostgrave</a
-                >
-                - Fantasy miniatyrspill som er lett å lære og vi har modeller å
-                låne ut
-              </li>
-              <li>
-                <a
-                  href="https://www.warhammer.com/en-GB/other-games-kill-team-LP"
-                  >Warhammer Kill Team</a
-                >
-                - En variant av Warhammer 40k der du bruker 5-20 modeller
-              </li>
-              <li>Folk som maler miniatyrer</li>
-              <li>
-                Magic the Gathering - det går som regel i Commander. Vi er
-                villige til å lære bort og har kortstokker du kan låne
-              </li>
-              <li>
-                Rollespill. Det er (nesten) alltid noe det går an å bli med på;
-                kom på Discord og spør i #rollespill.
-              </li>
-            </ul>
-
-            <p>
-              Kom gjerne innom for å si hei, vi er en vennlig gjeng og vil gjøre
-              vårt beste for at du skal trives.
-            </p>
-          </div>
-          <div class="content-header gray-box">
-            <h3 id="parkering-ved-biblioteket">
-              Parkering nær Tønsberg Bibliotek
-            </h3>
-            <p>
-              Vær forsiktig med hvor du parkerer; å parkere fra 17-22 kan koste
-              fra <b>7kr til 275kr</b>. Det er billig parkering mellom
-              biblioteket og XXL; det er dyrt å parkere ved XXL.
-            </p>
-            <p>
-              Vi har laget et kart med hvor det er praktisk å parkere og hva det
-              koster for perioden 17-22 på tirsdager.
-            </p>
-
-            <!-- Parking legend: responsive table/grid for desktop, stacked for mobile -->
-            <div class="parking-legend">
-              <div class="legend-table">
-                <div class="legend-row">
-                  <div class="legend-cell">
-                    <div
-                      class="color-box"
-                      style="background-color: rgb(255, 82, 82)"
-                    ></div>
-                    Dyrt
-                  </div>
-                  <div class="legend-cell">50-55kr/time hele døgnet</div>
-                  <div class="legend-cell">
-                    <b>275kr</b> for 17-22, aldri gratis
-                  </div>
+          <article class="comic-panel">
+            <div class="panel-body">
+              <h2>Praktisk info</h2>
+              <div class="split-callout">
+                <div class="detail-card">
+                  <h3>Sted</h3>
+                  <p>
+                    Vi holder til i et rom i kjelleren på biblioteket. Det
+                    pleier å være lett å finne oss når du kommer ned.
+                  </p>
                 </div>
-                <div class="legend-row">
-                  <div class="legend-cell">
-                    <div
-                      class="color-box"
-                      style="background-color: rgb(251, 192, 45)"
-                    ></div>
-                    Middels
-                  </div>
-                  <div class="legend-cell">25kr/time kl 9-20</div>
-                  <div class="legend-cell">
-                    <b>75kr</b> for 17-20, gratis 20-22
-                  </div>
+                <div class="detail-card">
+                  <h3>Ta med</h3>
+                  <p>
+                    Spill, figurer eller kort hvis du vil, men du trenger ikke
+                    ha med noe. Det viktigste er at du dukker opp.
+                  </p>
                 </div>
-                <div class="legend-row">
-                  <div class="legend-cell">
-                    <div
-                      class="color-box"
-                      style="background-color: rgb(124, 179, 66)"
-                    ></div>
-                    Billig
-                  </div>
-                  <div class="legend-cell">13kr/time kl 9-18</div>
-                  <div class="legend-cell">
-                    <b>13kr</b> for 17-18, gratis 18-22
-                  </div>
-                </div>
-                <div class="legend-row">
-                  <div class="legend-cell">
-                    <div
-                      class="color-box"
-                      style="background-color: rgb(9, 113, 56)"
-                    ></div>
-                    Veldig billig
-                  </div>
-                  <div class="legend-cell">7kr/time kl 9-18</div>
-                  <div class="legend-cell">
-                    <b>7kr</b> for 17-18, gratis 18-22
-                  </div>
+                <div class="detail-card">
+                  <h3>For nybegynnere</h3>
+                  <p>
+                    Spør oss gjerne om hva som er lettest å bli med på den
+                    kvelden. Vi peker deg gjerne til riktig bord.
+                  </p>
                 </div>
               </div>
             </div>
-            <iframe
-              src="https://www.google.com/maps/d/u/0/embed?mid=1jc7Q4XkoGOAU3XthXweR467E1VAn8Kk&ehbc=2E312F"
-              width="640"
-              height="480"
-            ></iframe>
-          </div>
-        </div>
-      </div>
+          </article>
 
-      {% render "footer.html" %}
-    </div>
+          <article class="comic-panel">
+            <div class="panel-body">
+              <h2>Slik parkerer du smart</h2>
+              <p>
+                Parkeringsprisene rundt biblioteket varierer voldsomt. For
+                tidsrommet 17-22 kan forskjellen være alt fra 7 kr til 275 kr.
+              </p>
+              <table class="parking-table">
+                <thead>
+                  <tr>
+                    <th>Sone</th>
+                    <th>Pris (17-22)</th>
+                    <th>Info</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <span class="status-dot" style="background: #097138"></span
+                      >Veldig billig
+                    </td>
+                    <td><strong>7 kr</strong></td>
+                    <td>Mellom biblioteket og XXL</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="status-dot" style="background: #7cb342"></span
+                      >Billig
+                    </td>
+                    <td><strong>13 kr</strong></td>
+                    <td>Området rundt biblioteket</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="status-dot" style="background: #fbc02d"></span
+                      >Middels
+                    </td>
+                    <td><strong>75 kr</strong></td>
+                    <td>Kommunale plasser</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="status-dot" style="background: #ff5252"></span
+                      >Dyrt
+                    </td>
+                    <td><strong>275 kr</strong></td>
+                    <td>Ved XXL og private p-hus</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div style="margin-top: 18px; border: 2px solid var(--stone-dark)">
+                <iframe
+                  class="embed-frame"
+                  src="https://www.google.com/maps/d/u/0/embed?mid=1jc7Q4XkoGOAU3XthXweR467E1VAn8Kk&ehbc=2E312F"
+                  title="Parkering ved biblioteket"
+                ></iframe>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <aside>
+          <article class="comic-panel">
+            <div class="panel-body">
+              <h2>Kommende datoer</h2>
+              {% render "content_body_samlingsdatoer.html" %}
+            </div>
+          </article>
+
+          <article class="comic-panel">
+            <div class="panel-body" style="background: var(--accent-yellow)">
+              <h2>Usikker på om du bør komme?</h2>
+              <p>
+                Send en melding på Discord, så sier vi hva folk planlegger den
+                kvelden og hjelper deg i gang.
+              </p>
+              <a href="https://discord.gg/N3MX5SHGZ8" class="btn-secondary"
+                >Snakk med oss</a
+              >
+            </div>
+          </article>
+        </aside>
+      </div>
+    </main>
+
+    {% render "footer.html" %}
   </body>
 </html>

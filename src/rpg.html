@@ -1,33 +1,111 @@
-<!DOCTYPE html>
-<html lang="en">
-  {% render "head.html", title: "Slottsfjellet Spillforening" %}
+<!doctype html>
+<html lang="no">
+  {% render "head.html", title: "Rollespill - Slottsfjellet Spillforening" %}
   <body class="rpg-page">
-    <div class="container">
-      {% render "header.html" %} {% render "nav.html" %}
+    {% render "header.html" %}
 
-      <!-- Main Content -->
-      <div class="main-content">
-        <!-- RPG Content -->
-        <div class="news-box" style="grid-column: 1 / -1">
-          <div class="content-header gray-box">
-            <h1>Rollespill</h1>
+    <main class="page-shell">
+      <section class="comic-panel page-hero">
+        <div class="page-hero__grid">
+          <div>
+            <span class="kicker">TTRPG og fortelling</span>
+            <h1 class="page-hero__title">Rollespill</h1>
+            <p class="page-hero__lead">
+              Vi har lyst til å bygge et mer aktivt rollespillmiljø i
+              foreningen. Interessen er der allerede, men rollespill trenger
+              litt mer planlegging enn mange av de andre aktivitetene våre, så
+              miljøet vokser best når folk sier tydelig fra hva de vil spille
+              eller lede.
+            </p>
+            <div class="cta-row">
+              <a href="https://discord.gg/N3MX5SHGZ8" class="btn-primary"
+                >Finn folk på Discord</a
+              >
+              <a href="tirsdag.html" class="btn-secondary"
+                >Se tirsdagene våre</a
+              >
+            </div>
           </div>
-          <div class="content-body gray-box">
-            <p>
-              Å få til et aktivt rollespillmiljø krever litt mer innsats i
-              forhold til andre spill, og vi har ikke helt hatt kapasiteten til
-              å få dette på beina ennå.
-            </p>
-            <p>
-              Ønsket er der, men vi trenger fler til å bidra med det
-              organisatoriske. Om dette er noe du kunne tenke deg å være med på,
-              ta kontakt!
-            </p>
+          <div class="comic-panel" style="margin: 0">
+            <img
+              src="/images/carousel/image-3-rollespill.webp"
+              alt="Rollespill"
+              style="display: block; width: 100%"
+            />
           </div>
         </div>
-      </div>
+      </section>
 
-      {% render "footer.html" %}
-    </div>
+      <section class="page-grid" style="margin-top: 28px">
+        <article class="comic-panel">
+          <div class="panel-body">
+            <h2>Status akkurat nå</h2>
+            <p>
+              Vi har ikke et like fast og selvgående rollespillopplegg som vi
+              har for miniatyrspill og kortspill ennå. Det betyr ikke at ønsket
+              mangler - bare at vi trenger flere som vil være med på
+              organiseringen.
+            </p>
+            <p>
+              Hvis dette er noe du har lyst til å dra i gang, enten som GM eller
+              spiller som hjelper med koordinering, vil du være veldig
+              velkommen.
+            </p>
+          </div>
+        </article>
+
+        <article class="comic-panel">
+          <div class="panel-body">
+            <h2>Slik blir du med</h2>
+            <ul class="feature-list">
+              <li>Kom på Discord og si at du er interessert i rollespill.</li>
+              <li>
+                Fortell gjerne om du vil spille, lede eller bare følge med på
+                hva som dukker opp.
+              </li>
+              <li>
+                Drop-in kan fungere, men det er mye lettere å få til bord når
+                folk melder fra litt på forhånd.
+              </li>
+              <li>
+                Hvis noen ved bordet foretrekker engelsk, kjører vi gjerne på
+                engelsk.
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="comic-panel">
+          <div class="panel-body">
+            <h2>Hva vi håper å få til</h2>
+            <div class="split-callout">
+              <div class="detail-card">
+                <h3>One-shots</h3>
+                <p>
+                  Korte eventyr som er lette å hoppe inn i uten langvarig
+                  forpliktelse.
+                </p>
+              </div>
+              <div class="detail-card">
+                <h3>Kampanjer</h3>
+                <p>
+                  Fast gruppe over tid for dem som vil bygge karakterer og
+                  historie sammen.
+                </p>
+              </div>
+              <div class="detail-card">
+                <h3>Lavterskel intro</h3>
+                <p>
+                  Gode førstegangsopplevelser for folk som er nysgjerrige, men
+                  ikke vet hvor de skal begynne.
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    {% render "footer.html" %}
   </body>
 </html>

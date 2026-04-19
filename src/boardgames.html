@@ -1,241 +1,219 @@
-<!DOCTYPE html>
-<html lang="en">
-  {% render "head.html", title: "Slottsfjellet Spillforening" %}
+<!doctype html>
+<html lang="no">
+  {% render "head.html", title: "Brettspill - Slottsfjellet Spillforening" %}
   <body class="boardgames-page">
-    <div class="container">
-      {% render "header.html" %} {% render "nav.html" %}
+    {% render "header.html" %}
 
-      <!-- Main Content -->
-      <div class="main-content">
-        <!-- Brettspill Content -->
-        <div class="news-box" style="grid-column: 1 / -1">
-          <div class="content-header gray-box boardgame-list">
-            <h1>Brettspill</h1>
-            <p>
-              Vi spiller brettspill i foreningen, både på tirsdagssamlinger og
-              på andre arrangementer.
+    <main class="page-shell">
+      <section class="comic-panel page-hero">
+        <div class="page-hero__grid">
+          <div>
+            <span class="kicker">Klubbens spillhylle</span>
+            <h1 class="page-hero__title">Brettspill</h1>
+            <p class="page-hero__lead">
+              Vi spiller brettspill både på tirsdagssamlinger og på større
+              arrangementer. Klubben har en liten samling spill som kan tas fram
+              når noen vil spille, og det er også helt vanlig å ta med egne
+              favoritter.
             </p>
-
-            <p>
-              Klubben har brettspillene nedenfor. Disse kan spilles tirsdager,
-              taes med til events, etc. Klikk på spillnavnet for mer
-              informasjon. Anbefalt antall spillere, tid, alder, kompleksitet
-              osv kommer fra "Community" på Board Game Geek.
-            </p>
-            <details>
-              <summary>
-                <img
-                  src="/images/bg_cartographers.webp"
-                  alt="Cartographers"
-                />Cartographers
-              </summary>
-              <div>
-                Et strategisk "roll & write"-spill der du tegner kart over et
-                kongerike og prøver å oppfylle ulike oppdrag. Pass på monstre og
-                optimaliser poengene dine! Mer på
-                <a
-                  href="https://boardgamegeek.com/boardgame/263918/cartographers"
-                  >Board Game Geek</a
-                >
-                og
-                <a
-                  href="https://www.outland.no/p-cartographers-norsk-revidert-utgave-cartographers-norsk-7073021000048"
-                  >Outland</a
-                >.
-              </div>
-              <br />
-              <div>
-                1-8 spillere (best: 3-4), typisk 30-45 minutter, kompleksitet 2
-                av 5 (middels lett)
-              </div>
-              <div>
-                Fantasy, Norsk Bokmål, Anbefalt alder 8+, Territory Building
-              </div>
-            </details>
-            <details>
-              <summary>
-                <img
-                  src="/images/bg_cartographers_heroes.webp"
-                  alt="Cartographers: Heroes"
-                />Cartographers: Heroes
-              </summary>
-              <div>
-                Ny versjon av Cartographers med nye helter, fiender og
-                kartoppdrag. Gir mer variasjon og utfordringer til det originale
-                spillet. Mer på
-                <a
-                  href="https://boardgamegeek.com/boardgame/315767/cartographers-heroes"
-                  >Board Game Geek</a
-                >
-                og
-                <a
-                  href="https://www.outland.no/cartographers-heroes-7073021000161"
-                  >Outland</a
-                >.
-              </div>
-              <br />
-              <div>
-                1-10 spillere (best: 3-4), typisk 30-45 minutter, kompleksitet 2
-                av 5 (middels lett)
-              </div>
-
-              <div>
-                Fantasy, Norsk Bokmål, Anbefalt alder 10+, Territory Building
-              </div>
-            </details>
-            <details>
-              <summary>
-                <img src="/images/bg_citadels.webp" alt="Citadels" />Citadels
-              </summary>
-              <div>
-                Et klassisk kortspill hvor du bygger byer og velger roller hver
-                runde. Bløff, strategi og taktikk avgjør hvem som vinner. Mer på
-                <a href="https://boardgamegeek.com/boardgame/478/citadels"
-                  >Board Game Geek</a
-                >
-                og
-                <a href="https://www.outland.no/citadels-revised-edition-2021"
-                  >Outland</a
-                >.
-              </div>
-              <br />
-              <div>
-                2-7 spillere (best: 5), typisk 20-60 minutter, kompleksitet 2 av
-                5 (middels lett)
-              </div>
-              <div>Fantasy, Engelsk, Anbefalt alder 10+, Strategispill</div>
-            </details>
-            <details>
-              <summary>
-                <img src="/images/bg_flip_7.webp" alt="Flip 7" />Flip 7
-              </summary>
-              <div>
-                Et raskt og enkelt kortspill der du prøver å få poeng ved å
-                spille kort i stigende rekkefølge. Bruk spesialkort for å endre
-                spillets gang. Mer på
-                <a href="https://boardgamegeek.com/boardgame/420087/flip-7"
-                  >Board Game Geek</a
-                >
-                og
-                <a href="https://www.outland.no/p-flip-7-flip-7-700304158604"
-                  >Outland</a
-                >.
-              </div>
-              <br />
-              <div>
-                3-9 spillere (best: 5-6), typisk 20 minutter, kompleksitet 1 av
-                5 (lett)
-              </div>
-              <div>Familie, Engelsk, Anbefalt alder 6+, Kortspill</div>
-            </details>
-            <details>
-              <summary>
-                <img
-                  src="/images/bg_marvel_mayhem.webp"
-                  alt="Marvel Mayhem"
-                />Marvel Mayhem
-              </summary>
-              <div>
-                Et actionfylt kortspill med Marvel-superhelter. Bruk spesialkort
-                og krefter for å slå ut motstanderne og bli den siste som står
-                igjen. Mer på
-                <a
-                  href="https://boardgamegeek.com/boardgame/354342/marvel-mayhem"
-                  >Board Game Geek</a
-                >
-                og
-                <a href="https://www.outland.no/marvel-mayhem-no">Outland</a>.
-              </div>
-              <br />
-              <div>
-                2-4 spillere (best: 2 eller 4), typisk 10 minutter, kompleksitet
-                1.5 av 5 (lett)
-              </div>
-              <div>Superhelter, Norsk (?), Anbefalt alder 8+, Kortspill</div>
-            </details>
-            <details>
-              <summary>
-                <img src="/images/bg_risk_legacy.webp" alt="Risk Legacy" />Risk
-                Legacy (ubrukt)
-              </summary>
-              <div>
-                En unik utgave av Risk hvor spillet utvikler seg over tid. Hver
-                kampanje endrer brettet og reglene, og gir en personlig
-                spillopplevelse. Mer på
-                <a href="https://boardgamegeek.com/boardgame/105134/risk-legacy"
-                  >Board Game Geek</a
-                >
-                og
-                <a
-                  href="https://gamezone.no/brettspill/121353/risk-legacy-brettspill"
-                  >Gamezone</a
-                >.
-              </div>
-              <br />
-              <div>
-                4-5 spillere (best: 5), typisk 60 minutter per runde (30-90 for
-                første gang per BGG), kompleksitet 3 av 5 (middels)
-              </div>
-              <div>
-                Krig/Science Fiction, Engelsk, Anbefalt alder 10+, Strategispill
-              </div>
-            </details>
-            <details>
-              <summary>
-                <img
-                  src="/images/bg_uno_no_mercy.webp"
-                  alt="UNO: Show 'em No Mercy"
-                />UNO: Show 'em No Mercy
-              </summary>
-              <div>
-                En tøffere og mer uforutsigbar versjon av UNO med nye kort og
-                regler som gir ekstra kaos og moro. Mer på
-                <a
-                  href="https://boardgamegeek.com/boardgame/399088/uno-show-em-no-mercy"
-                  >Board Game Geek</a
-                >
-                og
-                <a href="https://www.outland.no/p-uno-no-mercy-194735220809"
-                  >Outland</a
-                >.
-              </div>
-              <br />
-              <div>
-                2-6 spillere (best: 4-5), typisk 15-30 minutter, kompleksitet 1
-                av 5 (lett)
-              </div>
-              <div>
-                Familie, Engelsk (men det står ikke noe på kortene), Anbefalt
-                alder 6+, Kortspill
-              </div>
-            </details>
-            <details>
-              <summary>
-                <img src="/images/bg_yucatan.webp" alt="Yucatan" />Yucatan
-              </summary>
-              <div>
-                Et strategispill satt i oldtidens Mexico. Samle ressurser, bygg
-                opp styrker og ofre til gudene for å vinne ære og makt. Mer på
-                <a href="https://boardgamegeek.com/boardgame/330510/yucatan"
-                  >Board Game Geek</a
-                >
-                og
-                <a href="https://www.outland.no/p-yucatan-3760372230234"
-                  >Outland</a
-                >.
-              </div>
-              <br />
-              <div>
-                2-4 spillere (best: 3-4), typisk 90 minutter, kompleksitet 3 av
-                5 (middels)
-              </div>
-              <div>Mytologisk, Engelsk, Anbefalt alder 14+, Strategispill</div>
-            </details>
+            <div class="cta-row">
+              <a href="tirsdag.html" class="btn-primary">Se tirsdagsinfo</a>
+              <a href="https://discord.gg/N3MX5SHGZ8" class="btn-secondary"
+                >Avtal et bord</a
+              >
+            </div>
+          </div>
+          <div class="comic-panel" style="margin: 0">
+            <img
+              src="/images/carousel/image-2-brettspill.webp"
+              alt="Brettspill på bordet"
+              style="display: block; width: 100%"
+            />
           </div>
         </div>
-      </div>
+      </section>
 
-      {% render "footer.html" %}
-    </div>
+      <div class="page-grid page-grid--sidebar" style="margin-top: 28px">
+        <section>
+          <article class="comic-panel">
+            <div class="panel-body">
+              <h2>Slik fungerer det hos oss</h2>
+              <ul class="feature-list">
+                <li>
+                  Det varierer hvor mange som spiller brettspill på en gitt
+                  tirsdag, så Discord er nyttig hvis du vil sikre deg
+                  medspillere.
+                </li>
+                <li>
+                  Klubbspillene kan spilles på tirsdager, tas med til events og
+                  brukes som lavterskelinngang for nye medlemmer.
+                </li>
+                <li>
+                  Vi liker både korte spill for å varme opp og lengre
+                  strategispill når folk planlegger det på forhånd.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <details class="comic-panel library-entry" open>
+            <summary>Cartographers</summary>
+            <div class="panel-body">
+              <p>
+                Et strategisk roll-and-write-spill der du tegner kart over et
+                kongerike og prøver å oppfylle ulike oppdrag, samtidig som du
+                holder monstre unna de mest verdifulle områdene.
+              </p>
+              <p class="library-meta">
+                1-8 spillere (best 3-4) · 30-45 minutter · kompleksitet 2/5 ·
+                norsk bokmål · alder 8+
+              </p>
+            </div>
+          </details>
+
+          <details class="comic-panel library-entry">
+            <summary>Cartographers: Heroes</summary>
+            <div class="panel-body">
+              <p>
+                En videreføring av originalen med nye helter, fiender og
+                kartoppdrag. Passer godt for folk som liker den første, men vil
+                ha litt mer variasjon og flere overraskelser.
+              </p>
+              <p class="library-meta">
+                1-10 spillere (best 3-4) · 30-45 minutter · kompleksitet 2/5 ·
+                norsk bokmål · alder 10+
+              </p>
+            </div>
+          </details>
+
+          <details class="comic-panel library-entry">
+            <summary>Citadels</summary>
+            <div class="panel-body">
+              <p>
+                Et klassisk spill om å velge roller, lese motstandere og bygge
+                den mest imponerende byen. Det er raskt nok til å lære på en
+                kveld, men fullt av små psykologiske stikk og taktiske valg.
+              </p>
+              <p class="library-meta">
+                2-7 spillere (best 5) · 20-60 minutter · kompleksitet 2/5 ·
+                engelsk · alder 10+
+              </p>
+            </div>
+          </details>
+
+          <details class="comic-panel library-entry">
+            <summary>Flip 7</summary>
+            <div class="panel-body">
+              <p>
+                Et raskt kortspill som fungerer godt som oppvarming, ventespill
+                eller avslutning på kvelden. Enkelt å forklare, lett å få i
+                gang og morsomt med større grupper.
+              </p>
+              <p class="library-meta">
+                3-9 spillere (best 5-6) · ca. 20 minutter · kompleksitet 1/5 ·
+                engelsk · alder 6+
+              </p>
+            </div>
+          </details>
+
+          <details class="comic-panel library-entry">
+            <summary>Marvel Mayhem</summary>
+            <div class="panel-body">
+              <p>
+                Et kort og kaotisk kortspill med Marvel-figurer, spesialevner og
+                mye direkte interaksjon. Fin når dere vil spille noe raskt uten
+                stor oppsettstid.
+              </p>
+              <p class="library-meta">
+                2-4 spillere (best 2 eller 4) · ca. 10 minutter · kompleksitet
+                1.5/5 · norsk/uklar språkutgave · alder 8+
+              </p>
+            </div>
+          </details>
+
+          <details class="comic-panel library-entry">
+            <summary>Risk Legacy (ubrukt)</summary>
+            <div class="panel-body">
+              <p>
+                En kampanjevariant av Risk der brettet og reglene endrer seg
+                permanent fra spill til spill. Dette er et spill som fortjener
+                litt planlegging og en fast gruppe.
+              </p>
+              <p class="library-meta">
+                4-5 spillere (best 5) · rundt 60 minutter per runde ·
+                kompleksitet 3/5 · engelsk · alder 10+
+              </p>
+            </div>
+          </details>
+
+          <details class="comic-panel library-entry">
+            <summary>UNO: Show 'em No Mercy</summary>
+            <div class="panel-body">
+              <p>
+                En røffere og mer uforutsigbar UNO-variant med flere svingninger
+                og litt ekstra kaos. Fin for grupper som vil ha lav terskel og
+                høy stemning.
+              </p>
+              <p class="library-meta">
+                2-6 spillere (best 4-5) · 15-30 minutter · kompleksitet 1/5 ·
+                engelske kort uten mye tekst · alder 6+
+              </p>
+            </div>
+          </details>
+
+          <details class="comic-panel library-entry">
+            <summary>Yucatan</summary>
+            <div class="panel-body">
+              <p>
+                Et tyngre strategispill med ressurser, kamp og ofringer til
+                gudene. Dette er mer "sett av en kveld" enn "ta et kjapt
+                parti", men passer godt når noen vil ha noe dypere.
+              </p>
+              <p class="library-meta">
+                2-4 spillere (best 3-4) · rundt 90 minutter · kompleksitet 3/5
+                · engelsk · alder 14+
+              </p>
+            </div>
+          </details>
+        </section>
+
+        <aside>
+          <article class="comic-panel">
+            <div class="panel-body">
+              <h2>Hva slags spill?</h2>
+              <ul class="pill-list">
+                <li>Familiespill</li>
+                <li>Kortspill</li>
+                <li>Strategi</li>
+                <li>Fantasy</li>
+                <li>Krigsspill-light</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="comic-panel">
+            <div class="panel-body">
+              <h2>Tips før du kommer</h2>
+              <ul class="plain-list">
+                <li>
+                  Vil du ha medspillere til et spesifikt spill, si fra på
+                  Discord først.
+                </li>
+                <li>
+                  Har du et eget spill du vil lære bort, er det bare å ta det
+                  med.
+                </li>
+                <li>
+                  Spillsamlingen vår fungerer best når folk foreslår konkrete
+                  bord og starttid.
+                </li>
+              </ul>
+            </div>
+          </article>
+        </aside>
+      </div>
+    </main>
+
+    {% render "footer.html" %}
   </body>
 </html>

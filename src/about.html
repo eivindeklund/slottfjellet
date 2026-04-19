@@ -1,81 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
-  {% render "head.html", title: "Slottsfjellet Spillforening" %}
+<!doctype html>
+<html lang="no">
+  {% render "head.html", title: "Om klubben - Slottsfjellet Spillforening" %}
   <body class="about-page">
-    <div class="container">
-      {% render "header.html" %} {% render "nav.html" %}
+    {% render "header.html" %}
 
-      <!-- Main Content -->
-      <div class="main-content">
-        {% render "infobox_om_oss.html" %}
-
-        <!-- Board and Contact Info -->
-        <div class="news-box" style="grid-column: 2 / 4">
-          <div class="content-header gray-box">
-            <h3>Foreningsinformasjon</h3>
-          </div>
-          <div class="content-body gray-box">
-            <h3>Styret</h3>
-            <p>
-              Slottsfjellet spillforening sitt styre består av følgende
-              medlemmer:
+    <main class="page-shell">
+      <section class="comic-panel page-hero">
+        <div class="page-hero__grid">
+          <div>
+            <span class="kicker">Foreningen bak bordene</span>
+            <h1 class="page-hero__title">Om klubben</h1>
+            <p class="page-hero__lead">
+              Slottsfjellet Spillforening er en gjeng spillinteresserte fra
+              Tønsberg og omegn som vil bygge et aktivt miljø for folk som liker
+              fysiske spill. Vi jobber med brettspill, miniatyrspill,
+              rollespill og samlekortspill - og prøver å gjøre terskelen lav for
+              å bli med.
             </p>
-            <ul>
-              <li><b>Styreleder:</b> Daniel T. Bekmand</li>
-              <li><b>Kasserer:</b> Stig Magne E. Brekken</li>
-              <li><b>Mediaansvarlig:</b> Joakim Tvededal</li>
-              <li><b>Styremedlem:</b> Per O. Isdahl</li>
-              <li><b>Styremedlem:</b> Kristian</li>
-            </ul>
-          </div>
-          <div class="content-body gray-box">
-            <h3>Kontakt</h3>
-            <p>
-              Vi kan nåes på eposten
-              <script type="text/javascript">
-                const user = "post";
-                const domain = "slottsfjellet.org";
-                document.write(
-                  `<a href="mailto:${user}@${domain}">${user}@${domain}</a>`
-                );
-              </script>
-              <noscript>(skru på Javascript for å se eposten)</noscript>
-              eller på <a href="https://discord.gg/N3MX5SHGZ8">Discord</a>.
-            </p>
-          </div>
-          <div class="content-body gray-box">
-            <h3>Dokumenter</h3>
-            <p>
-              Vedtekter, referater og lignende finner du på vår
+            <div class="cta-row">
               <a
-                href="https://drive.google.com/drive/folders/1ECDuhpuua5BGEvJj-r7VaxvjdmWc8aKD?usp=sharing"
-                >Google Drive</a
-              >.
-            </p>
-          </div>
-          <div class="content-body gray-box">
-            <h3>Kalender</h3>
-            <p>
-              Vi har en
-              <a
-                href="https://calendar.google.com/calendar/u/0?cid=cG9zdEBzbG90dHNmamVsbGV0Lm9yZw"
-                >Google-kalender</a
+                href="https://slottsfjellet.portal.styreweb.com/arrangement/ArrangementSession?ID=Innmelding"
+                class="btn-primary"
+                >Bli medlem</a
               >
-              du kan abonnere på.
-            </p>
+              <a
+                href="https://facebook.com/slottsfjelletspillforening"
+                class="btn-secondary"
+                >Facebook</a
+              >
+            </div>
           </div>
-          <div class="content-body gray-box">
-            <h3>Diverse nummer</h3>
-            <ul>
-              <li>Vipps 967991 (gave/skriv beløp)</li>
-              <li>Vipps 830821 (meny under arrangementer)</li>
-              <li>Orgnr 931 955 144</li>
-            </ul>
+          <div
+            class="comic-panel"
+            style="
+              margin: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 24px;
+            "
+          >
+            <img
+              src="/images/logo_small.png"
+              alt="Slottsfjellet Spillforening logo"
+              style="max-height: 260px; width: auto"
+            />
           </div>
         </div>
-      </div>
+      </section>
 
-      {% render "footer.html" %}
-    </div>
+      <section class="page-grid" style="margin-top: 28px">
+        <article class="comic-panel">
+          <div class="panel-body">
+            <h2>Styret</h2>
+            <ul class="plain-list">
+              <li><strong>Styreleder:</strong> Daniel T. Bekmand</li>
+              <li><strong>Kasserer:</strong> Stig Magne E. Brekken</li>
+              <li><strong>Mediaansvarlig:</strong> Joakim Tvededal</li>
+              <li><strong>Styremedlem:</strong> Per O. Isdahl</li>
+              <li><strong>Styremedlem:</strong> Kristian</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="comic-panel">
+          <div class="panel-body">
+            <h2>Kontakt</h2>
+            <ul class="link-list">
+              <li>
+                <a href="mailto:post@slottsfjellet.org"
+                  >post@slottsfjellet.org</a
+                >
+              </li>
+              <li><a href="https://discord.gg/N3MX5SHGZ8">Discord-serveren vår</a></li>
+              <li>
+                <a href="https://facebook.com/slottsfjelletspillforening"
+                  >Facebook-siden vår</a
+                >
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="comic-panel">
+          <div class="panel-body">
+            <h2>Dokumenter og kalender</h2>
+            <ul class="link-list">
+              <li>
+                <a
+                  href="https://drive.google.com/drive/folders/1ECDuhpuua5BGEvJj-r7VaxvjdmWc8aKD?usp=sharing"
+                  >Vedtekter, referater og dokumenter</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://calendar.google.com/calendar/u/0?cid=cG9zdEBzbG90dHNmamVsbGV0Lm9yZw"
+                  >Abonner på Google-kalenderen</a
+                >
+              </li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <section class="comic-panel" style="margin-top: 28px">
+        <div class="panel-body">
+          <h2>Nyttige nummer</h2>
+          <div class="number-grid">
+            <div class="detail-card">
+              <h3>Vipps gave</h3>
+              <p><strong>967991</strong></p>
+            </div>
+            <div class="detail-card">
+              <h3>Vipps arrangement</h3>
+              <p><strong>830821</strong></p>
+            </div>
+            <div class="detail-card">
+              <h3>Organisasjonsnummer</h3>
+              <p><strong>931 955 144</strong></p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    {% render "footer.html" %}
   </body>
 </html>

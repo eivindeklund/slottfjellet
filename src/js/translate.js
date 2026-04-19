@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
         const en = document.getElementById("flag-en");
         const no = document.getElementById("flag-no");
+        if (!en || !no) return;
         const siteOrigin = "slottsfjellet.org";
 
         // Detect current language (based on domain)
