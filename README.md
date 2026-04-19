@@ -40,13 +40,22 @@ Lag et workspace med koden:
 
 ```sh
 # Sjekk ut koden
-$ git checkout https://github.com/eivindeklund/slottfjellet
+$ git clone https://github.com/eivindeklund/slottfjellet
 $ cd slottfjellet
 $ cp dotenv.example .env
-# Endre .env til å ha de variablene som er viktige for oss.  Du må få dem fra
-# noen som vet om dem; ihvertfall Daniel og Eivind har dem.
+# .env inneholder passord etc.  Du må få dem fra noen som vet hva de er;
+# ihvertfall Daniel og Eivind har dem.
 $ $EDITOR .env
 ```
+
+Hvis du har gjort oppsettet ovenfor kan du hente endringer andre har gjort siden sist ved å
+kjøre 
+
+```sh
+$ git pull
+```
+
+Hent andres endringer før hver gang du skal gjøre endringer!
 
 Sett igang server for å kunne teste endringer:
 
@@ -92,6 +101,8 @@ Dette skriver hele siten til  `_site`, akkurat som det skal lastes opp (som
 Deretter kan du sende den til å bli aktiv:
 
 ```sh
+# Hent andres endringer, så du sikrer at du ikke sletter noen endringer.
+$ git pull
 $ ./bin/deploy.sh
 ```
 
