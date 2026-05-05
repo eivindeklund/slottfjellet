@@ -106,6 +106,11 @@ $ git pull
 $ ./bin/deploy.sh
 ```
 
+NOTE: Hvis du får en feil fra dette om manglende "hostkey", prøv å gjøre ssh til
+brukeren/hosten først.  Skriv ```ssh USER@HOST``` fra SLOTTSFJELLET_URL (se på
+`.env` og `dotenv.example`); når du får spørsmål om å koble deg til svar "yes",
+og press Ctrl-C når du blir spurt om passord.
+
 Deploy vil sjekke at alt er bygd riktig og at alt er riktig med git,
 ta en datert backup av den live siten lokalt (til `_backup/`), laste backupen
 opp til `slottsfjellet-backups` på hosting, og til slutt laste opp selve siten.
