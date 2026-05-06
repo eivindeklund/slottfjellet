@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="no">
+  {% render "head.html", title: title %}
+  <body class="{{ bodyClass }}">
+    {% render "header.html" %}
+    <main class="page-shell">
+      {{ content }}
+    </main>
+    {% render "footer.html" %}
+  </body>
+</html>

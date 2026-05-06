@@ -1,4 +1,6 @@
 module.exports = function (eleventyConfig) {
+	// Enable HTML passthrough in Markdown files (needed for inline HTML blocks)
+	eleventyConfig.amendLibrary("md", mdLib => mdLib.set({ html: true }));
 	// Input directory: src
 	// Output directory: _site
 
