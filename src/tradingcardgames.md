@@ -48,11 +48,10 @@ sted å prøve formatet for første gang.
 
 ## For nye spillere
 
-<ul class="feature-list">
-<li>Du trenger ikke kunne alt på forhånd - folk forklarer gjerne regler og flyt.</li>
-<li>Lav terskel og sosial spilling er viktigere enn å komme med den sterkeste listen.</li>
-<li>Hvis du er usikker på om det blir kortspill en bestemt kveld, spør i Discord først.</li>
-</ul>
+* Du trenger ikke kunne alt på forhånd - folk forklarer gjerne regler og flyt.
+* Lav terskel og sosial spilling er viktigere enn å komme med den sterkeste listen.
+* Hvis du er usikker på om det blir kortspill en bestemt kveld, spør i Discord først.
+{.feature-list}
 
 </div>
 </article>

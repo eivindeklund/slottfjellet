@@ -34,13 +34,12 @@ bodyClass: about-page
 
 ## Styret
 
-<ul class="plain-list">
-<li><strong>Styreleder:</strong> Daniel T. Bekmand</li>
-<li><strong>Kasserer:</strong> Stig Magne E. Brekken</li>
-<li><strong>Mediaansvarlig:</strong> Joakim Tvededal</li>
-<li><strong>Styremedlem:</strong> Per O. Isdahl</li>
-<li><strong>Styremedlem:</strong> Kristian</li>
-</ul>
+* **Styreleder:** Daniel T. Bekmand
+* **Kasserer:** Stig Magne E. Brekken
+* **Mediaansvarlig:** Joakim Tvededal
+* **Styremedlem:** Per O. Isdahl
+* **Styremedlem:** Kristian
+{.plain-list}
 
 </div>
 </article>
@@ -50,11 +49,10 @@ bodyClass: about-page
 
 ## Kontakt
 
-<ul class="link-list">
-<li><a href="mailto:post@slottsfjellet.org">post@slottsfjellet.org</a></li>
-<li><a href="https://discord.gg/N3MX5SHGZ8">Discord-serveren vår</a></li>
-<li><a href="https://facebook.com/slottsfjelletspillforening">Facebook-siden vår</a></li>
-</ul>
+* [post@slottsfjellet.org](mailto:post@slottsfjellet.org)
+* [Discord-serveren vår](https://discord.gg/N3MX5SHGZ8)
+* [Facebook-siden vår](https://facebook.com/slottsfjelletspillforening)
+{.link-list}
 
 </div>
 </article>
@@ -64,10 +62,9 @@ bodyClass: about-page
 
 ## Dokumenter og kalender
 
-<ul class="link-list">
-<li><a href="https://drive.google.com/drive/folders/1ECDuhpuua5BGEvJj-r7VaxvjdmWc8aKD?usp=sharing">Vedtekter, referater og dokumenter</a></li>
-<li><a href="https://calendar.google.com/calendar/u/0?cid=cG9zdEBzbG90dHNmamVsbGV0Lm9yZw">Abonner på Google-kalenderen</a></li>
-</ul>
+* [Vedtekter, referater og dokumenter](https://drive.google.com/drive/folders/1ECDuhpuua5BGEvJj-r7VaxvjdmWc8aKD?usp=sharing)
+* [Abonner på Google-kalenderen](https://calendar.google.com/calendar/u/0?cid=cG9zdEBzbG90dHNmamVsbGV0Lm9yZw)
+{.link-list}
 
 </div>
 </article>

@@ -39,12 +39,11 @@ bodyClass: rpg-page
 
 ## Slik blir du med
 
-<ul class="feature-list">
-<li>Kom på Discord og si at du er interessert i rollespill.</li>
-<li>Fortell gjerne om du vil spille, lede eller bare følge med på hva som dukker opp.</li>
-<li>Drop-in kan fungere, men det er mye lettere å få til bord når folk melder fra litt på forhånd.</li>
-<li>Hvis noen ved bordet foretrekker engelsk, kjører vi gjerne på engelsk.</li>
-</ul>
+* Kom på Discord og si at du er interessert i rollespill.
+* Fortell gjerne om du vil spille, lede eller bare følge med på hva som dukker opp.
+* Drop-in kan fungere, men det er mye lettere å få til bord når folk melder fra litt på forhånd.
+* Hvis noen ved bordet foretrekker engelsk, kjører vi gjerne på engelsk.
+{.feature-list}
 
 </div>
 </article>

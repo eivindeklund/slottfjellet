@@ -35,11 +35,10 @@ bodyClass: boardgames-page
 
 ## Slik fungerer det hos oss
 
-<ul class="feature-list">
-<li>Det varierer hvor mange som spiller brettspill på en gitt tirsdag, så Discord er nyttig hvis du vil sikre deg medspillere.</li>
-<li>Klubbspillene kan spilles på tirsdager, tas med til events og brukes som lavterskelinngang for nye medlemmer.</li>
-<li>Vi liker både korte spill for å varme opp og lengre strategispill når folk planlegger det på forhånd.</li>
-</ul>
+* Det varierer hvor mange som spiller brettspill på en gitt tirsdag, så Discord er nyttig hvis du vil sikre deg medspillere.
+* Klubbspillene kan spilles på tirsdager, tas med til events og brukes som lavterskelinngang for nye medlemmer.
+* Vi liker både korte spill for å varme opp og lengre strategispill når folk planlegger det på forhånd.
+{.feature-list}
 
 </div>
 </article>
@@ -173,13 +172,12 @@ bodyClass: boardgames-page
 
 ## Hva slags spill?
 
-<ul class="pill-list">
-<li>Familiespill</li>
-<li>Kortspill</li>
-<li>Strategi</li>
-<li>Fantasy</li>
-<li>Krigsspill-light</li>
-</ul>
+* Familiespill
+* Kortspill
+* Strategi
+* Fantasy
+* Krigsspill-light
+{.pill-list}
 
 </div>
 </article>
@@ -189,11 +187,10 @@ bodyClass: boardgames-page
 
 ## Tips før du kommer
 
-<ul class="plain-list">
-<li>Vil du ha medspillere til et spesifikt spill, si fra på Discord først.</li>
-<li>Har du et eget spill du vil lære bort, er det bare å ta det med.</li>
-<li>Spillsamlingen vår fungerer best når folk foreslår konkrete bord og starttid.</li>
-</ul>
+* Vil du ha medspillere til et spesifikt spill, si fra på Discord først.
+* Har du et eget spill du vil lære bort, er det bare å ta det med.
+* Spillsamlingen vår fungerer best når folk foreslår konkrete bord og starttid.
+{.plain-list}
 
 </div>
 </article>

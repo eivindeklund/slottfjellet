@@ -48,12 +48,11 @@ planlegging, er det smart å si fra på Discord når du kommer.
 
 ## For nye spillere
 
-<ul class="feature-list">
-<li>Vi kan ofte ordne utlånsarmeer hvis du sier fra i forkant.</li>
-<li>Det er ikke noe krav om å komme med ferdig malte figurer.</li>
-<li>På større arrangementer har vi hatt spillere som har brukt enkle stand-ins så lenge det er tydelig hva de representerer.</li>
-<li>Du trenger ikke starte med et stort prosjekt; små format og hobbykvelder er en fin inngang.</li>
-</ul>
+* Vi kan ofte ordne utlånsarmeer hvis du sier fra i forkant.
+* Det er ikke noe krav om å komme med ferdig malte figurer.
+* På større arrangementer har vi hatt spillere som har brukt enkle stand-ins så lenge det er tydelig hva de representerer.
+* Du trenger ikke starte med et stort prosjekt; små format og hobbykvelder er en fin inngang.
+{.feature-list}
 
 </div>
 </article>
@@ -83,12 +82,11 @@ helgesamlinger.
 
 ## Typiske aktiviteter
 
-<ul class="plain-list">
-<li>Raske kamper i mindre formater</li>
-<li>Planlagte matcher når folk avtaler på forhånd</li>
-<li>Miniatyrmaling og hobbyarbeid</li>
-<li>Testing av lister og forberedelse til Tabletop</li>
-</ul>
+* Raske kamper i mindre formater
+* Planlagte matcher når folk avtaler på forhånd
+* Miniatyrmaling og hobbyarbeid
+* Testing av lister og forberedelse til Tabletop
+{.plain-list}
 
 </div>
 </article>

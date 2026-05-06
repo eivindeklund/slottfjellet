@@ -1,6 +1,11 @@
+const markdownItAttrs = require("markdown-it-attrs");
+
 module.exports = function (eleventyConfig) {
-	// Enable HTML passthrough in Markdown files (needed for inline HTML blocks)
-	eleventyConfig.amendLibrary("md", mdLib => mdLib.set({ html: true }));
+	// Enable HTML passthrough and attribute syntax ({.class}) in Markdown files
+	eleventyConfig.amendLibrary("md", mdLib => {
+		mdLib.set({ html: true });
+		mdLib.use(markdownItAttrs);
+	});
 	// Input directory: src
 	// Output directory: _site
 

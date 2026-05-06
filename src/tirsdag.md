@@ -48,13 +48,12 @@ Ingen medlemskrav, ingen inngangspenger, bare møt opp og si hei.
 
 ### Dette dukker ofte opp
 
-<ul class="feature-list">
-<li><strong>Frostgrave og mindre miniatyrspill</strong> for deg som liker raske kveldsformater.</li>
-<li><strong>Magic: The Gathering</strong>, som regel i Commander-format.</li>
-<li><strong>Rollespill</strong> - vi varierer spill, men det er alltid noe og mulig å være med hvis du sjekker på Discord først.</li>
-<li><strong>Maling og hobby</strong> for de som vil jobbe på figurer mellom slagene.</li>
-<li><strong>Brettspill</strong> når noen tar initiativ eller tar med spill.</li>
-</ul>
+* **Frostgrave og mindre miniatyrspill** for deg som liker raske kveldsformater.
+* **Magic: The Gathering**, som regel i Commander-format.
+* **Rollespill** - vi varierer spill, men det er alltid noe og mulig å være med hvis du sjekker på Discord først.
+* **Maling og hobby** for de som vil jobbe på figurer mellom slagene.
+* **Brettspill** når noen tar initiativ eller tar med spill.
+{.feature-list}
 
 Vi er en vennlig gjeng og prøver å gjøre det lett å bli med.
 Hvis noen ved bordet foretrekker engelsk, spiller vi på engelsk.

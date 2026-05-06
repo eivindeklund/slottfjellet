@@ -41,12 +41,11 @@ bodyClass: ttt-page
 
 ## Kjapp info
 
-<ul class="stat-list">
-<li><strong>Dato:</strong> fredag 17. april til søndag 19. april</li>
-<li><strong>Turneringer:</strong> Warhammer 40,000 og Warhammer: The Old World</li>
-<li><strong>Turneringsformat:</strong> 2000 poeng, tre kamper à tre timer</li>
-<li><strong>Pris:</strong> 250 kr for arrangementet + 100 kr for turnering</li>
-</ul>
+* **Dato:** fredag 17. april til søndag 19. april
+* **Turneringer:** Warhammer 40,000 og Warhammer: The Old World
+* **Turneringsformat:** 2000 poeng, tre kamper à tre timer
+* **Pris:** 250 kr for arrangementet + 100 kr for turnering
+{.stat-list}
 
 </div>
 </article>
@@ -104,12 +103,11 @@ helgen til frispill uten å eie alt selv.
 
 ## Mer enn turnering
 
-<ul class="plain-list">
-<li>Eget malebord for dem som vil jobbe på figurer og skravle samtidig.</li>
-<li>Bord til andre spill så lenge det er plass rundt turneringene.</li>
-<li>Felles lunsj og mye sosial tid mellom kampene.</li>
-<li>Plan for søndagen bestemmes fortsatt; Discord brukes til å lande innholdet.</li>
-</ul>
+* Eget malebord for dem som vil jobbe på figurer og skravle samtidig.
+* Bord til andre spill så lenge det er plass rundt turneringene.
+* Felles lunsj og mye sosial tid mellom kampene.
+* Plan for søndagen bestemmes fortsatt; Discord brukes til å lande innholdet.
+{.plain-list}
 
 </div>
 </article>
@@ -123,10 +121,8 @@ Arrangementet er åpent for alle nivåer. Vi har både veteraner
 med mange års erfaring og folk som prøver spillet for aller
 første gang.
 
-<p class="muted-note">
-Høsten 2025 samlet vi 36 spillere og ble Norges nest største Old
-World-turnering.
-</p>
+Høsten 2025 samlet vi 36 spillere og ble Norges nest største Old World-turnering.
+{.muted-note}
 
 </div>
 </article>

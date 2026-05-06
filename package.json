@@ -1,0 +1,27 @@
+{
+  "name": "slottsfjellet",
+  "version": "1.0.0",
+  "description": "<!-- markdownlint-disable --> # Om hvordan endre disse sidene",
+  "main": "eleventy.config.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eivindeklund/slottfjellet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/eivindeklund/slottfjellet/issues"
+  },
+  "homepage": "https://github.com/eivindeklund/slottfjellet#readme",
+  "devDependencies": {
+    "markdown-it-attrs": "^4.3.1"
+  }
+}
