@@ -4,32 +4,36 @@ title: "Samlekortspill - Slottsfjellet Spillforening"
 bodyClass: tradingcardgames-page
 ---
 
-<section class="comic-panel page-hero">
-<div class="page-hero__grid">
-<div>
-<span class="kicker">Kortbord og Commander</span>
-<h1 class="page-hero__title">Samlekortspill</h1>
-<p class="page-hero__lead">
-  Samlekortspill i foreningen er først og fremst knyttet til
-  tirsdagssamlingene, og det går som regel i Magic: The Gathering.
-  Mesteparten av tiden spilles Commander, men miljøet er åpent for
-  flere formater og flere spill hvis folk tar initiativ.
-</p>
-<div class="cta-row">
-<a href="tirsdag.html" class="btn-primary">Se tirsdagene</a>
-<a href="https://discord.gg/N3MX5SHGZ8" class="btn-secondary">Avtal kortbord</a>
-</div>
-</div>
-<div class="comic-panel" style="margin: 0">
-<img src="/images/carousel/image-6-samlekortspill.webp" alt="Samlekortspill" style="display: block; width: 100%" />
-</div>
-</div>
-</section>
+::::: page-hero
 
-<section class="page-grid" style="margin-top: 28px">
+:::: hero-content
 
-<article class="comic-panel">
-<div class="panel-body">
+[Kortbord og Commander]{.kicker}
+
+# Samlekortspill {.page-hero__title}
+
+Samlekortspill i foreningen er først og fremst knyttet til
+tirsdagssamlingene, og det går som regel i Magic: The Gathering.
+Mesteparten av tiden spilles Commander, men miljøet er åpent for
+flere formater og flere spill hvis folk tar initiativ.
+{.page-hero__lead}
+
+::: cta-row
+[Se tirsdagene](tirsdag.html){.btn-primary}
+[Avtal kortbord](https://discord.gg/N3MX5SHGZ8){.btn-secondary}
+:::
+
+::::
+
+:::: hero-image
+![Samlekortspill](/images/carousel/image-6-samlekortspill.webp){style="display: block; width: 100%"}
+::::
+
+:::::
+
+:::: page-grid
+
+::: panel
 
 ## Det vi spiller mest
 
@@ -40,11 +44,9 @@ kommer og går litt forskjellig.
 Vi har spillere som gjerne lærer bort reglene, så dette er et fint
 sted å prøve formatet for første gang.
 
-</div>
-</article>
+:::
 
-<article class="comic-panel">
-<div class="panel-body">
+::: panel
 
 ## For nye spillere
 
@@ -53,11 +55,9 @@ sted å prøve formatet for første gang.
 * Hvis du er usikker på om det blir kortspill en bestemt kveld, spør i Discord først.
 {.feature-list}
 
-</div>
-</article>
+:::
 
-<article class="comic-panel">
-<div class="panel-body">
+::: panel
 
 ## Rom for mer
 
@@ -65,7 +65,6 @@ Selv om Magic er hovedtyngden akkurat nå, er det plass til andre
 kortspill også. Hvis du vil få i gang noe nytt, er det beste du
 kan gjøre å samle interesse i forkant og så møtes på en tirsdag.
 
-</div>
-</article>
+:::
 
-</section>
+::::

@@ -4,38 +4,40 @@ title: "Rollespill - Slottsfjellet Spillforening"
 bodyClass: rpg-page
 ---
 
-<section class="comic-panel page-hero">
-<div class="page-hero__grid">
-<div>
-<span class="kicker">TTRPG og fortelling</span>
-<h1 class="page-hero__title">Rollespill</h1>
-<p class="page-hero__lead">
-  Vi spiller hver tirsdag, med varierende spill. Det er D&amp;D B/X
-  annenhver tirsdag, og ikke-D&amp;D systemer de andre tirsdagene.
-  Noen ganger er det D&amp;D 5e mini-kampajer, sjekk på Discord.
-  Hvis du ønsker å arrangere noe kan du også snakke med oss der.
-</p>
-<p>
-  Det er åpent rollespill hver tirsdag, du trenger ikke binde deg
-  til mer enn en tirsdag (og vi prøver å få det til å virke hvis
-  folk må komme sent eller gå tidlig). Folk som aldri har spilt
-  rollespill før er veldig velkomne.
-</p>
-<div class="cta-row">
-<a href="https://discord.gg/N3MX5SHGZ8" class="btn-primary">Finn folk på Discord</a>
-<a href="tirsdag.html" class="btn-secondary">Se tirsdagene våre</a>
-</div>
-</div>
-<div class="comic-panel" style="margin: 0">
-<img src="/images/carousel/image-3-rollespill.webp" alt="Rollespill" style="display: block; width: 100%" />
-</div>
-</div>
-</section>
+::::: page-hero
 
-<section class="page-grid" style="margin-top: 28px">
+:::: hero-content
 
-<article class="comic-panel">
-<div class="panel-body">
+[TTRPG og fortelling]{.kicker}
+
+# Rollespill {.page-hero__title}
+
+Vi spiller hver tirsdag, med varierende spill. Det er D&amp;D B/X
+annenhver tirsdag, og ikke-D&amp;D systemer de andre tirsdagene.
+Noen ganger er det D&amp;D 5e mini-kampajer, sjekk på Discord.
+Hvis du ønsker å arrangere noe kan du også snakke med oss der.
+
+Det er åpent rollespill hver tirsdag, du trenger ikke binde deg
+til mer enn en tirsdag (og vi prøver å få det til å virke hvis
+folk må komme sent eller gå tidlig). Folk som aldri har spilt
+rollespill før er veldig velkomne.
+
+::: cta-row
+[Finn folk på Discord](https://discord.gg/N3MX5SHGZ8){.btn-primary}
+[Se tirsdagene våre](tirsdag.html){.btn-secondary}
+:::
+
+::::
+
+:::: hero-image
+![Rollespill](/images/carousel/image-3-rollespill.webp){style="display: block; width: 100%"}
+::::
+
+:::::
+
+:::::: page-grid
+
+::: panel
 
 ## Slik blir du med
 
@@ -45,52 +47,50 @@ bodyClass: rpg-page
 * Hvis noen ved bordet foretrekker engelsk, kjører vi gjerne på engelsk.
 {.feature-list}
 
-</div>
-</article>
+:::
 
-<article class="comic-panel">
-<div class="panel-body">
+::::: panel
 
 ## Ting vi gjør
 
-<div class="split-callout">
-<div class="detail-card">
-<h3>Open table</h3>
-<p>
-  Utenom mini-kampanjene våre er det alltid åpent bord - folk
-  trenger ikke å komme fast for å kunne være med. Det er fint om
-  dere sier fra på Discord så vi kan sørge for at det er nok
-  plass til alle, men vi prøver å være fleksible og få til
-  drop-in også.
-</p>
-</div>
-<div class="detail-card">
-<h3>Lavterskel førstegangsspilling</h3>
-<p>
-  Det er alltid åpent for å være med uten å ha spilt rollespill
-  før. Hvis du aldri har spilt før og tar din første sesjon med
-  oss gir vi deg til og med et memento å ta med hjem: Et sett
-  med rollespillterninger i Slottsfjellet Spillforening-pose.
-</p>
-</div>
-<div class="detail-card">
-<h3>One-shots</h3>
-<p>
-  Korte eventyr som er lette å hoppe inn i. Dette er det vi
-  vanligvis spiller på ikke-B/X tirsdager.
-</p>
-</div>
-<div class="detail-card">
-<h3>Kampanjer</h3>
-<p>
-  Kampanjer er pågående historier og steder i en fantasiverden
-  der vi spiller flere ganger og det spillere gjør har varige
-  konsekvenser i fantasi-universet.
-</p>
-</div>
-</div>
+:::: split-callout
 
-</div>
-</article>
+::: detail-card
+### Open table
 
-</section>
+Utenom mini-kampanjene våre er det alltid åpent bord - folk
+trenger ikke å komme fast for å kunne være med. Det er fint om
+dere sier fra på Discord så vi kan sørge for at det er nok
+plass til alle, men vi prøver å være fleksible og få til
+drop-in også.
+:::
+
+::: detail-card
+### Lavterskel førstegangsspilling
+
+Det er alltid åpent for å være med uten å ha spilt rollespill
+før. Hvis du aldri har spilt før og tar din første sesjon med
+oss gir vi deg til og med et memento å ta med hjem: Et sett
+med rollespillterninger i Slottsfjellet Spillforening-pose.
+:::
+
+::: detail-card
+### One-shots
+
+Korte eventyr som er lette å hoppe inn i. Dette er det vi
+vanligvis spiller på ikke-B/X tirsdager.
+:::
+
+::: detail-card
+### Kampanjer
+
+Kampanjer er pågående historier og steder i en fantasiverden
+der vi spiller flere ganger og det spillere gjør har varige
+konsekvenser i fantasi-universet.
+:::
+
+::::
+
+:::::
+
+::::::

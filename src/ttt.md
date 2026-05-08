@@ -4,40 +4,41 @@ title: "Tønsberg Tabletop - Slottsfjellet Spillforening"
 bodyClass: ttt-page
 ---
 
-<section class="comic-panel page-hero" style="border-color: var(--accent-red)">
-<div class="page-hero__grid">
-<div>
-<span class="kicker">Helgesamling for miniatyrspill</span>
-<h1 class="page-hero__title" style="color: var(--accent-red)">
-  Tønsberg Tabletop Våren 2026
-</h1>
-<p class="page-hero__lead">
-  17.-19. april 2026 samler vi folk til en helg med
-  lavterskel-turneringer, frispill, maling og sosial spilling.
-  Våren 2026 planlegges på
-  <a href="https://discord.gg/N3MX5SHGZ8">Discord</a>, og
-  arrangementet holdes på
-  <a href="https://www.tonsberg.kommune.no/tjenester/helse-og-omsorg/aktivitet-og-mestring/aktivitetshusportalen/slagen/">Søndre Skagen Samfunnshus</a>.
-</p>
-<div class="cta-row">
-<a href="https://discord.gg/N3MX5SHGZ8" class="btn-primary">Følg planleggingen</a>
-<a href="miniaturegames.html" class="btn-secondary">Se miniatyrmiljøet</a>
-</div>
-<p class="muted-note">
-  Påmelding kommer når den er klar. Discord er stedet der nyheter og
-  praktiske detaljer dukker opp først.
-</p>
-</div>
-<div class="comic-panel" style="margin: 0">
-<img src="/images/carousel/image-5-Warhammer-40k.webp" alt="Warhammer på Tønsberg Tabletop" style="display: block; width: 100%" />
-</div>
-</div>
-</section>
+::::: page-hero {style="border-color: var(--accent-red)"}
 
-<section class="page-grid" style="margin-top: 28px">
+:::: hero-content
 
-<article class="comic-panel">
-<div class="panel-body">
+[Helgesamling for miniatyrspill]{.kicker}
+
+# Tønsberg Tabletop Våren 2026 {.page-hero__title style="color: var(--accent-red)"}
+
+17.-19. april 2026 samler vi folk til en helg med
+lavterskel-turneringer, frispill, maling og sosial spilling.
+Våren 2026 planlegges på
+[Discord](https://discord.gg/N3MX5SHGZ8), og
+arrangementet holdes på
+[Søndre Skagen Samfunnshus](https://www.tonsberg.kommune.no/tjenester/helse-og-omsorg/aktivitet-og-mestring/aktivitetshusportalen/slagen/).
+{.page-hero__lead}
+
+::: cta-row
+[Følg planleggingen](https://discord.gg/N3MX5SHGZ8){.btn-primary}
+[Se miniatyrmiljøet](miniaturegames.html){.btn-secondary}
+:::
+
+Påmelding kommer når den er klar. Discord er stedet der nyheter og
+praktiske detaljer dukker opp først.{.muted-note}
+
+::::
+
+:::: hero-image
+![Warhammer på Tønsberg Tabletop](/images/carousel/image-5-Warhammer-40k.webp){style="display: block; width: 100%"}
+::::
+
+:::::
+
+:::::: page-grid
+
+::: panel
 
 ## Kjapp info
 
@@ -47,11 +48,9 @@ bodyClass: ttt-page
 * **Pris:** 250 kr for arrangementet + 100 kr for turnering
 {.stat-list}
 
-</div>
-</article>
+:::
 
-<article class="comic-panel">
-<div class="panel-body">
+::::: panel
 
 ## Lavterskel på ordentlig
 
@@ -59,16 +58,14 @@ Her stilles det verken krav til erfaring eller perfekt malte
 miniatyrer. Det viktigste er at motstanderen kan se hva modellen
 forestiller, og at den er omtrent riktig størrelse på bordet.
 
-<div class="rule-note">
+:::: rule-note
 Ingen krav til ferdigmalte figurer. Vi har til og med hatt
 spillere som har brukt papirkjegler med tydelige lapper.
-</div>
+::::
 
-</div>
-</article>
+:::::
 
-<article class="comic-panel">
-<div class="panel-body">
+::: panel
 
 ## For nybegynnere også
 
@@ -79,27 +76,23 @@ malebord med utstyr til utlån.
 Det betyr at du både kan turnere, prøve miniatyrmaling og bruke
 helgen til frispill uten å eie alt selv.
 
-</div>
-</article>
+:::
 
-</section>
+::::::
 
-<section class="page-grid page-grid--sidebar" style="margin-top: 28px">
+:::::: page-grid {.page-grid--sidebar style="margin-top: 28px"}
 
-<article class="comic-panel">
-<div class="panel-body">
+::: panel
 
 ## Typisk helgeflyt
 
 {% render "content_body_tt_timeplan.html" %}
 
-</div>
-</article>
+:::
 
-<aside>
+:::: aside
 
-<article class="comic-panel">
-<div class="panel-body">
+::: panel
 
 ## Mer enn turnering
 
@@ -109,11 +102,9 @@ helgen til frispill uten å eie alt selv.
 * Plan for søndagen bestemmes fortsatt; Discord brukes til å lande innholdet.
 {.plain-list}
 
-</div>
-</article>
+:::
 
-<article class="comic-panel">
-<div class="panel-body">
+::: panel
 
 ## Hvordan stemningen er
 
@@ -121,12 +112,10 @@ Arrangementet er åpent for alle nivåer. Vi har både veteraner
 med mange års erfaring og folk som prøver spillet for aller
 første gang.
 
-Høsten 2025 samlet vi 36 spillere og ble Norges nest største Old World-turnering.
-{.muted-note}
+Høsten 2025 samlet vi 36 spillere og ble Norges nest største Old World-turnering.{.muted-note}
 
-</div>
-</article>
+:::
 
-</aside>
+::::
 
-</section>
+::::::

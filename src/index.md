@@ -4,37 +4,40 @@ title: "Slottsfjellet Spillforening"
 bodyClass: index-page
 ---
 
-<section class="comic-panel page-hero">
-<div class="page-hero__grid">
-<div>
-<span class="kicker">Analogspill i Tønsberg</span>
-<h1 class="page-hero__title">Slottsfjellet Spillforening</h1>
-<p class="page-hero__lead">
-  Vi er en forening for folk som liker fysiske spill: brettspill,
-  miniatyrspill, rollespill og samlekortspill. Hovedbasen vår er
-  tirsdagskveldene på biblioteket, men vi arrangerer også større
-  samlinger som Tønsberg Tabletop.
-</p>
-<div class="cta-row">
-<a href="tirsdag.html" class="btn-primary">Kom på tirsdag</a>
-<a href="ttt.html" class="btn-secondary">Se Tønsberg Tabletop</a>
-<a href="about.html" class="btn-secondary">Om klubben</a>
-</div>
-<p class="muted-note">
-  Gratis og åpent for alle. Vi er også English-friendly når noen i
-  bordet foretrekker det.
-</p>
-</div>
-<div class="comic-panel" style="margin: 0">
-<img src="/images/carousel/image-1-paa-biblioteket.webp" alt="Spilling på biblioteket" style="display: block; width: 100%" />
-</div>
-</div>
-</section>
+::::: page-hero
 
-<section class="page-grid" style="margin-top: 28px">
+:::: hero-content
 
-<article class="comic-panel">
-<div class="panel-body">
+[Analogspill i Tønsberg]{.kicker}
+
+# Slottsfjellet Spillforening {.page-hero__title}
+
+Vi er en forening for folk som liker fysiske spill: brettspill,
+miniatyrspill, rollespill og samlekortspill. Hovedbasen vår er
+tirsdagskveldene på biblioteket, men vi arrangerer også større
+samlinger som Tønsberg Tabletop.
+{.page-hero__lead}
+
+::: cta-row
+[Kom på tirsdag](tirsdag.html){.btn-primary}
+[Se Tønsberg Tabletop](ttt.html){.btn-secondary}
+[Om klubben](about.html){.btn-secondary}
+:::
+
+Gratis og åpent for alle. Vi er også English-friendly når noen i
+bordet foretrekker det.{.muted-note}
+
+::::
+
+:::: hero-image
+![Spilling på biblioteket](/images/carousel/image-1-paa-biblioteket.webp){style="display: block; width: 100%"}
+::::
+
+:::::
+
+:::: page-grid
+
+::: panel
 
 ## Fast møteplass
 
@@ -42,11 +45,9 @@ Hver tirsdag fra kl. 17:30 samles vi i kjelleren på Tønsberg
 Bibliotek. Du kan komme når du vil, gå når du vil, og det koster
 ingenting å delta.
 
-</div>
-</article>
+:::
 
-<article class="comic-panel">
-<div class="panel-body">
+::: panel
 
 ## Lav terskel
 
@@ -54,11 +55,9 @@ Vi hjelper gjerne nye spillere i gang. For miniatyrspill kan det
 ofte ordnes utlånsarmeer, og for kortspill har vi folk som gjerne
 lærer bort formatene.
 
-</div>
-</article>
+:::
 
-<article class="comic-panel">
-<div class="panel-body">
+::: panel
 
 ## Mer enn ukekveld
 
@@ -66,10 +65,9 @@ To ganger i året lager vi en større helgesamling for
 miniatyrspillere. Tønsberg Tabletop kombinerer
 lavterskel-turneringer med frispill, maling og sosial tid.
 
-</div>
-</article>
+:::
 
-</section>
+::::
 
 <section style="margin-top: 42px">
 <h2 style="text-align: center; margin-bottom: 24px">Hva vi spiller</h2>

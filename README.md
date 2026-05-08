@@ -138,7 +138,7 @@ Fil eller dir | Innhold
 `eleventy.config.js` | Oppsett for kopiering av filer etc.
 `README.md` | Denne filen.  Dokumentasjon på struktur, hvordan oppdatere, etc.
 `src/` | Input-data for å bygge websiten.  **Alt som skal kopieres herfra må settes opp i `eleventy.config.js`!**
-`src/*.html` | Der websidene våre kommer fra :-)
+`src/*.md` | Der websidene våre kommer fra :-) (Markdown med container-syntaks, se nedenfor)
 `src/_data/` | Greier for eleventy.  Det eneste jeg vet om bruk av er `permalink.js` men jeg antar det finnes mer en kna legge her.
 `src/_data/permalink.js` | Eleventy config for hvordan sette opp filnavn.  Per default kopierer eleventy foo.html til foo/index.html så foo.html kan kommes til som slottsfjellet.org/foo, men vi har allerede slottsfjellet.org/foo.html i bruk, så vi må gjøre noe mer oppsett før vi kan skifte format.
 `src/_extra_for_root` | Filer som skal kopieres til `/`, utenom `*.html`.  Separert ut for å ha minst mulig rot når en endrer HTML-filene.  `src/_includes` | Filer som inkluderes i de andre filene for å bygge websiten.
@@ -148,6 +148,188 @@ Fil eller dir | Innhold
 `src/_includes/footer.html` | Det som kommer på slutten av siden.  For øyeblikket reklamen med Tabletopbattle, Outland, og Togbutikken.
 `src/_includes/nav.html` | Nav-bar.  Kommer så langt alltid sammen med `header.html` så burde inkluderes derfra. Se TODO
 `src/_includes/infobox_om_oss.html` | Om oss-box, med HTML-struktur som er litt annerledes enn i `content_body_*.html`.  Burde gjøres om til å ha samme strukture.  TODO
+
+## Markdown og innholdssidene
+
+Innholdssidene er Markdown-filer i `src/*.md`.  De bruker [markdown-it](https://github.com/markdown-it/markdown-it) med følgende utvidelser:
+
+- **[markdown-it-attrs](https://github.com/arve0/markdown-it-attrs)**: legger til HTML-attributter på Markdown-elementer med `{.klasse}`, `{#id}`, `{style="..."}` etc.
+- **[markdown-it-bracketed-spans](https://github.com/mb21/markdown-it-bracketed-spans)**: inline `<span>` med attributter: `[tekst]{.klasse}`
+- **[markdown-it-container](https://github.com/markdown-it/markdown-it-container)**: navngitte fence-blokker (se nedenfor)
+
+### Container-syntaks og nøsting
+
+Alle sidestrukturene lages med fence-blokker:
+
+```
+::: container-navn {valgfrie attributter}
+innhold
+:::
+```
+
+Bruk **flere kolon for ytre containere** enn for indre.  Tomme linjer med bare kolon lukker den innerste åpne containeren med like mange eller færre kolon.  Eksempel på nøsting:
+
+```
+::::: ytre
+:::: midtre
+::: indre
+innhold
+:::
+::::
+:::::
+```
+
+### Navngitte layout-containere
+
+#### `page-hero` – sidens hero-seksjon
+
+```
+::::: page-hero {.ekstra-klasse}   ← eller {style="border-color: ..."}
+
+:::: hero-content
+[Kicker-tekst]{.kicker}
+
+# Sidetittel {.page-hero__title}
+
+Ingress-tekst her.{.page-hero__lead}
+
+::: cta-row
+[Knapp 1](url.html){.btn-primary}
+[Knapp 2](url.html){.btn-secondary}
+:::
+::::
+
+:::: hero-image
+![Alt-tekst](/images/...){style="display: block; width: 100%"}
+::::
+
+:::::
+```
+
+Elementer:
+- `page-hero` → `<section class="comic-panel page-hero [ekstra-klasse]">`
+- `hero-content` → `<div>` (tekstkolonnen)
+- `hero-image` → `<div class="comic-panel" style="margin: 0">` (bildekolonnen)
+- `cta-row` → `<div class="cta-row">` (knapperad)
+
+#### `page-grid` – innholdsområde under hero
+
+```
+:::: page-grid                                   ← enkel layout
+:::: page-grid {.page-grid--sidebar style="..."}  ← sidebar-layout
+```
+
+Renders som `<section class="page-grid [ekstra-klasse]" style="margin-top: 28px">`.
+Bruk `{.page-grid--sidebar}` for tokolonne-layout med sidebar.
+
+#### `panel` – innholdsboks
+
+```
+::: panel
+## Overskrift
+
+Innhold her.
+:::
+
+::: panel {style="background: var(--accent-yellow)"}
+Gul variant.
+:::
+```
+
+Renders som `<article class="comic-panel"><div class="panel-body [attrs]">`.
+Attributter (f.eks. bakgrunnsfarge) settes på `panel-body`.
+
+#### `highlight-box` – uthevet boks
+
+```
+:::: highlight-box
+**Viktig tekst** her.
+::::
+```
+
+Renders som `<div class="highlight-box">`.
+
+#### `split-callout` – kolonnegrid med kort
+
+```
+:::: split-callout
+
+::: detail-card
+### Korttittel
+Innhold.
+:::
+
+::: detail-card
+### Korttittel
+Innhold.
+:::
+
+::::
+```
+
+`split-callout` → `<div class="split-callout">`, `detail-card` → `<div class="detail-card">`.
+
+#### `rule-note` – regelnotat
+
+```
+:::: rule-note
+Regelforklaring eller notat som skiller seg ut.
+::::
+```
+
+Renders som `<div class="rule-note">`.
+
+#### `number-grid` – grid med numre
+
+```
+:::: number-grid
+
+::: detail-card
+### Tittel
+**Verdi**
+:::
+
+::::
+```
+
+Renders som `<div class="number-grid">`.
+
+#### `library-entry` – spillbibliotek-oppføring
+
+```
+::: library-entry Spilltittel
+Beskrivelse av spillet.
+
+2-4 spillere · 30-60 minutter · kompleksitet 2/5{.library-meta}
+:::
+
+::: library-entry Åpen oppføring {open}
+Denne er åpen som standard (details open-attributt).
+:::
+```
+
+Renders som `<details class="comic-panel library-entry"><summary>Spilltittel</summary><div class="panel-body">`.
+`{open}` i info-strengen legger til `open`-attributtet på `<details>`.
+
+### Generiske HTML-element-containere
+
+Bruk disse som fallback når ingen navngitt container passer:
+
+| Syntax | Output |
+|--------|--------|
+| `::: div {.klasse}` | `<div class="klasse">` |
+| `::: section {.klasse}` | `<section class="klasse">` |
+| `::: article {.klasse}` | `<article class="klasse">` |
+| `::: aside` | `<aside>` |
+
+Attributter fra `{...}` settes direkte på elementet.
+
+### Tips for attributter
+
+- **Klasse på avsnitt**: `tekst her.{.klasse}` (direkte på slutten, uten linjeskift)
+- **Klasse på liste**: skriv `{.klasse}` på egen linje rett etter listen (uten blanklinje)
+- **Klasse på overskrift**: `## Tittel {.klasse}`
+- **Inline span**: `[tekst]{.klasse}` → `<span class="klasse">tekst</span>`
 
 Includes brukes som følger:
 

@@ -4,33 +4,37 @@ title: "Om klubben - Slottsfjellet Spillforening"
 bodyClass: about-page
 ---
 
-<section class="comic-panel page-hero">
-<div class="page-hero__grid">
-<div>
-<span class="kicker">Foreningen bak bordene</span>
-<h1 class="page-hero__title">Om klubben</h1>
-<p class="page-hero__lead">
-  Slottsfjellet Spillforening er en gjeng spillinteresserte fra
-  Tønsberg og omegn som vil bygge et aktivt miljø for folk som liker
-  fysiske spill. Vi jobber med brettspill, miniatyrspill,
-  rollespill og samlekortspill - og prøver å gjøre terskelen lav for
-  å bli med.
-</p>
-<div class="cta-row">
-<a href="https://slottsfjellet.portal.styreweb.com/arrangement/ArrangementSession?ID=Innmelding" class="btn-primary">Bli medlem</a>
-<a href="https://facebook.com/slottsfjelletspillforening" class="btn-secondary">Facebook</a>
-</div>
-</div>
-<div class="comic-panel" style="margin: 0; display: flex; align-items: center; justify-content: center; padding: 24px;">
-<img src="/images/logo_small.png" alt="Slottsfjellet Spillforening logo" style="max-height: 260px; width: auto" />
-</div>
-</div>
-</section>
+::::: page-hero
 
-<section class="page-grid" style="margin-top: 28px">
+:::: hero-content
 
-<article class="comic-panel">
-<div class="panel-body">
+[Foreningen bak bordene]{.kicker}
+
+# Om klubben {.page-hero__title}
+
+Slottsfjellet Spillforening er en gjeng spillinteresserte fra
+Tønsberg og omegn som vil bygge et aktivt miljø for folk som liker
+fysiske spill. Vi jobber med brettspill, miniatyrspill,
+rollespill og samlekortspill - og prøver å gjøre terskelen lav for
+å bli med.
+{.page-hero__lead}
+
+::: cta-row
+[Bli medlem](https://slottsfjellet.portal.styreweb.com/arrangement/ArrangementSession?ID=Innmelding){.btn-primary}
+[Facebook](https://facebook.com/slottsfjelletspillforening){.btn-secondary}
+:::
+
+::::
+
+:::: div {.comic-panel style="margin: 0; display: flex; align-items: center; justify-content: center; padding: 24px;"}
+![Slottsfjellet Spillforening logo](/images/logo_small.png){style="max-height: 260px; width: auto"}
+::::
+
+:::::
+
+:::: page-grid
+
+::: panel
 
 ## Styret
 
@@ -41,11 +45,9 @@ bodyClass: about-page
 * **Styremedlem:** Kristian
 {.plain-list}
 
-</div>
-</article>
+:::
 
-<article class="comic-panel">
-<div class="panel-body">
+::: panel
 
 ## Kontakt
 
@@ -54,11 +56,9 @@ bodyClass: about-page
 * [Facebook-siden vår](https://facebook.com/slottsfjelletspillforening)
 {.link-list}
 
-</div>
-</article>
+:::
 
-<article class="comic-panel">
-<div class="panel-body">
+::: panel
 
 ## Dokumenter og kalender
 
@@ -66,30 +66,36 @@ bodyClass: about-page
 * [Abonner på Google-kalenderen](https://calendar.google.com/calendar/u/0?cid=cG9zdEBzbG90dHNmamVsbGV0Lm9yZw)
 {.link-list}
 
-</div>
-</article>
+:::
 
-</section>
+::::
 
-<section class="comic-panel" style="margin-top: 28px">
-<div class="panel-body">
+:::::: section {.comic-panel style="margin-top: 28px"}
+::::: div {.panel-body}
 
 ## Nyttige nummer
 
-<div class="number-grid">
-<div class="detail-card">
-<h3>Vipps gave</h3>
-<p><strong>967991</strong></p>
-</div>
-<div class="detail-card">
-<h3>Vipps arrangement</h3>
-<p><strong>830821</strong></p>
-</div>
-<div class="detail-card">
-<h3>Organisasjonsnummer</h3>
-<p><strong>931 955 144</strong></p>
-</div>
-</div>
+:::: number-grid
 
-</div>
-</section>
+::: detail-card
+### Vipps gave
+
+**967991**
+:::
+
+::: detail-card
+### Vipps arrangement
+
+**830821**
+:::
+
+::: detail-card
+### Organisasjonsnummer
+
+**931 955 144**
+:::
+
+::::
+
+:::::
+::::::

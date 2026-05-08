@@ -1023,6 +1023,17 @@ body.tradingcardgames-page .nav-link-tradingcardgames {
   max-width: 60ch;
 }
 
+/* markdown-it wraps kicker span and image in <p>; strip the unwanted margins */
+.page-hero__grid > div > p:first-child {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.page-hero .comic-panel > p {
+  margin: 0;
+  line-height: 0; /* prevents inline whitespace gap below block-level img */
+}
+
 .page-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1103,12 +1114,28 @@ body.tradingcardgames-page .nav-link-tradingcardgames {
   gap: 14px;
   margin-top: 22px;
 }
+.cta-row p {
+  margin: 0;
+  display: contents;
+}
 
 .highlight-box {
   background-color: #e9f5f3;
   border-left: 5px solid var(--accent-green);
   padding: 15px;
   margin: 20px 0;
+}
+
+.highlight-box > p:first-child,
+.rule-note > p:first-child,
+.detail-card > p:first-child {
+  margin-top: 0;
+}
+
+.highlight-box > p:last-child,
+.rule-note > p:last-child,
+.detail-card > p:last-child {
+  margin-bottom: 0;
 }
 
 .split-callout {
