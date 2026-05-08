@@ -8,3 +8,4 @@ _backups
 *.bak
 *.bak[1-9]
 *.bak[1-9][0-9]
+*.swp
