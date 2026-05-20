@@ -169,6 +169,7 @@ module.exports = function (eleventyConfig) {
 	// Stuff that must be in root
 	eleventyConfig.addPassthroughCopy("src/favicon.ico");
 	eleventyConfig.addPassthroughCopy("src/site.webmanifest");
+	eleventyConfig.addPassthroughCopy("src/.htaccess");
 	// Directories
 	eleventyConfig.addPassthroughCopy("src/css");
 	eleventyConfig.addPassthroughCopy("src/favicon");

@@ -1,1 +1,2 @@
-Redirect 302 /forms/rollespill https://forms.gle/ygKLi88NSxuUfCrP9
+# Setup for our RPG Google Form, to be able to replace it later.
+Redirect 302 /forms/rollespill https://docs.google.com/forms/d/e/1FAIpQLSfgr2ES2vpiWIaHY7YWknn8thBKZh1T4Fzzae2tSIDDT_u5Aw/viewform
