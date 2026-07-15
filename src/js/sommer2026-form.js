@@ -284,7 +284,15 @@
       positionGhost(ghost, ev.clientX, ev.clientY, rect);
 
       tile.classList.add("is-dragging");
-      dragCtx = { id, ghost, offsetX: ev.clientX - rect.left, offsetY: ev.clientY - rect.top, sourceRect: rect, currentZone: null };
+      dragCtx = {
+        id,
+        ghost,
+        offsetX: ev.clientX - rect.left,
+        offsetY: ev.clientY - rect.top,
+        sourceRect: rect,
+        sourceLocation: findLocation(id),
+        currentZone: null,
+      };
 
       document.addEventListener("pointermove", onDragMove);
       document.addEventListener("pointerup", onDragEnd, { once: true });
@@ -318,8 +326,11 @@
     if (zone) {
       zone.classList.remove("is-drag-over");
       const target = zone.dataset.dropTarget;
-      if (target === "pool") moveToPool(dragCtx.id);
-      else if (target === "vilIkke") moveToVilIkke(dragCtx.id);
+      if (target === "pool") {
+        if (!dragCtx.sourceLocation || dragCtx.sourceLocation.list !== "pool") moveToPool(dragCtx.id);
+      } else if (target === "vilIkke") {
+        if (!dragCtx.sourceLocation || dragCtx.sourceLocation.list !== "vilIkke") moveToVilIkke(dragCtx.id);
+      }
       else if (target === "ranks-slot") moveToExistingSlot(dragCtx.id, Number(zone.dataset.rankIndex));
       else if (target === "ranks-new") moveToNewSlotAt(dragCtx.id, Number(zone.dataset.rankIndex));
     }
