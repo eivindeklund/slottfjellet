@@ -182,7 +182,7 @@ fi
 
 # Verify that the local git branch is up to date with remote
 if [ "$(git rev-parse HEAD)" != "$(git rev-parse @{u} 2>/dev/null)" ]; then
-  warn_or_exit 'Your local branch is not up to date with remote. Please "git pull" the latest changes before deploying.' 0
+  warn_or_exit 'Your local branch is not up to date with remote. Please "git push" and/or "git pull" the latest changes before deploying.' 0
 fi
 
 # Verify that remote is up to date with the local git branch
