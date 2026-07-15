@@ -18,7 +18,6 @@
 
   const DAY_NAMES = ["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"];
   const MONTH_ABBR = ["jan", "feb", "mar", "apr", "mai", "jun", "jul", "aug", "sep", "okt", "nov", "des"];
-  const AVAIL_LABELS = ["Nei", "OK", "Bra"];
 
   // ------------------------------------------------------------------
   // Date helpers
@@ -345,33 +344,32 @@
   // Calendar widget state
   // ------------------------------------------------------------------
   const calState = {}; // dateISO -> { day: null|0|1|2, evening: null|0|1|2 }
-  let currentBrush = null; // { day: 0-2, evening: 0-2 }
+  const AVAIL_LEVELS = [0, 1, 2];
 
   function ensureCalEntry(iso) {
     if (!calState[iso]) calState[iso] = { day: null, evening: null };
     return calState[iso];
   }
 
-  function paintDate(iso) {
-    if (!currentBrush) return;
+  function getLevel(iso, part) {
+    const entry = calState[iso];
+    if (!entry) return null;
+    return entry[part];
+  }
+
+  function setLevel(iso, part, level) {
     const entry = ensureCalEntry(iso);
-    entry.day = currentBrush.day;
-    entry.evening = currentBrush.evening;
-    updateDateCellVisual(iso);
+    entry[part] = level;
   }
 
-  function paintColumn(weekdayIndex) {
-    if (!currentBrush) return;
-    RANGE.inRangeDates.forEach((d) => {
-      if ((d.getDay() + 6) % 7 === weekdayIndex) paintDate(toISODate(d));
-    });
+  function nextIndividualLevel(level) {
+    if (level === null || level === undefined) return 0;
+    return (level + 1) % AVAIL_LEVELS.length;
   }
 
-  function paintWeek(weekDates) {
-    if (!currentBrush) return;
-    weekDates.forEach((d) => {
-      if (d >= RANGE.start && d <= RANGE.end) paintDate(toISODate(d));
-    });
+  function nextGroupLevel(level) {
+    if (level === null || level === undefined) return 0;
+    return (level + 1) % AVAIL_LEVELS.length;
   }
 
   function availClass(level) {
@@ -379,14 +377,54 @@
     return "avail-" + level;
   }
 
-  function updateDateCellVisual(iso) {
-    const btn = document.querySelector('.calendar-date-btn[data-date="' + iso + '"]');
-    if (!btn) return;
-    const entry = calState[iso] || { day: null, evening: null };
-    const dayHalf = btn.querySelector(".day-half");
-    const eveningHalf = btn.querySelector(".evening-half");
-    dayHalf.className = "day-half " + availClass(entry.day);
-    eveningHalf.className = "evening-half " + availClass(entry.evening);
+  function getDatesForWeekday(weekdayIndex) {
+    return RANGE.inRangeDates.filter((d) => (d.getDay() + 6) % 7 === weekdayIndex).map((d) => toISODate(d));
+  }
+
+  function getDatesForWeek(weekDates) {
+    return weekDates.filter((d) => d >= RANGE.start && d <= RANGE.end).map((d) => toISODate(d));
+  }
+
+  function getUniformLevel(dateIsos, part) {
+    if (dateIsos.length === 0) return null;
+    const first = getLevel(dateIsos[0], part);
+    for (let i = 1; i < dateIsos.length; i++) {
+      if (getLevel(dateIsos[i], part) !== first) return null;
+    }
+    return first;
+  }
+
+  function cycleDateLevel(iso, part) {
+    const next = nextIndividualLevel(getLevel(iso, part));
+    setLevel(iso, part, next);
+  }
+
+  function cycleGroupLevel(dateIsos, part) {
+    if (dateIsos.length === 0) return;
+    const uniform = getUniformLevel(dateIsos, part);
+    const target = typeof uniform === "number" ? nextGroupLevel(uniform) : 0;
+    dateIsos.forEach((iso) => setLevel(iso, part, target));
+  }
+
+  function makeAvailButton(opts) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "availability-btn " + availClass(opts.level);
+    btn.title = opts.title;
+    btn.setAttribute("aria-label", opts.ariaLabel);
+    btn.addEventListener("click", opts.onClick);
+    return btn;
+  }
+
+  function makeControlStack(dayButton, eveningButton) {
+    const stack = el("div", "calendar-control-stack");
+    const dayWrap = el("div", "calendar-control-row");
+    const eveningWrap = el("div", "calendar-control-row");
+    dayWrap.appendChild(dayButton);
+    eveningWrap.appendChild(eveningButton);
+    stack.appendChild(dayWrap);
+    stack.appendChild(eveningWrap);
+    return stack;
   }
 
   function renderCalendar() {
@@ -399,10 +437,33 @@
     const thead = document.createElement("thead");
     const headRow = document.createElement("tr");
     headRow.appendChild(el("th", "", "Uke"));
+    headRow.appendChild(el("th", "", "Ukevalg"));
     DAY_NAMES.forEach((name, weekdayIndex) => {
-      const th = el("th", "", name);
-      th.title = "Sett hele " + name.toLowerCase();
-      th.addEventListener("click", () => paintColumn(weekdayIndex));
+      const th = el("th", "calendar-day-header");
+      const title = el("div", "calendar-day-title", name);
+      th.appendChild(title);
+      const weekdayDates = getDatesForWeekday(weekdayIndex);
+      const dayUniform = getUniformLevel(weekdayDates, "day");
+      const eveningUniform = getUniformLevel(weekdayDates, "evening");
+      const dayBtn = makeAvailButton({
+        level: dayUniform,
+        title: "Sett dag for alle " + name.toLowerCase(),
+        ariaLabel: "Sett dag for alle " + name.toLowerCase(),
+        onClick: () => {
+          cycleGroupLevel(weekdayDates, "day");
+          renderCalendar();
+        },
+      });
+      const eveningBtn = makeAvailButton({
+        level: eveningUniform,
+        title: "Sett kveld for alle " + name.toLowerCase(),
+        ariaLabel: "Sett kveld for alle " + name.toLowerCase(),
+        onClick: () => {
+          cycleGroupLevel(weekdayDates, "evening");
+          renderCalendar();
+        },
+      });
+      th.appendChild(makeControlStack(dayBtn, eveningBtn));
       headRow.appendChild(th);
     });
     thead.appendChild(headRow);
@@ -413,30 +474,61 @@
       const week = RANGE.gridDates.slice(i, i + 7);
       const row = document.createElement("tr");
       const weekLabel = el("td", "calendar-week-label", "Uke " + isoWeekNumber(week[0]));
-      weekLabel.title = "Sett hele uke " + isoWeekNumber(week[0]);
-      weekLabel.addEventListener("click", () => paintWeek(week));
       row.appendChild(weekLabel);
+
+      const weekControlCell = el("td", "calendar-week-controls");
+      const weekDates = getDatesForWeek(week);
+      const weekDayUniform = getUniformLevel(weekDates, "day");
+      const weekEveningUniform = getUniformLevel(weekDates, "evening");
+      const weekDayBtn = makeAvailButton({
+        level: weekDayUniform,
+        title: "Sett dag for hele uke " + isoWeekNumber(week[0]),
+        ariaLabel: "Sett dag for hele uke " + isoWeekNumber(week[0]),
+        onClick: () => {
+          cycleGroupLevel(weekDates, "day");
+          renderCalendar();
+        },
+      });
+      const weekEveningBtn = makeAvailButton({
+        level: weekEveningUniform,
+        title: "Sett kveld for hele uke " + isoWeekNumber(week[0]),
+        ariaLabel: "Sett kveld for hele uke " + isoWeekNumber(week[0]),
+        onClick: () => {
+          cycleGroupLevel(weekDates, "evening");
+          renderCalendar();
+        },
+      });
+      weekControlCell.appendChild(makeControlStack(weekDayBtn, weekEveningBtn));
+      row.appendChild(weekControlCell);
 
       week.forEach((d) => {
         const inRange = d >= RANGE.start && d <= RANGE.end;
         const cell = el("td", "calendar-date-cell" + (inRange ? "" : " is-outside-range"));
         if (inRange) {
           const iso = toISODate(d);
-          const btn = document.createElement("button");
-          btn.type = "button";
-          btn.className = "calendar-date-btn";
-          btn.dataset.date = iso;
           const label = d.getDate() === 1 ? d.getDate() + ". " + MONTH_ABBR[d.getMonth()] : String(d.getDate());
-          const dayHalf = el("span", "day-half avail-unset");
-          const eveningHalf = el("span", "evening-half avail-unset");
-          btn.appendChild(dayHalf);
-          btn.appendChild(eveningHalf);
-          btn.title = label;
-          btn.setAttribute("aria-label", DAY_NAMES[(d.getDay() + 6) % 7] + " " + label);
-          const numberOverlay = el("span", "date-number", label);
-          btn.appendChild(numberOverlay);
-          btn.addEventListener("click", () => paintDate(iso));
-          cell.appendChild(btn);
+          const dateLabel = el("div", "date-number", label);
+          cell.appendChild(dateLabel);
+          const weekdayName = DAY_NAMES[(d.getDay() + 6) % 7];
+          const dayBtn = makeAvailButton({
+            level: getLevel(iso, "day"),
+            title: weekdayName + " " + label + ": Dag",
+            ariaLabel: weekdayName + " " + label + ", dag",
+            onClick: () => {
+              cycleDateLevel(iso, "day");
+              renderCalendar();
+            },
+          });
+          const eveningBtn = makeAvailButton({
+            level: getLevel(iso, "evening"),
+            title: weekdayName + " " + label + ": Kveld",
+            ariaLabel: weekdayName + " " + label + ", kveld",
+            onClick: () => {
+              cycleDateLevel(iso, "evening");
+              renderCalendar();
+            },
+          });
+          cell.appendChild(makeControlStack(dayBtn, eveningBtn));
         }
         row.appendChild(cell);
       });
@@ -445,74 +537,6 @@
     table.appendChild(tbody);
     wrap.appendChild(table);
     container.appendChild(wrap);
-
-    renderLegend();
-  }
-
-  function renderLegend() {
-    const existing = document.querySelector(".legend-widget");
-    if (existing) existing.remove();
-    const container = document.getElementById("calendar-widget");
-    const wrap = el("div", "legend-widget");
-    const table = document.createElement("table");
-    const caption = document.createElement("caption");
-    caption.textContent = "Velg tilgjengelighet, klikk så på datoer over";
-    table.appendChild(caption);
-
-    const thead = document.createElement("thead");
-    const headRow = document.createElement("tr");
-    headRow.appendChild(el("th", "", ""));
-    AVAIL_LABELS.forEach((label) => headRow.appendChild(el("th", "", "Kveld: " + label)));
-    thead.appendChild(headRow);
-    table.appendChild(thead);
-
-    const tbody = document.createElement("tbody");
-    [0, 1, 2].forEach((dayLevel) => {
-      const row = document.createElement("tr");
-      row.appendChild(el("th", "", "Dag: " + AVAIL_LABELS[dayLevel]));
-      [0, 1, 2].forEach((eveningLevel) => {
-        const td = document.createElement("td");
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "legend-swatch-btn";
-        btn.dataset.day = String(dayLevel);
-        btn.dataset.evening = String(eveningLevel);
-        const dayHalf = el("span", "day-half avail-" + dayLevel);
-        const eveningHalf = el("span", "evening-half avail-" + eveningLevel);
-        btn.appendChild(dayHalf);
-        btn.appendChild(eveningHalf);
-        btn.title = "Dag: " + AVAIL_LABELS[dayLevel] + ", kveld: " + AVAIL_LABELS[eveningLevel];
-        btn.addEventListener("click", () => {
-          currentBrush = { day: dayLevel, evening: eveningLevel };
-          document.querySelectorAll(".legend-swatch-btn").forEach((b) => b.classList.remove("is-selected"));
-          btn.classList.add("is-selected");
-          updateLegendNote();
-        });
-        td.appendChild(btn);
-        row.appendChild(td);
-      });
-      tbody.appendChild(row);
-    });
-    table.appendChild(tbody);
-    wrap.appendChild(table);
-
-    const note = el("p", "legend-current-note");
-    note.id = "legend-current-note";
-    wrap.appendChild(note);
-
-    container.appendChild(wrap);
-    updateLegendNote();
-  }
-
-  function updateLegendNote() {
-    const note = document.getElementById("legend-current-note");
-    if (!note) return;
-    if (!currentBrush) {
-      note.textContent = "Ingen tilgjengelighet valgt ennå - trykk på en rute over først.";
-    } else {
-      note.textContent =
-        "Valgt: Dag = " + AVAIL_LABELS[currentBrush.day] + ", kveld = " + AVAIL_LABELS[currentBrush.evening] + ". Klikk på datoer, ukedager eller ukenumre over for å bruke den.";
-    }
   }
 
   // ------------------------------------------------------------------
@@ -636,7 +660,6 @@
             rankState.ranks = [];
             renderRanking();
             Object.keys(calState).forEach((k) => delete calState[k]);
-            currentBrush = null;
             renderCalendar();
           } else {
             setStatus("Noe gikk galt: " + ((data && data.error) || "ukjent feil") + ". Prøv igjen, eller ta kontakt på Discord.", "error");

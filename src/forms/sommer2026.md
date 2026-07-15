@@ -68,10 +68,10 @@ Fyll ut skjemaet under, så prøver vi å få til treff for deg!
 <div class="form-section">
   <h2>Når passer det?</h2>
   <p class="field-hint">
-    Velg en tilgjengelighet i fargevelgeren under kalenderen, og klikk
-    deretter på enkeltdatoer for å sette den. Klikk på en ukedag øverst
-    for å sette hele den ukedagen, eller på et ukenummer til venstre for
-    å sette hele uken.
+    Hver dato har to knapper: øverst for dag og nederst for kveld. Klikk
+    for å bla mellom Nei, OK og Bra. Du kan også bruke de to knappene under
+    hver ukedag øverst (for hele ukedagen) eller ved siden av ukenummeret
+    (for hele uka).
   </p>
   <div id="calendar-widget"></div>
 </div>

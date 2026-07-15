@@ -285,15 +285,7 @@
 .calendar-grid {
   border-collapse: collapse;
   width: 100%;
-  min-width: 560px;
-}
-
-.calendar-grid caption {
-  caption-side: top;
-  text-align: left;
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 1.05rem;
-  margin-bottom: 6px;
+  min-width: 760px;
 }
 
 .calendar-grid th,
@@ -308,25 +300,39 @@
   color: white;
   font-family: "Bebas Neue", sans-serif;
   letter-spacing: 0.03em;
-  cursor: pointer;
   padding: 8px 4px;
 }
 
-.calendar-grid thead th:hover {
-  background: var(--accent-blue);
+.calendar-day-header {
+  min-width: 90px;
+}
+
+.calendar-day-title {
+  margin-bottom: 6px;
+  line-height: 1;
 }
 
 .calendar-week-label {
   background: var(--stone-dark);
   color: white;
   font-weight: 700;
-  cursor: pointer;
   white-space: nowrap;
   padding: 4px 8px;
 }
 
-.calendar-week-label:hover {
-  background: var(--accent-blue);
+.calendar-week-controls {
+  min-width: 56px;
+  background: #f7f5f0;
+}
+
+.calendar-control-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.calendar-control-row {
+  display: flex;
 }
 
 .calendar-month-row td {
@@ -339,56 +345,73 @@
 }
 
 .calendar-date-cell {
-  cursor: pointer;
-  padding: 0 !important;
-  width: 60px;
-  height: 44px;
+  padding: 2px !important;
+  width: 90px;
+  min-width: 90px;
+  vertical-align: top;
 }
 
 .calendar-date-cell.is-outside-range {
-  cursor: default;
   background: #f2f2f2;
 }
 
-.calendar-date-btn {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 44px;
-  border: none;
-  cursor: pointer;
-  font-family: var(--main-font-family, "Inter", sans-serif);
-  font-size: 0.85rem;
+.date-number {
+  text-align: center;
+  font-size: 0.78rem;
   font-weight: 700;
   color: var(--stone-dark);
+  margin-bottom: 2px;
+}
+
+.availability-btn {
+  border: 1px solid #b7b7b7;
+  width: 100%;
+  min-height: 22px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.calendar-date-cell .availability-btn {
+  min-height: 24px;
+}
+
+.availability-btn:focus-visible {
+  outline: 3px solid var(--accent-blue);
+  outline-offset: 1px;
+}
+
+.calendar-date-cell .calendar-control-stack {
+  margin-top: 1px;
+}
+
+.calendar-day-header .calendar-control-stack,
+.calendar-week-controls .calendar-control-stack {
+  max-width: 44px;
+  margin: 0 auto;
+}
+
+.calendar-day-header .availability-btn,
+.calendar-week-controls .availability-btn {
+  min-height: 20px;
+}
+
+.calendar-date-cell.is-outside-range .date-number {
+  visibility: hidden;
+}
+
+.calendar-date-cell.is-outside-range .availability-btn {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.date-number,
+.calendar-day-title,
+.calendar-week-label {
+  user-select: none;
 }
 
 .date-number {
-  position: absolute;
-  top: 2px;
-  left: 0;
-  right: 0;
   text-align: center;
-  font-size: 0.72rem;
-  pointer-events: none;
-  text-shadow:
-    0 0 3px white,
-    0 0 3px white,
-    0 0 3px white;
-}
-
-.calendar-date-btn .day-half,
-.calendar-date-btn .evening-half {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.calendar-date-btn:focus-visible {
-  outline: 3px solid var(--accent-blue);
-  outline-offset: -3px;
 }
 
 .avail-0 {
@@ -402,64 +425,4 @@
 }
 .avail-unset {
   background: white;
-}
-
-/* ==========================================================================
-   Legend / brush picker
-   ========================================================================== */
-
-.legend-widget {
-  margin-top: 16px;
-  display: inline-block;
-}
-
-.legend-widget table {
-  border-collapse: collapse;
-}
-
-.legend-widget caption {
-  caption-side: top;
-  text-align: left;
-  font-family: "Bebas Neue", sans-serif;
-  margin-bottom: 6px;
-}
-
-.legend-widget th,
-.legend-widget td {
-  border: 1px solid #ccc;
-  padding: 0;
-}
-
-.legend-widget thead th,
-.legend-widget tbody th {
-  background: var(--stone-dark);
-  color: white;
-  font-size: 0.78rem;
-  font-weight: 400;
-  padding: 4px 6px;
-}
-
-.legend-swatch-btn {
-  width: 56px;
-  height: 36px;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-}
-
-.legend-swatch-btn .day-half,
-.legend-swatch-btn .evening-half {
-  flex: 1;
-}
-
-.legend-swatch-btn.is-selected {
-  outline: 3px solid var(--stone-dark);
-  outline-offset: -3px;
-}
-
-.legend-current-note {
-  margin-top: 8px;
-  font-size: 0.9rem;
-  color: #5c5c5c;
 }
