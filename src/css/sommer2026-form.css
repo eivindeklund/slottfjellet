@@ -1,0 +1,465 @@
+/* ==========================================================================
+   Sommerregistrering 2026 - dedicated form styles
+   Loaded only on /forms/sommer2026.html via the extraCss front-matter hook.
+   Uses the same design tokens as style.css (--stone-dark, --accent-*, etc).
+   ========================================================================== */
+
+#sommer-form h2 {
+  font-size: 1.4rem;
+  margin: 0 0 12px;
+}
+
+.form-status {
+  display: none;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  border: 2px solid var(--stone-dark);
+  font-weight: 700;
+}
+
+.form-status.is-visible {
+  display: block;
+}
+
+.form-status.is-success {
+  background: #e9f5f3;
+  border-color: var(--accent-green);
+  color: #1c5c53;
+}
+
+.form-status.is-error {
+  background: #fdecea;
+  border-color: var(--accent-red);
+  color: #8a1f27;
+}
+
+.form-section {
+  margin-bottom: 36px;
+  padding-bottom: 28px;
+  border-bottom: 2px dashed #c9c2b6;
+}
+
+.form-section:last-of-type,
+.form-submit-row {
+  border-bottom: none;
+}
+
+.form-field {
+  margin-bottom: 18px;
+}
+
+.form-field label {
+  display: block;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.03em;
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.required-marker {
+  color: var(--accent-red);
+}
+
+.field-hint {
+  color: #5c5c5c;
+  font-size: 0.95rem;
+  margin: 4px 0 14px;
+}
+
+#sommer-form input[type="text"],
+#sommer-form input[type="email"],
+#sommer-form textarea {
+  width: 100%;
+  max-width: 480px;
+  font-family: var(--main-font-family, "Inter", sans-serif);
+  font-size: 1rem;
+  padding: 10px 12px;
+  border: 2px solid var(--stone-dark);
+  background: white;
+  color: var(--stone-dark);
+}
+
+#sommer-form textarea {
+  max-width: 100%;
+  resize: vertical;
+}
+
+#sommer-form input:focus,
+#sommer-form textarea:focus {
+  outline: 3px solid var(--accent-blue);
+  outline-offset: 1px;
+}
+
+#sommer-form input.field-invalid,
+#sommer-form textarea.field-invalid {
+  border-color: var(--accent-red);
+}
+
+/* Honeypot field - kept in the accessibility tree layout but visually and
+   interactively hidden from real users, unlike display:none which some bots
+   specifically detect and skip. */
+.hp-field {
+  position: absolute;
+  left: -5000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form-submit-row {
+  margin-top: 10px;
+}
+
+#submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.validation-note {
+  color: var(--accent-red);
+  font-weight: 700;
+  margin-top: 10px;
+  display: none;
+}
+
+.validation-note.is-visible {
+  display: block;
+}
+
+/* ==========================================================================
+   Ranking widget
+   ========================================================================== */
+
+.ranking-widget {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+@media (max-width: 767px) {
+  .ranking-widget {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ranking-column h3 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.03em;
+  margin: 0 0 8px;
+  color: var(--stone-dark);
+}
+
+.ranking-dropzone {
+  background: var(--stone-light);
+  border: 2px dashed #b9b2a4;
+  min-height: 60px;
+  padding: 8px;
+}
+
+.ranking-dropzone.is-drag-over {
+  border-color: var(--accent-blue);
+  background: #eaf2f7;
+}
+
+.rank-pool .ranking-dropzone,
+.rank-vilikke .ranking-dropzone {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.rank-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rank-slot-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  min-height: 52px;
+  padding: 6px 8px;
+  background: var(--stone-light);
+  border: 2px dashed #b9b2a4;
+}
+
+.rank-slot-row.is-drag-over {
+  border-color: var(--accent-blue);
+  background: #eaf2f7;
+}
+
+.rank-slot-row.is-empty-slot {
+  border-style: dotted;
+}
+
+.rank-slot-label {
+  font-family: "Bebas Neue", sans-serif;
+  color: #8a8375;
+  min-width: 28px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.rank-tile {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  border: 2px solid var(--stone-dark);
+  box-shadow: 3px 3px 0 var(--stone-dark);
+  padding: 6px 8px 6px 12px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.rank-tile:active {
+  cursor: grabbing;
+}
+
+.rank-tile.is-dragging {
+  opacity: 0.35;
+}
+
+.rank-tile-drag-ghost {
+  position: fixed;
+  z-index: 2000;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.rank-tile-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-left: 2px;
+}
+
+.rank-tile-buttons button {
+  border: none;
+  background: none;
+  font-size: 0.7rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #666;
+  padding: 1px 2px;
+}
+
+.rank-tile-buttons button:hover {
+  color: var(--accent-blue);
+}
+
+.rank-tile-remove {
+  border: none;
+  background: none;
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #999;
+  margin-left: 4px;
+  padding: 0 2px;
+}
+
+.rank-tile-remove:hover {
+  color: var(--accent-red);
+}
+
+.rank-vilikke .rank-tile {
+  background: #f4f1ea;
+}
+
+/* ==========================================================================
+   Calendar widget
+   ========================================================================== */
+
+.calendar-widget {
+  overflow-x: auto;
+}
+
+.calendar-grid {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 560px;
+}
+
+.calendar-grid caption {
+  caption-side: top;
+  text-align: left;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.calendar-grid th,
+.calendar-grid td {
+  border: 1px solid #ccc;
+  padding: 4px;
+  text-align: center;
+}
+
+.calendar-grid thead th {
+  background: var(--stone-dark);
+  color: white;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  padding: 8px 4px;
+}
+
+.calendar-grid thead th:hover {
+  background: var(--accent-blue);
+}
+
+.calendar-week-label {
+  background: var(--stone-dark);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 4px 8px;
+}
+
+.calendar-week-label:hover {
+  background: var(--accent-blue);
+}
+
+.calendar-month-row td {
+  background: var(--accent-yellow);
+  color: var(--stone-dark);
+  font-family: "Bebas Neue", sans-serif;
+  text-align: left;
+  padding: 4px 8px;
+  border: 1px solid var(--stone-dark);
+}
+
+.calendar-date-cell {
+  cursor: pointer;
+  padding: 0 !important;
+  width: 60px;
+  height: 44px;
+}
+
+.calendar-date-cell.is-outside-range {
+  cursor: default;
+  background: #f2f2f2;
+}
+
+.calendar-date-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 44px;
+  border: none;
+  cursor: pointer;
+  font-family: var(--main-font-family, "Inter", sans-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--stone-dark);
+}
+
+.date-number {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.72rem;
+  pointer-events: none;
+  text-shadow:
+    0 0 3px white,
+    0 0 3px white,
+    0 0 3px white;
+}
+
+.calendar-date-btn .day-half,
+.calendar-date-btn .evening-half {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-date-btn:focus-visible {
+  outline: 3px solid var(--accent-blue);
+  outline-offset: -3px;
+}
+
+.avail-0 {
+  background: #f6b8bd;
+}
+.avail-1 {
+  background: #ffe08a;
+}
+.avail-2 {
+  background: #b7e4cf;
+}
+.avail-unset {
+  background: white;
+}
+
+/* ==========================================================================
+   Legend / brush picker
+   ========================================================================== */
+
+.legend-widget {
+  margin-top: 16px;
+  display: inline-block;
+}
+
+.legend-widget table {
+  border-collapse: collapse;
+}
+
+.legend-widget caption {
+  caption-side: top;
+  text-align: left;
+  font-family: "Bebas Neue", sans-serif;
+  margin-bottom: 6px;
+}
+
+.legend-widget th,
+.legend-widget td {
+  border: 1px solid #ccc;
+  padding: 0;
+}
+
+.legend-widget thead th,
+.legend-widget tbody th {
+  background: var(--stone-dark);
+  color: white;
+  font-size: 0.78rem;
+  font-weight: 400;
+  padding: 4px 6px;
+}
+
+.legend-swatch-btn {
+  width: 56px;
+  height: 36px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.legend-swatch-btn .day-half,
+.legend-swatch-btn .evening-half {
+  flex: 1;
+}
+
+.legend-swatch-btn.is-selected {
+  outline: 3px solid var(--stone-dark);
+  outline-offset: -3px;
+}
+
+.legend-current-note {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #5c5c5c;
+}

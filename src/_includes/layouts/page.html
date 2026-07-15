@@ -1,11 +1,12 @@
 <!doctype html>
 <html lang="no">
-  {% render "head.html", title: title %}
+  {% render "head.html", title: title, extraCss: extraCss %}
   <body class="{{ bodyClass }}">
     {% render "header.html" %}
     <main class="page-shell">
       {{ content }}
     </main>
     {% render "footer.html" %}
+    {% if extraJs %}<script src="{{ extraJs }}" defer></script>{% endif %}
   </body>
 </html>
