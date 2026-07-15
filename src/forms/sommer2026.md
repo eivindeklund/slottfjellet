@@ -31,8 +31,6 @@ Fyll ut skjemaet under, så prøver vi å få til treff for deg!
 
 <form id="sommer-form" novalidate>
 
-<div class="form-status" id="form-status" role="status" aria-live="polite"></div>
-
 <div class="form-section">
   <h2>Om deg</h2>
 
@@ -85,7 +83,11 @@ Fyll ut skjemaet under, så prøver vi å få til treff for deg!
 </div>
 
 <div class="form-section form-submit-row">
-  <button type="submit" class="btn-primary" id="submit-button">Send inn</button>
+  <button type="submit" class="btn-primary" id="submit-button">
+    <span class="submit-button-label">Send inn</span>
+    <span class="submit-button-spinner" aria-hidden="true"></span>
+  </button>
+  <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
 </div>
 
 </form>

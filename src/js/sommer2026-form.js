@@ -606,6 +606,14 @@
     const commentInput = document.getElementById("field-comment");
     const websiteInput = document.getElementById("field-website"); // honeypot
     const submitButton = document.getElementById("submit-button");
+    const submitButtonLabel = submitButton.querySelector(".submit-button-label") || submitButton;
+
+    function setSubmitting(isSubmitting) {
+      submitButton.disabled = isSubmitting;
+      submitButton.classList.toggle("is-loading", isSubmitting);
+      submitButton.setAttribute("aria-busy", isSubmitting ? "true" : "false");
+      submitButtonLabel.textContent = isSubmitting ? "Sender..." : "Send inn";
+    }
 
     form.addEventListener("submit", function (ev) {
       ev.preventDefault();
@@ -652,7 +660,7 @@
         calendar: computeCalendarExport(),
       };
 
-      submitButton.disabled = true;
+      setSubmitting(true);
       setStatus("Sender inn...", "success");
 
       fetch(CONFIG.appsScriptUrl, {
@@ -662,7 +670,7 @@
       })
         .then((r) => r.json())
         .then((data) => {
-          submitButton.disabled = false;
+          setSubmitting(false);
           if (data && data.ok) {
             setStatus("Takk! Vi har registrert svaret ditt.", "success");
             form.reset();
@@ -677,7 +685,7 @@
           }
         })
         .catch(() => {
-          submitButton.disabled = false;
+          setSubmitting(false);
           setStatus("Kunne ikke sende inn skjemaet. Sjekk nettforbindelsen og prøv igjen.", "error");
         });
     });
