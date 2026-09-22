@@ -6,17 +6,16 @@ bodyClass: ttt-page
 
 ::::: page-hero {style="border-color: var(--accent-red)"}
 
-:::: hero-content
+:::: hero-content {data-hide-after="2026-10-19"}
 
 [Helgesamling for miniatyrspill]{.kicker}
 
-# Tønsberg Tabletop Våren 2026 {.page-hero__title style="color: var(--accent-red)"}
+# Tønsberg Tabletop Høsten 2026 {.page-hero__title style="color: var(--accent-red)"}
 
-17.-19. april 2026 samler vi folk til en helg med
-lavterskel-turneringer, frispill, maling og sosial spilling.
-Våren 2026 planlegges på
+16.-18. oktober 2026 samler vi folk til en helg med
+lavterskel-turneringer, frispill, maling og sosial spilling.  Arrangementet planlegges på
 [Discord](https://discord.gg/N3MX5SHGZ8), og
-arrangementet holdes på
+holdes på
 [Søndre Skagen Samfunnshus](https://www.tonsberg.kommune.no/tjenester/helse-og-omsorg/aktivitet-og-mestring/aktivitetshusportalen/slagen/).
 {.page-hero__lead}
 
@@ -25,8 +24,47 @@ arrangementet holdes på
 [Se miniatyrmiljøet](miniaturegames.html){.btn-secondary}
 :::
 
-Påmelding kommer når den er klar. Discord er stedet der nyheter og
-praktiske detaljer dukker opp først.{.muted-note}
+[Meld deg på nå!](https://docs.google.com/forms/d/e/1FAIpQLSelIJVp9hpQSqmlvqBFoLH7CgkkWRU_C3vUWjBJe2rtmXhmgA/viewform)
+
+
+Discord er stedet der nyheter og praktiske detaljer dukker opp først; web oppdaters mer sporadisk.{.muted-note}
+
+::::
+
+:::: hero-content {data-show-after="2026-10-19" data-hide-after="2027-04-26"}
+
+[Helgesamling for miniatyrspill]{.kicker}
+
+# Tønsberg Tabletop Våren 2027 {.page-hero__title style="color: var(--accent-red)"}
+
+23.-25. april 2027 samler vi folk til en helg med
+lavterskel-turneringer, frispill, maling og sosial spilling.  Arrangementet planlegges på
+[Discord](https://discord.gg/N3MX5SHGZ8), og
+arrangementet holdes sannsynligvis på
+[Søndre Skagen Samfunnshus](https://www.tonsberg.kommune.no/tjenester/helse-og-omsorg/aktivitet-og-mestring/aktivitetshusportalen/slagen/) - men muligens blir det et nytt og større lokale.
+{.page-hero__lead}
+
+::: cta-row
+[Følg planleggingen](https://discord.gg/N3MX5SHGZ8){.btn-primary}
+[Se miniatyrmiljøet](miniaturegames.html){.btn-secondary}
+:::
+
+[Meld deg på nå!](https://docs.google.com/forms/d/e/1FAIpQLSeYFIk8inWUu65tFm9VwkO_Ivn-gLZezpvk8tVpQXaBeXuX1A/viewform)
+
+
+Discord er stedet der nyheter og praktiske detaljer dukker opp først; web oppdaters mer sporadisk.{.muted-note}
+
+::::
+
+:::: hero-content {data-show-after="2027-04-26"}
+
+[Helgesamling for miniatyrspill]{.kicker}
+
+# Tønsberg Tabletop: Kommende Turneringer {.page-hero__title style="color: var(--accent-red)"}
+
+Vi fortsetter med Tønsberg Tabletop, men vi har ikke oppdater
+websiden, og informasjon om forrige har blitt automatisk fjernet.  Vi holder en
+i siste halvdel av oktober, og en i siste halvdel av april.  Snakk med oss på Discord!
 
 ::::
 
@@ -38,17 +76,42 @@ praktiske detaljer dukker opp først.{.muted-note}
 
 :::::: page-grid
 
-::: panel
+:::: panel
 
 ## Kjapp info
 
-* **Dato:** fredag 17. april til søndag 19. april
+::: div {data-hide-after="2026-10-19"}
+
+* **Dato:** fredag 16. oktober til søndag 18. oktober 2026
 * **Turneringer:** Warhammer 40,000 og Warhammer: The Old World
 * **Turneringsformat:** 2000 poeng, tre kamper à tre timer
-* **Pris:** 250 kr for arrangementet + 100 kr for turnering
+* **Pris:** 200kr for dagspass, 300kr for helgepass, +100 kr for turnering
 {.stat-list}
 
 :::
+
+::: div {data-show-after="2026-10-19" data-hide-after="2027-04-26"}
+
+* **Dato:** fredag 23. april til søndag 25. april 2027
+* **Turneringer:** Warhammer 40,000 og Warhammer: The Old World
+* **Turneringsformat:** 2000 poeng, tre kamper à tre timer
+* **Pris:** (ikke avgjort, var 300kr helgepass + 100kr turnering for høst 2026)
+{.stat-list}
+
+:::
+
+::: div {data-show-after="2027-04-26"}
+
+* **Dato:** siste halvdel av april og oktober
+* **Turneringer:** Warhammer 40,000 og Warhammer: The Old World
+* **Turneringsformat:** 2000 poeng, tre kamper à tre timer
+* **Pris:** under 500kr
+{.stat-list}
+
+:::
+
+::::
+
 
 ::::: panel
 
